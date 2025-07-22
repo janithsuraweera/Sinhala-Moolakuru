@@ -263,6 +263,34 @@ const successSound = new Audio('assets/success.mp3');
 const errorSound = new Audio('assets/error.mp3');
 let lastFeedback = '';
 
+// Help Modal
+const helpBtn = document.getElementById('help-btn');
+const helpModal = document.getElementById('help-modal');
+const closeModal = document.querySelector('.close-modal');
+const phoneticGuide = document.getElementById('phonetic-guide');
+const wijesekaraGuide = document.getElementById('wijesekara-guide');
+
+helpBtn.addEventListener('click', () => {
+  helpModal.style.display = 'flex';
+  if (keyboardMethod.value === 'wijesekara') {
+    phoneticGuide.style.display = 'none';
+    wijesekaraGuide.style.display = 'block';
+  } else {
+    phoneticGuide.style.display = 'block';
+    wijesekaraGuide.style.display = 'none';
+  }
+});
+
+closeModal.addEventListener('click', () => {
+  helpModal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+  if (e.target === helpModal) {
+    helpModal.style.display = 'none';
+  }
+});
+
 // Initial state
 resetStats();
 startBtn.style.display = 'inline-block';

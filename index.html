@@ -79,6 +79,33 @@
   <footer>
     <small>© 2024 Sinhala Moolakuru</small>
   </footer>
+  <div id="help-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <button class="close-modal">&times;</button>
+      <h2>How to Type Sinhala</h2>
+      <div id="phonetic-guide">
+        <h3>Phonetic Keyboard</h3>
+        <p>Type English letters to get Sinhala letters. Examples:</p>
+        <ul>
+          <li><code>amma</code> → <strong>අම්මා</strong></li>
+          <li><code>paasala</code> → <strong>පාසල</strong></li>
+          <li><code>iskoolaya</code> → <strong>ඉස්කෝලය</strong></li>
+        </ul>
+        <p>This method is intuitive and easy for beginners.</p>
+      </div>
+      <div id="wijesekara-guide" style="display: none;">
+        <h3>Wijesekara Keyboard Layout</h3>
+        <p>This follows the standard Wijesekara layout. Key mappings:</p>
+        <!-- A simple table for demonstration -->
+        <table>
+          <tr><td>a → අ</td><td>A → ආ</td><td>k → ක</td><td>K → ඛ</td></tr>
+          <tr><td>g → ග</td><td>G → ඝ</td><td>j → ජ</td><td>J → ඣ</td></tr>
+          <!-- Add more rows for the full layout -->
+        </table>
+      </div>
+    </div>
+  </div>
+  <button id="help-btn">?</button>
   <script src="js/app.js"></script>
 </body>
 </html> 
