@@ -340,6 +340,16 @@ footer a {
   border-radius: 6px;
   transition: width 0.2s;
 }
+.modal-content .report-level {
+  font-size: 1.3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.report-level span {
+  font-weight: bold;
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
 .modal-content .report-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;

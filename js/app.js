@@ -330,8 +330,17 @@ resetTimer();
 
 // Session Report Modal
 function showSessionReport() {
-  document.getElementById('report-wpm').textContent = wpmDisplay.textContent;
-  document.getElementById('report-accuracy').textContent = accuracyDisplay.textContent;
+  const wpm = parseInt(wpmDisplay.textContent, 10);
+  const accuracy = parseInt(accuracyDisplay.textContent, 10);
+  let level = 'Beginner';
+  if (wpm >= 40 && accuracy >= 90) {
+    level = 'Advanced';
+  } else if (wpm >= 25 && accuracy >= 80) {
+    level = 'Intermediate';
+  }
+  document.getElementById('report-level').textContent = level;
+  document.getElementById('report-wpm').textContent = wpm;
+  document.getElementById('report-accuracy').textContent = accuracy;
   document.getElementById('report-correct').textContent = correctWords;
   document.getElementById('report-incorrect').textContent = incorrectWords;
   document.getElementById('session-report-modal').style.display = 'flex';
