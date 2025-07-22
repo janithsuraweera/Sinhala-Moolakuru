@@ -39,6 +39,69 @@ const timeSelect = document.getElementById('time-select');
 let countdown = null;
 let timeLeft = 60;
 
+// --- Sinhala Phonetic Transliteration ---
+// Basic mapping for common Sinhala sounds
+const PHONETIC_MAP = [
+  ['aa', 'ආ'], ['ae', 'ඇ'], ['ai', 'ඓ'], ['au', 'ඖ'],
+  ['a', 'අ'], ['b', 'බ'], ['ch', 'ච'], ['d', 'ද'], ['dh', 'ධ'], ['e', 'එ'], ['ee', 'ඊ'], ['ei', 'ඒ'],
+  ['g', 'ග'], ['h', 'හ'], ['i', 'ඉ'], ['ii', 'ඊ'], ['j', 'ජ'], ['k', 'ක'], ['l', 'ල'], ['m', 'ම'],
+  ['n', 'න'], ['ng', 'ඞ'], ['o', 'ඔ'], ['oo', 'ඕ'], ['p', 'ප'], ['r', 'ර'], ['s', 'ස'], ['t', 'ත'],
+  ['th', 'ථ'], ['u', 'උ'], ['uu', 'ඌ'], ['v', 'ව'], ['w', 'ව'], ['y', 'ය'], ['sh', 'ශ'], ['gn', 'ඥ'],
+  ['ṭ', 'ට'], ['ḍ', 'ඩ'], ['ṇ', 'ණ'], ['ḷ', 'ළ'], ['ś', 'ෂ'], ['f', 'ෆ'], ['z', 'ඤ'],
+  // Vowel signs (matra)
+  ['aa', 'ා'], ['ae', 'ැ'], ['ai', 'ෛ'], ['au', 'ෞ'], ['e', 'ෙ'], ['ee', 'ී'], ['ei', 'ේ'], ['i', 'ි'], ['ii', 'ී'], ['o', 'ො'], ['oo', 'ෝ'], ['u', 'ු'], ['uu', 'ූ'],
+  // Special
+  ['ṃ', 'ං'], ['ḥ', 'ඃ'], ['ṁ', 'ං'], ['ṅ', 'ං'],
+];
+
+function transliterateToSinhala(input) {
+  let text = input;
+  // Sort by length to match longest first
+  PHONETIC_MAP.sort((a, b) => b[0].length - a[0].length);
+  for (const [en, si] of PHONETIC_MAP) {
+    const re = new RegExp(en, 'g');
+    text = text.replace(re, si);
+  }
+  return text;
+}
+
+// --- Replace input with Sinhala in real-time ---
+typingInput.addEventListener('input', (e) => {
+  if (finished) return;
+  // Save caret position
+  const caret = typingInput.selectionStart;
+  // Transliterate
+  const sinhala = transliterateToSinhala(typingInput.value);
+  typingInput.value = sinhala;
+  // Restore caret
+  typingInput.setSelectionRange(caret, caret);
+  // Continue with normal logic
+  if (!startTime) startTime = Date.now();
+  const val = typingInput.value;
+  typedChars = val.length;
+  let correct = 0;
+  for (let i = 0; i < val.length; i++) {
+    if (val[i] === currentSentence[i]) correct++;
+  }
+  correctChars = correct;
+  // Accuracy
+  const accuracy = typedChars ? Math.round((correctChars / typedChars) * 100) : 0;
+  accuracyDisplay.textContent = accuracy;
+  // WPM
+  const elapsed = (Date.now() - startTime) / 1000 / 60;
+  const wpm = elapsed > 0 ? Math.round((correctChars / 5) / elapsed) : 0;
+  wpmDisplay.textContent = wpm;
+  // Feedback
+  if (val === currentSentence) {
+    feedback.textContent = 'Great!';
+    endTest();
+  } else if (currentSentence.startsWith(val)) {
+    feedback.textContent = '';
+  } else {
+    feedback.textContent = 'Incorrect!';
+  }
+});
+
 function pickSentence() {
   const level = difficultySelect.value;
   const arr = DATA[level];
@@ -105,34 +168,6 @@ function endTest() {
     renderLeaderboard();
   }
 }
-
-typingInput.addEventListener('input', () => {
-  if (finished) return;
-  if (!startTime) startTime = Date.now();
-  const val = typingInput.value;
-  typedChars = val.length;
-  let correct = 0;
-  for (let i = 0; i < val.length; i++) {
-    if (val[i] === currentSentence[i]) correct++;
-  }
-  correctChars = correct;
-  // Accuracy
-  const accuracy = typedChars ? Math.round((correctChars / typedChars) * 100) : 0;
-  accuracyDisplay.textContent = accuracy;
-  // WPM
-  const elapsed = (Date.now() - startTime) / 1000 / 60;
-  const wpm = elapsed > 0 ? Math.round((correctChars / 5) / elapsed) : 0;
-  wpmDisplay.textContent = wpm;
-  // Feedback
-  if (val === currentSentence) {
-    feedback.textContent = 'Great!';
-    endTest();
-  } else if (currentSentence.startsWith(val)) {
-    feedback.textContent = '';
-  } else {
-    feedback.textContent = 'Incorrect!';
-  }
-});
 
 startBtn.addEventListener('click', startTest);
 restartBtn.addEventListener('click', startTest);
