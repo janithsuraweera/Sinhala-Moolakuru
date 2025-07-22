@@ -1,0 +1,145 @@
+body {
+  font-family: 'Noto Sans Sinhala', 'Iskoola Pota', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+:root {
+  --bg: #f7f7fa;
+  --text: #222;
+  --primary: #4f46e5;
+  --secondary: #06b6d4;
+  --accent: #f59e42;
+  --card: #fff;
+  --input-bg: #f1f5f9;
+}
+body.dark {
+  --bg: #18181b;
+  --text: #f3f4f6;
+  --primary: #818cf8;
+  --secondary: #22d3ee;
+  --accent: #fbbf24;
+  --card: #23232b;
+  --input-bg: #27272a;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--card);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.logo {
+  width: 40px;
+  height: 40px;
+}
+h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+#mode-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--primary);
+}
+main {
+  max-width: 500px;
+  margin: 2rem auto;
+  background: var(--card);
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  padding: 2rem;
+}
+.difficulty-select {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+#difficulty {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--primary);
+  background: var(--input-bg);
+  color: var(--text);
+  font-size: 1rem;
+}
+.typing-area {
+  margin-bottom: 1.5rem;
+}
+#sentence-display {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  min-height: 2.5rem;
+  background: var(--input-bg);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+#typing-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--primary);
+  background: var(--input-bg);
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.feedback {
+  min-height: 1.2rem;
+  color: var(--accent);
+  font-size: 1rem;
+}
+.stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+.controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.controls button {
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.controls button:hover {
+  background: var(--secondary);
+}
+footer {
+  text-align: center;
+  margin: 2rem 0 1rem 0;
+  color: #888;
+}
+@media (max-width: 600px) {
+  main {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  header {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+  h1 {
+    font-size: 1.1rem;
+  }
+} 
