@@ -498,11 +498,15 @@ function showPremiumFeatures() {
     customThemeSection.style.display = 'block';
     activatePremiumBtn.style.display = 'none';
     logoutPremiumBtn.style.display = 'inline-block';
+    // Show premium badge
+    document.getElementById('premium-badge').style.display = 'inline-block';
   } else {
     customKeyboardSection.style.display = 'none';
     customThemeSection.style.display = 'none';
     activatePremiumBtn.style.display = 'inline-block';
     logoutPremiumBtn.style.display = 'none';
+    // Hide premium badge
+    document.getElementById('premium-badge').style.display = 'none';
   }
 }
 
