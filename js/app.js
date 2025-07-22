@@ -254,7 +254,9 @@ difficultySelect.addEventListener('change', () => {
   }
   startTest();
 });
-timeSelect.addEventListener('change', resetTimer);
+timeSelect.addEventListener('change', () => {
+  startTest();
+});
 
 // Dark/Light mode toggle
 modeToggle.addEventListener('click', () => {
