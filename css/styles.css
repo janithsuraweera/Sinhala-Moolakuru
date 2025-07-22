@@ -160,6 +160,31 @@ footer {
 #leaderboard tr:nth-child(odd) {
   background: var(--card);
 }
+.timer-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+#timer-display {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--accent);
+  background: var(--input-bg);
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.5rem;
+  min-width: 70px;
+  text-align: center;
+}
+#time-select {
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--primary);
+  background: var(--input-bg);
+  color: var(--text);
+  font-size: 1rem;
+}
 @media (max-width: 600px) {
   main {
     padding: 1rem;

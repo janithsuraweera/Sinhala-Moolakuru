@@ -34,6 +34,10 @@ const startBtn = document.getElementById('start-btn');
 const restartBtn = document.getElementById('restart-btn');
 const difficultySelect = document.getElementById('difficulty');
 const modeToggle = document.getElementById('mode-toggle');
+const timerDisplay = document.getElementById('timer-display');
+const timeSelect = document.getElementById('time-select');
+let countdown = null;
+let timeLeft = 60;
 
 function pickSentence() {
   const level = difficultySelect.value;
@@ -45,6 +49,31 @@ function resetStats() {
   wpmDisplay.textContent = '0';
   accuracyDisplay.textContent = '0';
   feedback.textContent = '';
+}
+
+function formatTime(sec) {
+  const m = String(Math.floor(sec / 60)).padStart(2, '0');
+  const s = String(sec % 60).padStart(2, '0');
+  return `${m}:${s}`;
+}
+
+function resetTimer() {
+  clearInterval(countdown);
+  timeLeft = parseInt(timeSelect.value, 10);
+  timerDisplay.textContent = formatTime(timeLeft);
+}
+
+function startTimer() {
+  resetTimer();
+  countdown = setInterval(() => {
+    timeLeft--;
+    timerDisplay.textContent = formatTime(timeLeft);
+    if (timeLeft <= 0) {
+      clearInterval(countdown);
+      timerDisplay.textContent = '00:00';
+      endTest();
+    }
+  }, 1000);
 }
 
 function startTest() {
@@ -60,12 +89,14 @@ function startTest() {
   resetStats();
   startBtn.style.display = 'none';
   restartBtn.style.display = 'inline-block';
+  startTimer();
 }
 
 function endTest() {
   finished = true;
   typingInput.disabled = true;
   feedback.textContent = 'අවසන්!';
+  clearInterval(countdown);
 }
 
 typingInput.addEventListener('input', () => {
@@ -101,6 +132,7 @@ restartBtn.addEventListener('click', startTest);
 difficultySelect.addEventListener('change', () => {
   if (!finished) startTest();
 });
+timeSelect.addEventListener('change', resetTimer);
 
 // Dark/Light mode toggle
 modeToggle.addEventListener('click', () => {
@@ -116,4 +148,5 @@ sentenceDisplay.addEventListener('click', () => {
 // Initial state
 resetStats();
 startBtn.style.display = 'inline-block';
-restartBtn.style.display = 'none'; 
+restartBtn.style.display = 'none';
+resetTimer(); 
