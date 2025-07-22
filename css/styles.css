@@ -340,6 +340,22 @@ footer a {
   border-radius: 6px;
   transition: width 0.2s;
 }
+.modal-content .report-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+.report-stats div {
+  background: var(--input-bg);
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+}
+.report-stats span {
+  font-weight: bold;
+  color: var(--primary);
+}
 @media (max-width: 600px) {
   main {
     padding: 1rem;

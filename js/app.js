@@ -26,6 +26,8 @@ let correctChars = 0;
 let finished = false;
 let totalCorrectChars = 0;
 let totalTypedChars = 0;
+let correctWords = 0;
+let incorrectWords = 0;
 
 const sentenceDisplay = document.getElementById('sentence-display');
 const typingInput = document.getElementById('typing-input');
@@ -116,6 +118,37 @@ function renderSentenceDisplay() {
 }
 
 // --- Replace input with Sinhala in real-time, based on method ---
+typingInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    if (finished) return;
+
+    const val = typingInput.value;
+    if (val.length === 0) return;
+
+    if (val === currentSentence) {
+      correctWords++;
+    } else {
+      incorrectWords++;
+    }
+
+    totalCorrectChars += val.split('').filter((char, i) => char === currentSentence[i]).length;
+    totalTypedChars += currentSentence.length;
+
+    const elapsed = (Date.now() - startTime) / 1000 / 60;
+    const wpm = elapsed > 0 ? Math.round(((totalCorrectChars / 5) / elapsed)) : 0;
+    const accuracy = totalTypedChars > 0 ? Math.round((totalCorrectChars / totalTypedChars) * 100) : 0;
+
+    wpmDisplay.textContent = wpm;
+    accuracyDisplay.textContent = accuracy;
+
+    currentSentence = pickSentence();
+    typingInput.value = '';
+    renderSentenceDisplay();
+    updateProgressBar();
+  }
+});
+
 typingInput.addEventListener('input', (e) => {
   if (finished) return;
   const caret = typingInput.selectionStart;
@@ -125,50 +158,12 @@ typingInput.addEventListener('input', (e) => {
   } else if (keyboardMethod.value === 'wijesekara') {
     sinhala = wijesekaraTransliterate(typingInput.value);
   } else if (keyboardMethod.value === 'unicode') {
-    // Unicode: do not change input, just use as-is
     sinhala = typingInput.value;
   }
   typingInput.value = sinhala;
   typingInput.setSelectionRange(caret, caret);
   renderSentenceDisplay();
   updateProgressBar();
-  const val = typingInput.value;
-  const elapsed = (Date.now() - startTime) / 1000 / 60;
-  let currentCorrect = 0;
-  for (let i = 0; i < val.length; i++) {
-    if (val[i] === currentSentence[i]) {
-      currentCorrect++;
-    }
-  }
-  const sessionCorrectChars = totalCorrectChars + currentCorrect;
-  const wpm = elapsed > 0 ? Math.round((sessionCorrectChars / 5) / elapsed) : 0;
-  wpmDisplay.textContent = wpm;
-  const sessionTypedChars = totalTypedChars + val.length;
-  const accuracy = sessionTypedChars > 0 ? Math.round((sessionCorrectChars / sessionTypedChars) * 100) : 0;
-  accuracyDisplay.textContent = accuracy;
-  let feedbackMsg = '';
-  if (val === currentSentence) {
-    totalCorrectChars += currentCorrect;
-    totalTypedChars += val.length;
-    currentSentence = pickSentence();
-    typingInput.value = '';
-    renderSentenceDisplay();
-    updateProgressBar();
-    if (currentSentence.includes("Please enter")) {
-      endTest();
-      feedbackMsg = 'Please add custom text first.';
-    } else {
-      feedbackMsg = 'Great!';
-      if (lastFeedback !== 'Great!') successSound.play();
-    }
-  } else if (currentSentence.startsWith(val)) {
-    feedbackMsg = '';
-  } else {
-    feedbackMsg = 'Incorrect!';
-    if (lastFeedback !== 'Incorrect!') errorSound.play();
-  }
-  feedback.textContent = feedbackMsg;
-  lastFeedback = feedbackMsg;
 });
 
 function pickSentence() {
@@ -227,6 +222,8 @@ function startTest() {
   startTime = Date.now();
   totalCorrectChars = 0;
   totalTypedChars = 0;
+  correctWords = 0;
+  incorrectWords = 0;
   resetStats();
   startBtn.style.display = 'none';
   restartBtn.style.display = 'inline-block';
@@ -244,6 +241,7 @@ function endTest() {
     saveToLeaderboard(wpm, accuracy);
     renderLeaderboard();
   }
+  showSessionReport();
 }
 
 startBtn.addEventListener('click', startTest);
@@ -328,4 +326,29 @@ window.addEventListener('click', (e) => {
 resetStats();
 startBtn.style.display = 'inline-block';
 restartBtn.style.display = 'none';
-resetTimer(); 
+resetTimer();
+
+// Session Report Modal
+function showSessionReport() {
+  document.getElementById('report-wpm').textContent = wpmDisplay.textContent;
+  document.getElementById('report-accuracy').textContent = accuracyDisplay.textContent;
+  document.getElementById('report-correct').textContent = correctWords;
+  document.getElementById('report-incorrect').textContent = incorrectWords;
+  document.getElementById('session-report-modal').style.display = 'flex';
+  mainContent.classList.add('blur-background');
+}
+
+// Close Session Report Modal
+const closeModalReport = document.querySelector('.close-modal-report');
+
+closeModalReport.addEventListener('click', () => {
+  document.getElementById('session-report-modal').style.display = 'none';
+  mainContent.classList.remove('blur-background');
+});
+
+window.addEventListener('click', (e) => {
+  if (e.target === document.getElementById('session-report-modal')) {
+    document.getElementById('session-report-modal').style.display = 'none';
+    mainContent.classList.remove('blur-background');
+  }
+}); 
