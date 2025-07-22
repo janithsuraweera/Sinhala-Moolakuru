@@ -48,7 +48,11 @@
     </section>
     <section class="typing-area">
       <div id="sentence-display">මෙහි වචන/වක්‍ය පෙන්වයි</div>
-      <input type="text" id="typing-input" placeholder="Type here in Sinhala..." autocomplete="off" />
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <input type="text" id="typing-input" placeholder="Type here in Sinhala..." autocomplete="off" />
+        <button id="wijesekara-suggest-toggle" title="Wijesekara Letter Suggestion ON/OFF" style="display: none;">🔔</button>
+        <div id="wijesekara-suggest-tooltip" style="display: none;"></div>
+      </div>
       <div class="progress-bar-bg">
         <div id="progress-bar"></div>
       </div>

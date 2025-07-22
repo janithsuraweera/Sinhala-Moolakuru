@@ -45,6 +45,9 @@ let timeLeft = 60;
 const keyboardMethod = document.getElementById('keyboard-method');
 const customTextSection = document.querySelector('.custom-text-section');
 const customTextInput = document.getElementById('custom-text-input');
+const wijesekaraSuggestToggle = document.getElementById('wijesekara-suggest-toggle');
+const wijesekaraSuggestTooltip = document.getElementById('wijesekara-suggest-tooltip');
+let wijesekaraSuggestOn = false;
 
 // Wijesekara mapping (basic, for demonstration)
 const WIJESEKARA_MAP = {
@@ -361,5 +364,46 @@ window.addEventListener('click', (e) => {
   if (e.target === document.getElementById('session-report-modal')) {
     document.getElementById('session-report-modal').style.display = 'none';
     mainContent.classList.remove('blur-background');
+  }
+});
+
+// Show/hide suggestion toggle only for Wijesekara
+keyboardMethod.addEventListener('change', () => {
+  if (keyboardMethod.value === 'wijesekara') {
+    wijesekaraSuggestToggle.style.display = 'inline-block';
+  } else {
+    wijesekaraSuggestToggle.style.display = 'none';
+    wijesekaraSuggestTooltip.style.display = 'none';
+  }
+});
+
+// Toggle suggestion ON/OFF
+wijesekaraSuggestToggle.addEventListener('click', () => {
+  wijesekaraSuggestOn = !wijesekaraSuggestOn;
+  wijesekaraSuggestToggle.textContent = wijesekaraSuggestOn ? '🔔' : '🔕';
+  if (!wijesekaraSuggestOn) {
+    wijesekaraSuggestTooltip.style.display = 'none';
+  }
+});
+wijesekaraSuggestToggle.textContent = '🔕';
+
+// Show suggestion tooltip on keydown/input (Wijesekara mode only)
+typingInput.addEventListener('keydown', (e) => {
+  if (keyboardMethod.value === 'wijesekara' && wijesekaraSuggestOn && e.key.length === 1) {
+    const mapped = WIJESEKARA_MAP[e.key] || '';
+    if (mapped) {
+      wijesekaraSuggestTooltip.textContent = `"${e.key}" → "${mapped}"`;
+      wijesekaraSuggestTooltip.style.display = 'inline-block';
+      wijesekaraSuggestTooltip.style.background = '#fffbe7';
+      wijesekaraSuggestTooltip.style.border = '1px solid #fbbf24';
+      wijesekaraSuggestTooltip.style.padding = '2px 8px';
+      wijesekaraSuggestTooltip.style.borderRadius = '6px';
+      wijesekaraSuggestTooltip.style.marginLeft = '4px';
+      setTimeout(() => {
+        wijesekaraSuggestTooltip.style.display = 'none';
+      }, 1200);
+    } else {
+      wijesekaraSuggestTooltip.style.display = 'none';
+    }
   }
 }); 
