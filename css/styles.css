@@ -185,6 +185,32 @@ footer {
   color: var(--text);
   font-size: 1rem;
 }
+.keyboard-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+#keyboard-method {
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--primary);
+  background: var(--input-bg);
+  color: var(--text);
+  font-size: 1rem;
+}
+.correct-char {
+  color: var(--text);
+}
+.mistake-char {
+  color: #e11d48;
+  background: #fee2e2;
+  border-radius: 2px;
+}
+.pending-char {
+  color: #a3a3a3;
+}
 @media (max-width: 600px) {
   main {
     padding: 1rem;

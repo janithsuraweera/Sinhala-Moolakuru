@@ -38,6 +38,27 @@ const timerDisplay = document.getElementById('timer-display');
 const timeSelect = document.getElementById('time-select');
 let countdown = null;
 let timeLeft = 60;
+const keyboardMethod = document.getElementById('keyboard-method');
+
+// Wijesekara mapping (basic, for demonstration)
+const WIJESEKARA_MAP = {
+  'a': 'අ', 'A': 'ආ', 'b': 'බ', 'B': 'භ', 'c': 'ච', 'C': 'ඡ', 'd': 'ද', 'D': 'ධ',
+  'e': 'එ', 'E': 'ඒ', 'f': 'ෆ', 'g': 'ග', 'G': 'ඝ', 'h': 'හ', 'H': 'ඨ', 'i': 'ඉ',
+  'I': 'ඊ', 'j': 'ජ', 'J': 'ඣ', 'k': 'ක', 'K': 'ඛ', 'l': 'ල', 'L': 'ළ', 'm': 'ම',
+  'n': 'න', 'N': 'ණ', 'o': 'ඔ', 'O': 'ඕ', 'p': 'ප', 'P': 'ඵ', 'q': 'ඤ', 'r': 'ර',
+  'R': 'ඍ', 's': 'ස', 'S': 'ශ', 't': 'ත', 'T': 'ථ', 'u': 'උ', 'U': 'ඌ', 'v': 'ව',
+  'w': 'ව', 'W': 'ඡ', 'x': 'ක්‍ෂ', 'y': 'ය', 'Y': 'ය', 'z': 'ඣ', 'Z': 'ඣ',
+  // Add more for full layout
+};
+
+function wijesekaraTransliterate(input) {
+  let out = '';
+  for (let i = 0; i < input.length; i++) {
+    const c = input[i];
+    out += WIJESEKARA_MAP[c] || c;
+  }
+  return out;
+}
 
 // --- Sinhala Phonetic Transliteration ---
 // Basic mapping for common Sinhala sounds
@@ -65,16 +86,39 @@ function transliterateToSinhala(input) {
   return text;
 }
 
-// --- Replace input with Sinhala in real-time ---
+function renderSentenceDisplay() {
+  const val = typingInput.value;
+  let html = '';
+  for (let i = 0; i < currentSentence.length; i++) {
+    if (i < val.length) {
+      if (val[i] === currentSentence[i]) {
+        html += `<span class='correct-char'>${currentSentence[i]}</span>`;
+      } else {
+        html += `<span class='mistake-char'>${currentSentence[i]}</span>`;
+      }
+    } else {
+      html += `<span class='pending-char'>${currentSentence[i]}</span>`;
+    }
+  }
+  sentenceDisplay.innerHTML = html;
+}
+
+// --- Replace input with Sinhala in real-time, based on method ---
 typingInput.addEventListener('input', (e) => {
   if (finished) return;
-  // Save caret position
   const caret = typingInput.selectionStart;
-  // Transliterate
-  const sinhala = transliterateToSinhala(typingInput.value);
+  let sinhala = typingInput.value;
+  if (keyboardMethod.value === 'phonetic') {
+    sinhala = transliterateToSinhala(typingInput.value);
+  } else if (keyboardMethod.value === 'wijesekara') {
+    sinhala = wijesekaraTransliterate(typingInput.value);
+  } else if (keyboardMethod.value === 'unicode') {
+    // Unicode: do not change input, just use as-is
+    sinhala = typingInput.value;
+  }
   typingInput.value = sinhala;
-  // Restore caret
   typingInput.setSelectionRange(caret, caret);
+  renderSentenceDisplay();
   // Continue with normal logic
   if (!startTime) startTime = Date.now();
   const val = typingInput.value;
@@ -92,14 +136,19 @@ typingInput.addEventListener('input', (e) => {
   const wpm = elapsed > 0 ? Math.round((correctChars / 5) / elapsed) : 0;
   wpmDisplay.textContent = wpm;
   // Feedback
+  let feedbackMsg = '';
   if (val === currentSentence) {
-    feedback.textContent = 'Great!';
+    feedbackMsg = 'Great!';
+    if (lastFeedback !== 'Great!') successSound.play();
     endTest();
   } else if (currentSentence.startsWith(val)) {
-    feedback.textContent = '';
+    feedbackMsg = '';
   } else {
-    feedback.textContent = 'Incorrect!';
+    feedbackMsg = 'Incorrect!';
+    if (lastFeedback !== 'Incorrect!') errorSound.play();
   }
+  feedback.textContent = feedbackMsg;
+  lastFeedback = feedbackMsg;
 });
 
 function pickSentence() {
@@ -142,7 +191,7 @@ function startTimer() {
 function startTest() {
   finished = false;
   currentSentence = pickSentence();
-  sentenceDisplay.textContent = currentSentence;
+  renderSentenceDisplay();
   typingInput.value = '';
   typingInput.disabled = false;
   typingInput.focus();
@@ -186,6 +235,11 @@ modeToggle.addEventListener('click', () => {
 sentenceDisplay.addEventListener('click', () => {
   typingInput.focus();
 });
+
+// Sound feedback
+const successSound = new Audio('assets/success.mp3');
+const errorSound = new Audio('assets/error.mp3');
+let lastFeedback = '';
 
 // Initial state
 resetStats();
