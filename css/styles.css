@@ -129,6 +129,37 @@ footer {
   margin: 2rem 0 1rem 0;
   color: #888;
 }
+.leaderboard-section {
+  margin-top: 2rem;
+}
+.leaderboard-section h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+#leaderboard {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+#leaderboard th, #leaderboard td {
+  padding: 0.5rem 0.7rem;
+  text-align: center;
+}
+#leaderboard th {
+  background: var(--input-bg);
+  color: var(--primary);
+  font-weight: 700;
+}
+#leaderboard tr:nth-child(even) {
+  background: var(--input-bg);
+}
+#leaderboard tr:nth-child(odd) {
+  background: var(--card);
+}
 @media (max-width: 600px) {
   main {
     padding: 1rem;
@@ -141,5 +172,12 @@ footer {
   }
   h1 {
     font-size: 1.1rem;
+  }
+  .leaderboard-section h2 {
+    font-size: 1rem;
+  }
+  #leaderboard th, #leaderboard td {
+    padding: 0.3rem 0.3rem;
+    font-size: 0.9rem;
   }
 } 
