@@ -45,6 +45,9 @@ let timeLeft = 60;
 const keyboardMethod = document.getElementById('keyboard-method');
 const customTextSection = document.querySelector('.custom-text-section');
 const customTextInput = document.getElementById('custom-text-input');
+const wijesekaraSuggestToggle = document.getElementById('wijesekara-suggest-toggle');
+const wijesekaraSuggestTooltip = document.getElementById('wijesekara-suggest-tooltip');
+let wijesekaraSuggestOn = false;
 
 // Wijesekara mapping (basic, for demonstration)
 const WIJESEKARA_MAP = {
@@ -225,8 +228,6 @@ function startTest() {
   correctWords = 0;
   incorrectWords = 0;
   resetStats();
-  startBtn.style.display = 'none';
-  restartBtn.style.display = 'inline-block';
   startTimer();
 }
 
@@ -244,9 +245,12 @@ function endTest() {
   showSessionReport();
 }
 
-startBtn.addEventListener('click', startTest);
-restartBtn.addEventListener('click', startTest);
+// Remove all references to restartBtn
+// --- Persistent User Settings (localStorage) ---
+// Save on change
+
 difficultySelect.addEventListener('change', () => {
+  localStorage.setItem('difficulty', difficultySelect.value);
   if (difficultySelect.value === 'custom') {
     customTextSection.style.display = 'block';
   } else {
@@ -254,14 +258,61 @@ difficultySelect.addEventListener('change', () => {
   }
   startTest();
 });
+
 timeSelect.addEventListener('change', () => {
+  localStorage.setItem('time', timeSelect.value);
   startTest();
+});
+
+keyboardMethod.addEventListener('change', () => {
+  localStorage.setItem('keyboardMethod', keyboardMethod.value);
+  if (keyboardMethod.value === 'wijesekara') {
+    wijesekaraSuggestToggle.style.display = 'inline-block';
+  } else {
+    wijesekaraSuggestToggle.style.display = 'none';
+    wijesekaraSuggestTooltip.style.display = 'none';
+  }
+});
+
+customTextInput.addEventListener('input', () => {
+  localStorage.setItem('customText', customTextInput.value);
+});
+
+// Restore on load
+window.addEventListener('DOMContentLoaded', function() {
+  const savedDifficulty = localStorage.getItem('difficulty');
+  if (savedDifficulty) difficultySelect.value = savedDifficulty;
+  const savedTime = localStorage.getItem('time');
+  if (savedTime) timeSelect.value = savedTime;
+  const savedKeyboard = localStorage.getItem('keyboardMethod');
+  if (savedKeyboard) keyboardMethod.value = savedKeyboard;
+  const savedCustomText = localStorage.getItem('customText');
+  if (savedCustomText) customTextInput.value = savedCustomText;
+  // Show/hide custom text section
+  if (difficultySelect.value === 'custom') {
+    customTextSection.style.display = 'block';
+  } else {
+    customTextSection.style.display = 'none';
+  }
+  // Theme and premium already handled below
+  // Start with restored settings
+  startTest();
+  // Restore dark mode
+  if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark');
+    modeToggle.textContent = '☀️';
+  } else {
+    document.body.classList.remove('dark');
+    modeToggle.textContent = '🌙';
+  }
 });
 
 // Dark/Light mode toggle
 modeToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark');
   modeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+  // Save to localStorage
+  localStorage.setItem('darkMode', document.body.classList.contains('dark') ? 'true' : 'false');
 });
 
 // Mobile: focus input on sentence click
@@ -327,7 +378,7 @@ window.addEventListener('click', (e) => {
 // Initial state
 resetStats();
 startBtn.style.display = 'inline-block';
-restartBtn.style.display = 'none';
+startBtn.disabled = false;
 resetTimer();
 
 // Session Report Modal
@@ -347,19 +398,215 @@ function showSessionReport() {
   document.getElementById('report-incorrect').textContent = incorrectWords;
   document.getElementById('session-report-modal').style.display = 'flex';
   mainContent.classList.add('blur-background');
+  // Lock start button
+  startBtn.disabled = true;
 }
+
+// Modal Restart Button
+const modalRestartBtn = document.getElementById('modal-restart-btn');
+modalRestartBtn.addEventListener('click', () => {
+  document.getElementById('session-report-modal').style.display = 'none';
+  mainContent.classList.remove('blur-background');
+  startBtn.disabled = false;
+  startTest();
+});
+
+// Start button logic
+startBtn.addEventListener('click', () => {
+  startBtn.disabled = true;
+  startTest();
+});
 
 // Close Session Report Modal
 const closeModalReport = document.querySelector('.close-modal-report');
-
 closeModalReport.addEventListener('click', () => {
   document.getElementById('session-report-modal').style.display = 'none';
   mainContent.classList.remove('blur-background');
+  startBtn.disabled = false;
 });
 
 window.addEventListener('click', (e) => {
   if (e.target === document.getElementById('session-report-modal')) {
     document.getElementById('session-report-modal').style.display = 'none';
     mainContent.classList.remove('blur-background');
+    startBtn.disabled = false;
+  }
+});
+
+// Show/hide suggestion toggle only for Wijesekara
+keyboardMethod.addEventListener('change', () => {
+  if (keyboardMethod.value === 'wijesekara') {
+    wijesekaraSuggestToggle.style.display = 'inline-block';
+  } else {
+    wijesekaraSuggestToggle.style.display = 'none';
+    wijesekaraSuggestTooltip.style.display = 'none';
+  }
+});
+
+// Toggle suggestion ON/OFF
+wijesekaraSuggestToggle.addEventListener('click', () => {
+  wijesekaraSuggestOn = !wijesekaraSuggestOn;
+  wijesekaraSuggestToggle.textContent = wijesekaraSuggestOn ? '🔔' : '🔕';
+  if (!wijesekaraSuggestOn) {
+    wijesekaraSuggestTooltip.style.display = 'none';
+  }
+});
+wijesekaraSuggestToggle.textContent = '🔕';
+
+// Show suggestion tooltip on keydown/input (Wijesekara mode only)
+typingInput.addEventListener('keydown', (e) => {
+  if (keyboardMethod.value === 'wijesekara' && wijesekaraSuggestOn && e.key.length === 1) {
+    const mapped = WIJESEKARA_MAP[e.key] || '';
+    if (mapped) {
+      wijesekaraSuggestTooltip.textContent = `"${e.key}" → "${mapped}"`;
+      wijesekaraSuggestTooltip.style.display = 'inline-block';
+      wijesekaraSuggestTooltip.style.background = '#fffbe7';
+      wijesekaraSuggestTooltip.style.border = '1px solid #fbbf24';
+      wijesekaraSuggestTooltip.style.padding = '2px 8px';
+      wijesekaraSuggestTooltip.style.borderRadius = '6px';
+      wijesekaraSuggestTooltip.style.marginLeft = '4px';
+      setTimeout(() => {
+        wijesekaraSuggestTooltip.style.display = 'none';
+      }, 1200);
+    } else {
+      wijesekaraSuggestTooltip.style.display = 'none';
+    }
   }
 }); 
+
+// Premium activation logic
+const activatePremiumBtn = document.getElementById('activate-premium-btn');
+const premiumModal = document.getElementById('premium-modal');
+const closeModalPremium = document.querySelector('.close-modal-premium');
+const premiumCodeInput = document.getElementById('premium-code-input');
+const submitPremiumCode = document.getElementById('submit-premium-code');
+const premiumFeedback = document.getElementById('premium-feedback');
+const customKeyboardSection = document.getElementById('custom-keyboard-section');
+const customKeyboardMapping = document.getElementById('custom-keyboard-mapping');
+const saveCustomKeyboard = document.getElementById('save-custom-keyboard');
+const customThemeSection = document.getElementById('custom-theme-section');
+const customThemeSelect = document.getElementById('custom-theme-select');
+const logoutPremiumBtn = document.getElementById('logout-premium-btn');
+
+function isPremium() {
+  return localStorage.getItem('premium') === 'true';
+}
+
+function showPremiumFeatures() {
+  if (isPremium()) {
+    customKeyboardSection.style.display = 'block';
+    customThemeSection.style.display = 'block';
+    activatePremiumBtn.style.display = 'none';
+    logoutPremiumBtn.style.display = 'inline-block';
+    // Show premium badge
+    document.getElementById('premium-badge').style.display = 'inline-block';
+  } else {
+    customKeyboardSection.style.display = 'none';
+    customThemeSection.style.display = 'none';
+    activatePremiumBtn.style.display = 'inline-block';
+    logoutPremiumBtn.style.display = 'none';
+    // Hide premium badge
+    document.getElementById('premium-badge').style.display = 'none';
+  }
+}
+
+activatePremiumBtn.addEventListener('click', () => {
+  premiumModal.style.display = 'flex';
+  mainContent.classList.add('blur-background');
+  premiumFeedback.textContent = '';
+  premiumCodeInput.value = '';
+});
+closeModalPremium.addEventListener('click', () => {
+  premiumModal.style.display = 'none';
+  mainContent.classList.remove('blur-background');
+});
+window.addEventListener('click', (e) => {
+  if (e.target === premiumModal) {
+    premiumModal.style.display = 'none';
+    mainContent.classList.remove('blur-background');
+  }
+});
+submitPremiumCode.addEventListener('click', () => {
+  const code = premiumCodeInput.value.trim();
+  if (code === '123456') {
+    localStorage.setItem('premium', 'true');
+    premiumFeedback.style.color = '#22c55e';
+    premiumFeedback.textContent = 'Premium activated!';
+    setTimeout(() => {
+      premiumModal.style.display = 'none';
+      mainContent.classList.remove('blur-background');
+      showPremiumFeatures();
+    }, 800);
+  } else {
+    premiumFeedback.style.color = '#e11d48';
+    premiumFeedback.textContent = 'Invalid code!';
+  }
+});
+
+// Custom Keyboard Layout (Premium)
+saveCustomKeyboard.addEventListener('click', () => {
+  const mappingStr = customKeyboardMapping.value.trim();
+  localStorage.setItem('customKeyboardMapping', mappingStr);
+  alert('Custom keyboard layout saved!');
+});
+
+// Custom Theme (Premium)
+customThemeSelect.addEventListener('change', () => {
+  const theme = customThemeSelect.value;
+  localStorage.setItem('customTheme', theme);
+  applyCustomTheme(theme);
+});
+
+function applyCustomTheme(theme) {
+  document.body.classList.remove('theme-blue', 'theme-green', 'theme-pink', 'theme-dark');
+  if (theme === 'blue') document.body.classList.add('theme-blue');
+  else if (theme === 'green') document.body.classList.add('theme-green');
+  else if (theme === 'pink') document.body.classList.add('theme-pink');
+  else if (theme === 'dark') document.body.classList.add('dark');
+  else document.body.classList.remove('dark');
+}
+
+// On load, show premium features if activated
+showPremiumFeatures();
+// Load custom theme if set
+if (isPremium()) {
+  const theme = localStorage.getItem('customTheme') || 'default';
+  customThemeSelect.value = theme;
+  applyCustomTheme(theme);
+}
+// Load custom keyboard mapping if set
+if (isPremium()) {
+  const mappingStr = localStorage.getItem('customKeyboardMapping') || '';
+  customKeyboardMapping.value = mappingStr;
+} 
+
+logoutPremiumBtn.addEventListener('click', () => {
+  localStorage.removeItem('premium');
+  // Optionally remove custom features
+  // localStorage.removeItem('customKeyboardMapping');
+  // localStorage.removeItem('customTheme');
+  showPremiumFeatures();
+  alert('Premium logged out!');
+}); 
+
+// --- Leaderboard Persistence ---
+function saveToLeaderboard(wpm, accuracy) {
+  const leaderboard = JSON.parse(localStorage.getItem('leaderboard') || '[]');
+  leaderboard.push({ wpm, accuracy, date: new Date().toLocaleString() });
+  leaderboard.sort((a, b) => b.wpm - a.wpm); // Highest WPM first
+  localStorage.setItem('leaderboard', JSON.stringify(leaderboard.slice(0, 10)));
+}
+
+function renderLeaderboard() {
+  const leaderboard = JSON.parse(localStorage.getItem('leaderboard') || '[]');
+  const tbody = document.querySelector('#leaderboard tbody');
+  tbody.innerHTML = '';
+  leaderboard.forEach((row, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${i + 1}</td><td>${row.wpm}</td><td>${row.accuracy}</td><td>${row.date}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// Render leaderboard on load
+window.addEventListener('DOMContentLoaded', renderLeaderboard); 
