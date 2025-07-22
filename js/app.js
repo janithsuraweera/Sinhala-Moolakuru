@@ -24,6 +24,8 @@ let timer = null;
 let typedChars = 0;
 let correctChars = 0;
 let finished = false;
+let totalCorrectChars = 0;
+let totalTypedChars = 0;
 
 const sentenceDisplay = document.getElementById('sentence-display');
 const typingInput = document.getElementById('typing-input');
@@ -39,6 +41,8 @@ const timeSelect = document.getElementById('time-select');
 let countdown = null;
 let timeLeft = 60;
 const keyboardMethod = document.getElementById('keyboard-method');
+const customTextSection = document.querySelector('.custom-text-section');
+const customTextInput = document.getElementById('custom-text-input');
 
 // Wijesekara mapping (basic, for demonstration)
 const WIJESEKARA_MAP = {
@@ -119,28 +123,34 @@ typingInput.addEventListener('input', (e) => {
   typingInput.value = sinhala;
   typingInput.setSelectionRange(caret, caret);
   renderSentenceDisplay();
-  // Continue with normal logic
-  if (!startTime) startTime = Date.now();
   const val = typingInput.value;
-  typedChars = val.length;
-  let correct = 0;
-  for (let i = 0; i < val.length; i++) {
-    if (val[i] === currentSentence[i]) correct++;
-  }
-  correctChars = correct;
-  // Accuracy
-  const accuracy = typedChars ? Math.round((correctChars / typedChars) * 100) : 0;
-  accuracyDisplay.textContent = accuracy;
-  // WPM
   const elapsed = (Date.now() - startTime) / 1000 / 60;
-  const wpm = elapsed > 0 ? Math.round((correctChars / 5) / elapsed) : 0;
+  let currentCorrect = 0;
+  for (let i = 0; i < val.length; i++) {
+    if (val[i] === currentSentence[i]) {
+      currentCorrect++;
+    }
+  }
+  const sessionCorrectChars = totalCorrectChars + currentCorrect;
+  const wpm = elapsed > 0 ? Math.round((sessionCorrectChars / 5) / elapsed) : 0;
   wpmDisplay.textContent = wpm;
-  // Feedback
+  const sessionTypedChars = totalTypedChars + val.length;
+  const accuracy = sessionTypedChars > 0 ? Math.round((sessionCorrectChars / sessionTypedChars) * 100) : 0;
+  accuracyDisplay.textContent = accuracy;
   let feedbackMsg = '';
   if (val === currentSentence) {
-    feedbackMsg = 'Great!';
-    if (lastFeedback !== 'Great!') successSound.play();
-    endTest();
+    totalCorrectChars += currentCorrect;
+    totalTypedChars += val.length;
+    currentSentence = pickSentence();
+    typingInput.value = '';
+    renderSentenceDisplay();
+    if (currentSentence.includes("Please enter")) {
+      endTest();
+      feedbackMsg = 'Please add custom text first.';
+    } else {
+      feedbackMsg = 'Great!';
+      if (lastFeedback !== 'Great!') successSound.play();
+    }
   } else if (currentSentence.startsWith(val)) {
     feedbackMsg = '';
   } else {
@@ -153,6 +163,14 @@ typingInput.addEventListener('input', (e) => {
 
 function pickSentence() {
   const level = difficultySelect.value;
+  if (level === 'custom') {
+    const customText = customTextInput.value.trim();
+    if (customText) {
+      const sentences = customText.split(/[\n\.?!]+/).filter(s => s.trim().length > 0);
+      return sentences[Math.floor(Math.random() * sentences.length)];
+    }
+    return "Please enter some custom text to practice.";
+  }
   const arr = DATA[level];
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -195,9 +213,9 @@ function startTest() {
   typingInput.value = '';
   typingInput.disabled = false;
   typingInput.focus();
-  startTime = null;
-  typedChars = 0;
-  correctChars = 0;
+  startTime = Date.now();
+  totalCorrectChars = 0;
+  totalTypedChars = 0;
   resetStats();
   startBtn.style.display = 'none';
   restartBtn.style.display = 'inline-block';
@@ -209,10 +227,9 @@ function endTest() {
   typingInput.disabled = true;
   feedback.textContent = 'Finished!';
   clearInterval(countdown);
-  // Save to leaderboard
   const wpm = parseInt(wpmDisplay.textContent, 10);
   const accuracy = parseInt(accuracyDisplay.textContent, 10);
-  if (wpm > 0 && accuracy > 0) {
+  if (wpm > 0) {
     saveToLeaderboard(wpm, accuracy);
     renderLeaderboard();
   }
@@ -221,7 +238,12 @@ function endTest() {
 startBtn.addEventListener('click', startTest);
 restartBtn.addEventListener('click', startTest);
 difficultySelect.addEventListener('change', () => {
-  if (!finished) startTest();
+  if (difficultySelect.value === 'custom') {
+    customTextSection.style.display = 'block';
+  } else {
+    customTextSection.style.display = 'none';
+  }
+  startTest();
 });
 timeSelect.addEventListener('change', resetTimer);
 
