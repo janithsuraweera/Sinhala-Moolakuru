@@ -90,6 +90,13 @@ function transliterateToSinhala(input) {
   return text;
 }
 
+function updateProgressBar() {
+  const val = typingInput.value;
+  const total = currentSentence.length;
+  const percent = Math.min((val.length / total) * 100, 100);
+  document.getElementById('progress-bar').style.width = percent + '%';
+}
+
 function renderSentenceDisplay() {
   const val = typingInput.value;
   let html = '';
@@ -105,6 +112,7 @@ function renderSentenceDisplay() {
     }
   }
   sentenceDisplay.innerHTML = html;
+  updateProgressBar();
 }
 
 // --- Replace input with Sinhala in real-time, based on method ---
@@ -123,6 +131,7 @@ typingInput.addEventListener('input', (e) => {
   typingInput.value = sinhala;
   typingInput.setSelectionRange(caret, caret);
   renderSentenceDisplay();
+  updateProgressBar();
   const val = typingInput.value;
   const elapsed = (Date.now() - startTime) / 1000 / 60;
   let currentCorrect = 0;
@@ -144,6 +153,7 @@ typingInput.addEventListener('input', (e) => {
     currentSentence = pickSentence();
     typingInput.value = '';
     renderSentenceDisplay();
+    updateProgressBar();
     if (currentSentence.includes("Please enter")) {
       endTest();
       feedbackMsg = 'Please add custom text first.';
@@ -210,6 +220,7 @@ function startTest() {
   finished = false;
   currentSentence = pickSentence();
   renderSentenceDisplay();
+  updateProgressBar();
   typingInput.value = '';
   typingInput.disabled = false;
   typingInput.focus();
