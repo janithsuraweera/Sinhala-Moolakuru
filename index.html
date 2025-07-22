@@ -53,6 +53,23 @@
         <button id="wijesekara-suggest-toggle" title="Wijesekara Letter Suggestion ON/OFF" style="display: none;">🔔</button>
         <div id="wijesekara-suggest-tooltip" style="display: none;"></div>
       </div>
+      <button id="activate-premium-btn" class="footer-btn" style="margin-top: 1rem;">Activate Premium</button>
+      <div id="custom-keyboard-section" style="display:none; margin-top:1rem;">
+        <label>Custom Keyboard Layout (Premium):</label>
+        <textarea id="custom-keyboard-mapping" rows="3" placeholder="e.g. q=ඤ, w=ව, ..."></textarea>
+        <button id="save-custom-keyboard" class="footer-btn">Save Layout</button>
+      </div>
+      <div id="custom-theme-section" style="display:none; margin-top:1rem;">
+        <label>Custom Theme (Premium):</label>
+        <select id="custom-theme-select">
+          <option value="default">Default</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+          <option value="pink">Pink</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+      <button id="logout-premium-btn" class="footer-btn" style="display:none; margin-top:1rem; background:#e11d48; color:#fff;">Logout Premium</button>
       <div class="progress-bar-bg">
         <div id="progress-bar"></div>
       </div>
@@ -148,6 +165,18 @@
         <div>Correct Words: <span id="report-correct">0</span></div>
         <div>Incorrect Words: <span id="report-incorrect">0</span></div>
       </div>
+    </div>
+  </div>
+
+  <!-- Premium Activation Modal -->
+  <div id="premium-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <button class="close-modal-premium">&times;</button>
+      <h2>Activate Premium</h2>
+      <p>Enter your premium code to unlock custom keyboard layouts and themes.</p>
+      <input type="text" id="premium-code-input" placeholder="Enter code here..." style="width: 100%; padding: 0.5rem; margin-bottom: 1rem;" />
+      <button id="submit-premium-code" class="footer-btn">Activate</button>
+      <div id="premium-feedback" style="color: #e11d48; margin-top: 0.5rem;"></div>
     </div>
   </div>
 
