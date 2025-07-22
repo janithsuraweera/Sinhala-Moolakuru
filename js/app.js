@@ -95,8 +95,15 @@ function startTest() {
 function endTest() {
   finished = true;
   typingInput.disabled = true;
-  feedback.textContent = 'අවසන්!';
+  feedback.textContent = 'Finished!';
   clearInterval(countdown);
+  // Save to leaderboard
+  const wpm = parseInt(wpmDisplay.textContent, 10);
+  const accuracy = parseInt(accuracyDisplay.textContent, 10);
+  if (wpm > 0 && accuracy > 0) {
+    saveToLeaderboard(wpm, accuracy);
+    renderLeaderboard();
+  }
 }
 
 typingInput.addEventListener('input', () => {
@@ -118,12 +125,12 @@ typingInput.addEventListener('input', () => {
   wpmDisplay.textContent = wpm;
   // Feedback
   if (val === currentSentence) {
-    feedback.textContent = 'හොඳයි!';
+    feedback.textContent = 'Great!';
     endTest();
   } else if (currentSentence.startsWith(val)) {
     feedback.textContent = '';
   } else {
-    feedback.textContent = 'වැරදියි!';
+    feedback.textContent = 'Incorrect!';
   }
 });
 

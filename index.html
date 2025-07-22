@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="si">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>සිංහල ටයිප් පුහුණු යෙදුම</title>
+  <title>Sinhala Moolakuru</title>
   <link rel="stylesheet" href="css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -11,21 +11,21 @@
   <header>
     <div class="logo-title">
       <img src="assets/logo.png" alt="Logo" class="logo" />
-      <h1>සිංහල ටයිප් පුහුණු යෙදුම</h1>
+      <h1>Sinhala Moolakuru</h1>
     </div>
     <button id="mode-toggle">🌙</button>
   </header>
   <main>
     <section class="difficulty-select">
-      <label>අපහසුතාවය තෝරන්න:</label>
+      <label>Select difficulty:</label>
       <select id="difficulty">
-        <option value="easy">සහල්</option>
-        <option value="medium">මධ්‍යම</option>
-        <option value="hard">කඨින</option>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
       </select>
     </section>
     <section class="timer-section">
-      <label>කාලය තෝරන්න:</label>
+      <label>Select time:</label>
       <select id="time-select">
         <option value="60">1 minute</option>
         <option value="120">2 minutes</option>
@@ -35,16 +35,16 @@
     </section>
     <section class="typing-area">
       <div id="sentence-display">මෙහි වචන/වක්‍ය පෙන්වයි</div>
-      <input type="text" id="typing-input" placeholder="මෙහි ටයිප් කරන්න..." autocomplete="off" />
+      <input type="text" id="typing-input" placeholder="Type here in Sinhala..." autocomplete="off" />
       <div class="feedback" id="feedback"></div>
     </section>
     <section class="stats">
-      <div>වේගය: <span id="wpm">0</span> WPM</div>
-      <div>නිවැරදිභාවය: <span id="accuracy">0</span>%</div>
+      <div>Speed: <span id="wpm">0</span> WPM</div>
+      <div>Accuracy: <span id="accuracy">0</span>%</div>
     </section>
     <section class="controls">
-      <button id="start-btn">ආරම්භ කරන්න</button>
-      <button id="restart-btn" style="display:none;">නැවත පටන් ගන්න</button>
+      <button id="start-btn">Start</button>
+      <button id="restart-btn" style="display:none;">Restart</button>
     </section>
     <section class="leaderboard-section">
       <h2>Leaderboard</h2>
@@ -64,7 +64,7 @@
     </section>
   </main>
   <footer>
-    <small>© 2024 සිංහල ටයිප් පුහුණු යෙදුම</small>
+    <small>© 2024 Sinhala Moolakuru</small>
   </footer>
   <script src="js/app.js"></script>
 </body>
