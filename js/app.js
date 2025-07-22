@@ -266,12 +266,18 @@ let lastFeedback = '';
 // Help Modal
 const helpBtn = document.getElementById('help-btn');
 const helpModal = document.getElementById('help-modal');
-const closeModal = document.querySelector('.close-modal');
-const phoneticGuide = document.getElementById('phonetic-guide');
-const wijesekaraGuide = document.getElementById('wijesekara-guide');
+const closeModalHelp = document.querySelector('.close-modal-help');
+
+// About Modal
+const aboutBtn = document.getElementById('about-btn');
+const aboutModal = document.getElementById('about-modal');
+const closeModalAbout = document.querySelector('.close-modal-about');
+
+const mainContent = document.querySelector('main');
 
 helpBtn.addEventListener('click', () => {
   helpModal.style.display = 'flex';
+  mainContent.classList.add('blur-background');
   if (keyboardMethod.value === 'wijesekara') {
     phoneticGuide.style.display = 'none';
     wijesekaraGuide.style.display = 'block';
@@ -281,13 +287,29 @@ helpBtn.addEventListener('click', () => {
   }
 });
 
-closeModal.addEventListener('click', () => {
+aboutBtn.addEventListener('click', () => {
+  aboutModal.style.display = 'flex';
+  mainContent.classList.add('blur-background');
+});
+
+closeModalHelp.addEventListener('click', () => {
   helpModal.style.display = 'none';
+  mainContent.classList.remove('blur-background');
+});
+
+closeModalAbout.addEventListener('click', () => {
+  aboutModal.style.display = 'none';
+  mainContent.classList.remove('blur-background');
 });
 
 window.addEventListener('click', (e) => {
   if (e.target === helpModal) {
     helpModal.style.display = 'none';
+    mainContent.classList.remove('blur-background');
+  }
+  if (e.target === aboutModal) {
+    aboutModal.style.display = 'none';
+    mainContent.classList.remove('blur-background');
   }
 });
 
