@@ -228,8 +228,6 @@ function startTest() {
   correctWords = 0;
   incorrectWords = 0;
   resetStats();
-  startBtn.style.display = 'none';
-  restartBtn.style.display = 'inline-block';
   startTimer();
 }
 
@@ -247,8 +245,7 @@ function endTest() {
   showSessionReport();
 }
 
-startBtn.addEventListener('click', startTest);
-restartBtn.addEventListener('click', startTest);
+// Remove all references to restartBtn
 // --- Persistent User Settings (localStorage) ---
 // Save on change
 
@@ -381,7 +378,7 @@ window.addEventListener('click', (e) => {
 // Initial state
 resetStats();
 startBtn.style.display = 'inline-block';
-restartBtn.style.display = 'none';
+startBtn.disabled = false;
 resetTimer();
 
 // Session Report Modal
@@ -401,20 +398,38 @@ function showSessionReport() {
   document.getElementById('report-incorrect').textContent = incorrectWords;
   document.getElementById('session-report-modal').style.display = 'flex';
   mainContent.classList.add('blur-background');
+  // Lock start button
+  startBtn.disabled = true;
 }
+
+// Modal Restart Button
+const modalRestartBtn = document.getElementById('modal-restart-btn');
+modalRestartBtn.addEventListener('click', () => {
+  document.getElementById('session-report-modal').style.display = 'none';
+  mainContent.classList.remove('blur-background');
+  startBtn.disabled = false;
+  startTest();
+});
+
+// Start button logic
+startBtn.addEventListener('click', () => {
+  startBtn.disabled = true;
+  startTest();
+});
 
 // Close Session Report Modal
 const closeModalReport = document.querySelector('.close-modal-report');
-
 closeModalReport.addEventListener('click', () => {
   document.getElementById('session-report-modal').style.display = 'none';
   mainContent.classList.remove('blur-background');
+  startBtn.disabled = false;
 });
 
 window.addEventListener('click', (e) => {
   if (e.target === document.getElementById('session-report-modal')) {
     document.getElementById('session-report-modal').style.display = 'none';
     mainContent.classList.remove('blur-background');
+    startBtn.disabled = false;
   }
 });
 
