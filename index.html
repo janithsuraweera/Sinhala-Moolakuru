@@ -9,7 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="card header-card">
+    <!-- <header> -->
+  <header class="card header-car">
     <div class="logo-title">
       <img src="assets/logo.png" alt="Logo" class="logo" />
       <span class="sinhala-badge">සිංහල 🇱🇰</span>
@@ -21,87 +22,92 @@
     <button id="mode-toggle" aria-label="Toggle dark mode">🌙</button>
   </header>
   <main>
-    <section class="card controls-card difficulty-select">
-      <label>Select difficulty:</label>
-      <select id="difficulty">
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-        <option value="custom">Custom</option>
-      </select>
-    </section>
-    <section class="card custom-text-section" style="display: none;">
-      <label for="custom-text-input">Paste your custom text here:</label>
-      <textarea id="custom-text-input" rows="4" placeholder="Enter any Sinhala text you want to practice..."></textarea>
-    </section>
-    <section class="card timer-section">
-      <label>Select time:</label>
-      <select id="time-select">
-        <option value="60">1 minute</option>
-        <option value="120">2 minutes</option>
-        <option value="180">3 minutes</option>
-      </select>
-      <span id="timer-display">01:00</span>
-    </section>
-    <section class="card keyboard-section">
-      <label for="keyboard-method">Keyboard method:</label>
-      <select id="keyboard-method">
-        <option value="phonetic">Phonetic</option>
-        <option value="wijesekara">Wijesekara</option>
-        <!-- <option value="unicode">Unicode</option> -->
-      </select>
-    </section>
-    <section class="card typing-area-card typing-area">
-      <div id="sentence-display" class="sentence-display">මෙහි වචන/වක්‍ය පෙන්වයි</div>
-      <div style="display: flex; align-items: center; gap: 0.5rem;">
-        <input type="text" id="typing-input" placeholder="Type here in Sinhala..." autocomplete="off" />
-        <button id="wijesekara-suggest-toggle" title="Wijesekara Letter Suggestion ON/OFF" style="display: none;">🔔</button>
-        <div id="wijesekara-suggest-tooltip" style="display: none;"></div>
+    <section class="card main-card">
+      <!-- <h1 class="main-heading">Sinhala Typing Test</h1> -->
+      <div class="timer-section">
+        <label for="time-select">Select time:</label>
+        <select id="time-select">
+          <option value="60">1 minute</option>
+          <option value="120">2 minutes</option>
+          <option value="180">3 minutes</option>
+        </select>
+        <span id="timer-display">01:00</span>
       </div>
-      <button id="activate-premium-btn" class="footer-btn" style="margin-top: 1rem;">Activate Premium</button>
-      <div id="custom-keyboard-section" style="display:none; margin-top:1rem;">
-        <label>Custom Keyboard Layout (Premium):</label>
-        <textarea id="custom-keyboard-mapping" rows="3" placeholder="e.g. q=ඤ, w=ව, ..."></textarea>
-        <button id="save-custom-keyboard" class="footer-btn">Save Layout</button>
-      </div>
-      <div id="custom-theme-section" style="display:none; margin-top:1rem;">
-        <label>Custom Theme (Premium):</label>
-        <select id="custom-theme-select">
-          <option value="default">Default</option>
-          <option value="blue">Blue</option>
-          <option value="green">Green</option>
-          <option value="pink">Pink</option>
-          <option value="dark">Dark</option>
+
+      <div class="select">
+      <div class="difficulty-select" style="margin-bottom: 1rem;">
+        <label for="difficulty">Select difficulty:</label>
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+          <option value="custom">Custom</option>
         </select>
       </div>
-      <button id="logout-premium-btn" class="footer-btn" style="display:none; margin-top:1rem; background:#e11d48; color:#fff;">Logout Premium</button>
-      <div class="progress-bar-bg">
-        <div id="progress-bar"></div>
+      
+
+      <div class="keyboard-section" style="margin-bottom: 1rem;">
+        <label for="keyboard-method">Keyboard method:</label>
+        <select id="keyboard-method">
+          <option value="phonetic">Phonetic</option>
+          <option value="wijesekara">Wijesekara</option>
+        </select>
       </div>
-      <div class="feedback" id="feedback"></div>
-    </section>
-    <section class="card stats-card stats">
-      <div class="stat-badge">Speed: <span id="wpm">0</span> WPM</div>
-      <div class="stat-badge">Accuracy: <span id="accuracy">0</span>%</div>
-    </section>
-    <section class="card controls-card controls">
-      <button id="start-btn" aria-label="Start typing test">Start</button>
-    </section>
-    <section class="card leaderboard-card leaderboard-section">
-      <h2>Leaderboard</h2>
-      <table id="leaderboard">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>WPM</th>
-            <th>Accuracy</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Leaderboard rows will be inserted here -->
-        </tbody>
-      </table>
+      </div>
+      <div class="custom-text-section" style="display: none;">
+        <label for="custom-text-input">Paste your custom text here:</label>
+        <textarea id="custom-text-input" rows="4" placeholder="Enter any Sinhala text you want to practice..."></textarea>
+      </div>
+      <div class="typing-area-card typing-area" style="margin-bottom: 1.2rem;">
+        <div id="sentence-display" class="sentence-display">මෙහි වචන/වක්‍ය පෙන්වයි</div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.7rem;">
+          <input type="text" id="typing-input" placeholder="Type here in Sinhala..." autocomplete="off" />
+          <button id="wijesekara-suggest-toggle" title="Wijesekara Letter Suggestion ON/OFF" style="display: none;">🔔</button>
+          <div id="wijesekara-suggest-tooltip" style="display: none;"></div>
+        </div>
+        <button id="start-btn" aria-label="Start typing test" style="margin: 1rem auto 0 auto; display: block;">Start</button>
+        <div class="progress-bar-bg">
+          <div id="progress-bar"></div>
+        </div>
+        <div class="stats-card_stats2" >
+          <div class="stat-badge">Speed: <span id="wpm">0</span> WPM</div>
+          <div class="stat-badge">Accuracy: <span id="accuracy">0</span>%</div>
+        </div>
+        <div class="feedback" id="feedback"></div>
+        <div id="custom-keyboard-section" style="display:none; margin-top:1rem;">
+          <label>Custom Keyboard Layout (Premium):</label>
+          <textarea id="custom-keyboard-mapping" rows="3" placeholder="e.g. q=ඤ, w=ව, ..."></textarea>
+          <button id="save-custom-keyboard" class="footer-btn">Save Layout</button>
+        </div>
+        <div id="custom-theme-section" style="display:none; margin-top:1rem;">
+          <label>Custom Theme (Premium):</label>
+          <select id="custom-theme-select">
+            <option value="default">Default</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="pink">Pink</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+        <button id="logout-premium-btn" class="footer-btn" style="display:none; margin-top:1rem; background:#e11d48; color:#fff;">Logout Premium</button>
+      </div>
+      <div class="leaderboard-card leaderboard-section" style="margin-top: 1.2rem;">
+        <h2>Leaderboard</h2>
+        <table id="leaderboard">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>WPM</th>
+              <th>Accuracy</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Leaderboard rows will be inserted here -->
+          </tbody>
+        </table>
+        <button id="activate-premium-btn" class="premium-link-btn" type="button">🔓 Unlock Premium features</button>
+      </div>
     </section>
   </main>
   <footer class="card footer-card">
