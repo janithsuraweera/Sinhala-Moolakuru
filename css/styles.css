@@ -1458,42 +1458,35 @@ background: none;
   color: #444;
   margin-bottom: 1.2rem;
 }
-/* --- Improved Stat Badge Layout --- */
+/* --- Colorful Stat Badges for Report Modal --- */
+.report-stat-badge.wpm {
+  background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
+  color: #fff;
+}
+.report-stat-badge.cpm {
+  background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%);
+  color: #fff;
+}
+.report-stat-badge.accuracy {
+  background: linear-gradient(90deg, #f59e42 0%, #fbbf24 100%);
+  color: #222;
+}
 .report-stat-badge {
   border-radius: 16px;
   font-size: 1.25rem;
   font-weight: 700;
-  padding: 0.7em 1em;
+  padding: 1em 1.5em;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
   box-shadow: 0 2px 12px rgba(30,41,59,0.10);
   margin-bottom: 0.5rem;
-  min-width: 80px;
-  max-width: 120px;
+  min-width: 110px;
   transition: background 0.2s, color 0.2s;
-  word-break: break-word;
 }
 .report-stat-badge span {
   font-size: 1.3em;
-  margin-right: 0;
-}
-.badge-label {
-  font-size: 0.97em;
-  font-weight: 500;
-  color: #222;
-  opacity: 0.85;
-  margin-top: 0.1em;
-  letter-spacing: 0.01em;
-  line-height: 1.1;
-}
-.report-stat-badge.wpm, .report-stat-badge.cpm {
-  color: #fff;
-}
-.report-stat-badge.accuracy {
-  color: #222;
+  margin-right: 0.2em;
 }
 .report-share-row {
   margin-bottom: 1.2rem;
@@ -1570,12 +1563,7 @@ background: none;
   }
   .report-stat-badge {
     font-size: 0.97rem;
-    padding: 0.4em 0.5em;
-    min-width: 55px;
-    max-width: 80px;
-  }
-  .badge-label {
-    font-size: 0.85em;
+    padding: 0.4em 0.7em;
   }
   .report-share-btn {
     font-size: 1.1rem;
