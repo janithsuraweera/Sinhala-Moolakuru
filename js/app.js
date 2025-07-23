@@ -28,6 +28,7 @@ let totalCorrectChars = 0;
 let totalTypedChars = 0;
 let correctWords = 0;
 let incorrectWords = 0;
+let testStarted = false;
 
 const sentenceDisplay = document.getElementById('sentence-display');
 const typingInput = document.getElementById('typing-input');
@@ -123,6 +124,13 @@ function renderSentenceDisplay() {
 
 // --- Replace input with Sinhala in real-time, based on method ---
 typingInput.addEventListener('keydown', (e) => {
+  if (!testStarted && !finished && e.key.length === 1 && typingInput.value.length === 0) {
+    // Auto start on first key if not started
+    startBtn.style.display = 'none';
+    startBtn.disabled = true;
+    startTest();
+    testStarted = true;
+  }
   if (e.key === 'Enter') {
     e.preventDefault();
     if (finished) return;
@@ -154,6 +162,13 @@ typingInput.addEventListener('keydown', (e) => {
 });
 
 typingInput.addEventListener('input', (e) => {
+  if (!testStarted && !finished && typingInput.value.length > 0) {
+    // Auto start on first input if not started
+    startBtn.style.display = 'none';
+    startBtn.disabled = true;
+    startTest();
+    testStarted = true;
+  }
   if (finished) return;
   const caret = typingInput.selectionStart;
   let sinhala = typingInput.value;
@@ -226,6 +241,7 @@ function startTimer(resumeMode = false) {
 
 function startTest() {
   finished = false;
+  testStarted = true;
   currentSentence = pickSentence();
   renderSentenceDisplay();
   updateProgressBar();
@@ -246,6 +262,7 @@ function startTest() {
 
 function endTest() {
   finished = true;
+  testStarted = false;
   typingInput.disabled = true;
   feedback.textContent = 'Finished!';
   clearInterval(countdown);
@@ -361,6 +378,7 @@ function clearTestState() {
 }
 function restoreTestState() {
   finished = false;
+  testStarted = true;
   currentSentence = localStorage.getItem('testCurrentSentence') || pickSentence();
   renderSentenceDisplay();
   updateProgressBar();
