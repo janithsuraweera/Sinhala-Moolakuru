@@ -1,3 +1,11 @@
+html, body {
+  width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 body {
   font-family: 'Noto Sans Sinhala', 'Iskoola Pota', sans-serif;
   margin: 0;
@@ -1204,6 +1212,10 @@ main {
 }
 
 @media (max-width: 700px) {
+  main {
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+  }
   .main-card {
     max-width: 99vw;
     padding: 1.1rem 0.2rem 1.2rem 0.2rem;
@@ -1271,66 +1283,52 @@ background: none;
   gap: 1rem;
 }
 
+/* --- MOBILE-ONLY OVERRIDES: width < 700px --- */
 @media (max-width: 700px) {
+  main {
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+  }
   .main-card, .card, .typing-area-card, .leaderboard-card, .footer-card, .header-card {
-    max-width: 100vw;
-    width: 100vw;
-    padding: 0.5rem 0.2rem;
-    margin: 0;
-    border-radius: 7px;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: unset !important;
+    margin: 0 !important;
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+    border-radius: 6px !important;
     box-sizing: border-box;
   }
-  .main-heading, h1, h2, h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  .stats-card.stats, .difficulty-select, .keyboard-section, .custom-text-section {
-    flex-direction: column;
-    gap: 0.4rem;
-    font-size: 0.95rem;
-  }
-  .timer-section {
-    gap: 0.5rem;
-    flex-direction: column;
+  .modal-content, .modal-content.card, .modal-overlay {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: unset !important;
+    left: 0 !important;
+    right: 0 !important;
+    border-radius: 8px !important;
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+    margin: 0 !important;
+    box-sizing: border-box;
   }
   #leaderboard {
-    font-size: 0.9rem;
-    overflow-x: auto;
-    display: block;
-  }
-  #leaderboard th, #leaderboard td {
-    padding: 0.3rem 0.2rem;
-    font-size: 0.85rem;
-    min-width: 60px;
-  }
-  button, .footer-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.95rem;
-    min-width: 80px;
-    min-height: 36px;
-  }
-  input[type="text"], textarea, select {
-    font-size: 0.95rem;
-    padding: 0.5rem;
-    width: 100vw;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: unset !important;
+    overflow-x: auto !important;
+    display: block !important;
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
     box-sizing: border-box;
   }
-  .modal-content, .modal-content.card {
-    padding: 0.7rem 0.2rem;
-    max-width: 99vw;
-    border-radius: 8px;
+  #leaderboard th, #leaderboard td {
+    min-width: 60px !important;
+    font-size: 0.85rem !important;
+    padding: 0.3rem 0.2rem !important;
   }
-  #help-btn {
-    width: 44px;
-    height: 44px;
-    font-size: 1.3rem;
-    bottom: 10px;
-    right: 10px;
-  }
-  ::-webkit-scrollbar {
-    display: none;
-  }
+  /* No width: 100vw or min-width: 100vw anywhere! */
 }
+
 @media (max-width: 400px) {
   .main-card, .card, .typing-area-card, .leaderboard-card, .footer-card, .header-card {
     padding: 0.2rem 0.05rem;
