@@ -506,20 +506,36 @@ resetTimer();
 function showSessionReport() {
   const wpm = parseInt(wpmDisplay.textContent, 10);
   const accuracy = parseInt(accuracyDisplay.textContent, 10);
-  let level = 'Beginner';
+  const cpm = Math.round((totalCorrectChars / ((Date.now() - startTime) / 1000)) * 60) || 0;
+  // Determine level and illustration
+  let level = 'Turtle';
+  let emoji = '🐢';
+  let heading = "You're a Turtle.";
+  let summary = `Well... You type with the speed of <b>${wpm} WPM</b> (${cpm} CPM). Your accuracy was <b>${accuracy}%</b>. It could be better!`;
   if (wpm >= 40 && accuracy >= 90) {
-    level = 'Advanced';
+    level = 'Cheetah';
+    emoji = '🐆';
+    heading = "You're a Cheetah!";
+    summary = `Amazing! You type with the speed of <b>${wpm} WPM</b> (${cpm} CPM). Your accuracy was <b>${accuracy}%</b>. Lightning fast!`;
   } else if (wpm >= 25 && accuracy >= 80) {
-    level = 'Intermediate';
+    level = 'Lion';
+    emoji = '🦁';
+    heading = "You're a Lion!";
+    summary = `Great! You type with the speed of <b>${wpm} WPM</b> (${cpm} CPM). Your accuracy was <b>${accuracy}%</b>. Keep it up!`;
+  } else if (wpm >= 15 && accuracy >= 60) {
+    level = 'Fox';
+    emoji = '🦊';
+    heading = "You're a Fox!";
+    summary = `Good! You type with the speed of <b>${wpm} WPM</b> (${cpm} CPM). Your accuracy was <b>${accuracy}%</b>. Getting better!`;
   }
-  document.getElementById('report-level').textContent = level;
+  document.getElementById('report-illustration').innerHTML = `<span style="font-size:3.5rem;">${emoji}</span>`;
+  document.getElementById('report-heading').textContent = heading;
+  document.getElementById('report-summary').innerHTML = summary;
   document.getElementById('report-wpm').textContent = wpm;
+  document.getElementById('report-cpm').textContent = cpm;
   document.getElementById('report-accuracy').textContent = accuracy;
-  document.getElementById('report-correct').textContent = correctWords;
-  document.getElementById('report-incorrect').textContent = incorrectWords;
   document.getElementById('session-report-modal').style.display = 'flex';
   mainContent.classList.add('blur-background');
-  // Lock start button
   startBtn.disabled = true;
 }
 

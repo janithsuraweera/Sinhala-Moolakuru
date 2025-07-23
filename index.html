@@ -167,19 +167,29 @@
 
   <!-- Session Report Modal -->
   <div id="session-report-modal" class="modal-overlay fade-in" style="display: none;">
-    <div class="modal-content card">
+    <div class="modal-content card report-modern">
       <button class="close-modal-report">&times;</button>
-      <h2>Session Report</h2>
-      <div class="report-level">
-        Your Level: <span id="report-level" class="level-badge">⭐ Beginner</span>
+      <div id="report-illustration" style="text-align:center; margin-bottom:1rem;"></div>
+      <h2 id="report-heading" style="text-align:center; margin-bottom:0.5rem;"></h2>
+      <div id="report-summary" style="text-align:center; margin-bottom:1.2rem;"></div>
+      <div class="report-stats-modern" style="display:flex; justify-content:center; gap:1.2rem; margin-bottom:1.2rem;">
+        <div class="report-stat-badge"><span id="report-wpm">0</span> WPM</div>
+        <div class="report-stat-badge"><span id="report-cpm">0</span> CPM</div>
+        <div class="report-stat-badge"><span id="report-accuracy">0</span>% Accuracy</div>
       </div>
-      <div class="report-stats">
-        <div>WPM: <span id="report-wpm">0</span></div>
-        <div>Accuracy: <span id="report-accuracy">0</span>%</div>
-        <div>Correct Words: <span id="report-correct">0</span></div>
-        <div>Incorrect Words: <span id="report-incorrect">0</span></div>
+      <div class="report-share-row" style="text-align:center; margin-bottom:1.2rem;">
+        <span style="font-size:0.98rem; color:#444;">Share your score</span><br>
+        <a href="#" class="report-share-btn fb" title="Share on Facebook">&#xf09a;</a>
+        <a href="#" class="report-share-btn li" title="Share on LinkedIn">&#xf0e1;</a>
+        <a href="#" class="report-share-btn tw" title="Share on Twitter">&#xf099;</a>
       </div>
-      <button id="modal-restart-btn" class="footer-btn" style="margin-top:1rem;" aria-label="Restart typing test">Restart</button>
+      <div style="text-align:center; margin-bottom:1.2rem;">
+        <a href="#leaderboard" class="report-leaderboard-link">View Leaderboard</a>
+      </div>
+      <div class="report-action-row" style="display:flex; justify-content:center; gap:1.2rem;">
+        <button id="modal-restart-btn" class="footer-btn report-btn-try" aria-label="Restart typing test">Try Again</button>
+        <button class="footer-btn report-btn-save">Save</button>
+      </div>
     </div>
   </div>
 
