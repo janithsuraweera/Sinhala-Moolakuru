@@ -1,17 +1,21 @@
-# සිංහල ටයිප් පුහුණු යෙදුම (Sinhala Typing Practice App)
+# Sinhala Mulakuru - Sinhala Typing Practice App
 
-මෙය සිංහල ටයිප් කිරීම ඉගෙන ගැනීම සහ පුහුණු වීම සඳහා නිර්මාණය කළ web application එකකි.
+Sinhala Mulakuru is a modern, mobile-friendly web application designed to help you learn and practice Sinhala typing using different keyboard layouts. Whether you are a beginner or want to improve your speed and accuracy, this app provides a fun and effective way to master Sinhala typing.
 
-## විශේෂාංග
-- සිංහල වචන සහ වාක්‍ය typing practice (Easy/Medium/Hard)
-- Typing speed (WPM) සහ accuracy පෙන්වයි
+## Features
+- Practice Sinhala words and sentences (Easy / Medium / Hard / Custom)
+- Typing speed (WPM) and accuracy tracking
+- Mistake highlighting and feedback
+- Multiple keyboard layouts: Phonetic, Wijesekara
+- Custom text practice mode
+- Leaderboard to track your best scores
 - Dark/Light mode
-- Mobile-friendly, professional UI/UX
-- Responsive design
+- Custom themes and keyboard layouts (Premium)
+- Fully responsive, professional UI/UX (works great on mobile and desktop)
 
-## භාවිතා කරන ආකාරය
-1. මෙම project එක download/clone කරන්න
-2. `index.html` file එක browser එකක open කරන්න
+## Getting Started
+1. **Download or clone** this repository.
+2. Open the `index.html` file in your web browser (no installation required).
 
 ## Folder Structure
 ```
@@ -21,11 +25,14 @@ css/
 js/
   app.js
 assets/
-  (images/icons)
+  (images, icons, logo)
 ```
 
-## Contributors
-- ඔබ
+## Contributing
+Contributions are welcome! Feel free to open issues or submit pull requests to improve the app.
 
 ## License
-MIT 
+MIT
+
+---
+Developed by [Janith Suraweera](https://github.com/janithsuraweera/) 
