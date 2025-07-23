@@ -42,6 +42,7 @@ const timerDisplay = document.getElementById('timer-display');
 const timeSelect = document.getElementById('time-select');
 let countdown = null;
 let timeLeft = 60;
+const defaultTimerColor = timerDisplay.style.color || '';
 const keyboardMethod = document.getElementById('keyboard-method');
 const customTextSection = document.querySelector('.custom-text-section');
 const customTextInput = document.getElementById('custom-text-input');
@@ -199,6 +200,7 @@ function resetTimer() {
   clearInterval(countdown);
   timeLeft = parseInt(timeSelect.value, 10);
   timerDisplay.textContent = formatTime(timeLeft);
+  timerDisplay.style.color = defaultTimerColor;
 }
 
 function startTimer() {
@@ -206,9 +208,15 @@ function startTimer() {
   countdown = setInterval(() => {
     timeLeft--;
     timerDisplay.textContent = formatTime(timeLeft);
+    if (timeLeft <= 10) {
+      timerDisplay.style.color = '#e11d48';
+    } else {
+      timerDisplay.style.color = defaultTimerColor;
+    }
     if (timeLeft <= 0) {
       clearInterval(countdown);
       timerDisplay.textContent = '00:00';
+      timerDisplay.style.color = defaultTimerColor;
       endTest();
     }
   }, 1000);
