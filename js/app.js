@@ -29,6 +29,7 @@ let totalTypedChars = 0;
 let correctWords = 0;
 let incorrectWords = 0;
 let testStarted = false;
+let wordsSoFar = 0;
 
 const sentenceDisplay = document.getElementById('sentence-display');
 const typingInput = document.getElementById('typing-input');
@@ -138,6 +139,14 @@ typingInput.addEventListener('keydown', (e) => {
     const val = typingInput.value;
     if (val.length === 0) return;
 
+    // Calculate word count before clearing input
+    let words = 0;
+    if (val.trim().length > 0) {
+      words = val.trim().split(/\s+/).filter(Boolean).length;
+    }
+    wordsSoFar += words;
+    document.getElementById('word-count').textContent = wordsSoFar;
+
     if (val === currentSentence) {
       correctWords++;
     } else {
@@ -158,6 +167,7 @@ typingInput.addEventListener('keydown', (e) => {
     typingInput.value = '';
     renderSentenceDisplay();
     updateProgressBar();
+    // Do not reset word count here; keep cumulative value
   }
 });
 
@@ -183,6 +193,12 @@ typingInput.addEventListener('input', (e) => {
   typingInput.setSelectionRange(caret, caret);
   renderSentenceDisplay();
   updateProgressBar();
+  // Real-time cumulative word count
+  let words = 0;
+  if (typingInput.value.trim().length > 0) {
+    words = typingInput.value.trim().split(/\s+/).filter(Boolean).length;
+  }
+  document.getElementById('word-count').textContent = wordsSoFar + words;
 });
 
 function pickSentence() {
@@ -203,6 +219,8 @@ function resetStats() {
   wpmDisplay.textContent = '0';
   accuracyDisplay.textContent = '0';
   feedback.textContent = '';
+  document.getElementById('word-count').textContent = '0';
+  wordsSoFar = 0;
 }
 
 function formatTime(sec) {
@@ -242,6 +260,7 @@ function startTimer(resumeMode = false) {
 function startTest() {
   finished = false;
   testStarted = true;
+  wordsSoFar = 0;
   currentSentence = pickSentence();
   renderSentenceDisplay();
   updateProgressBar();
@@ -263,6 +282,7 @@ function startTest() {
 function endTest() {
   finished = true;
   testStarted = false;
+  wordsSoFar = 0;
   typingInput.disabled = true;
   feedback.textContent = 'Finished!';
   clearInterval(countdown);
