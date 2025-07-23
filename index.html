@@ -32,10 +32,8 @@
         </select>
         <span id="timer-display">01:00</span>
       </div>
-      <div class="stats-card stats" style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.2rem;">
-        <div class="stat-badge">Speed: <span id="wpm">0</span> WPM</div>
-        <div class="stat-badge">Accuracy: <span id="accuracy">0</span>%</div>
-      </div>
+
+      <div class="select">
       <div class="difficulty-select" style="margin-bottom: 1rem;">
         <label for="difficulty">Select difficulty:</label>
         <select id="difficulty">
@@ -45,16 +43,19 @@
           <option value="custom">Custom</option>
         </select>
       </div>
-      <div class="custom-text-section" style="display: none;">
-        <label for="custom-text-input">Paste your custom text here:</label>
-        <textarea id="custom-text-input" rows="4" placeholder="Enter any Sinhala text you want to practice..."></textarea>
-      </div>
+      
+
       <div class="keyboard-section" style="margin-bottom: 1rem;">
         <label for="keyboard-method">Keyboard method:</label>
         <select id="keyboard-method">
           <option value="phonetic">Phonetic</option>
           <option value="wijesekara">Wijesekara</option>
         </select>
+      </div>
+      </div>
+      <div class="custom-text-section" style="display: none;">
+        <label for="custom-text-input">Paste your custom text here:</label>
+        <textarea id="custom-text-input" rows="4" placeholder="Enter any Sinhala text you want to practice..."></textarea>
       </div>
       <div class="typing-area-card typing-area" style="margin-bottom: 1.2rem;">
         <div id="sentence-display" class="sentence-display">මෙහි වචන/වක්‍ය පෙන්වයි</div>
@@ -66,6 +67,10 @@
         <button id="start-btn" aria-label="Start typing test" style="margin: 1rem auto 0 auto; display: block;">Start</button>
         <div class="progress-bar-bg">
           <div id="progress-bar"></div>
+        </div>
+        <div class="stats-card_stats2" >
+          <div class="stat-badge">Speed: <span id="wpm">0</span> WPM</div>
+          <div class="stat-badge">Accuracy: <span id="accuracy">0</span>%</div>
         </div>
         <div class="feedback" id="feedback"></div>
         <div id="custom-keyboard-section" style="display:none; margin-top:1rem;">
