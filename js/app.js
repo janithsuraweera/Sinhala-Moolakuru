@@ -203,8 +203,9 @@ function resetTimer() {
   timerDisplay.style.color = defaultTimerColor;
 }
 
-function startTimer() {
-  resetTimer();
+function startTimer(resumeMode = false) {
+  if (!resumeMode) resetTimer();
+  clearInterval(countdown);
   countdown = setInterval(() => {
     timeLeft--;
     timerDisplay.textContent = formatTime(timeLeft);
@@ -213,6 +214,7 @@ function startTimer() {
     } else {
       timerDisplay.style.color = defaultTimerColor;
     }
+    localStorage.setItem('testTimeLeft', timeLeft);
     if (timeLeft <= 0) {
       clearInterval(countdown);
       timerDisplay.textContent = '00:00';
@@ -236,6 +238,9 @@ function startTest() {
   correctWords = 0;
   incorrectWords = 0;
   resetStats();
+  startBtn.style.display = 'none';
+  startBtn.disabled = true;
+  saveTestState();
   startTimer();
 }
 
@@ -244,6 +249,7 @@ function endTest() {
   typingInput.disabled = true;
   feedback.textContent = 'Finished!';
   clearInterval(countdown);
+  clearTestState();
   const wpm = parseInt(wpmDisplay.textContent, 10);
   const accuracy = parseInt(accuracyDisplay.textContent, 10);
   if (wpm > 0) {
@@ -264,12 +270,20 @@ difficultySelect.addEventListener('change', () => {
   } else {
     customTextSection.style.display = 'none';
   }
-  startTest();
+  clearTestState();
+  startBtn.style.display = 'inline-block';
+  startBtn.disabled = false;
+  resetStats();
+  resetTimer();
 });
 
 timeSelect.addEventListener('change', () => {
   localStorage.setItem('time', timeSelect.value);
-  startTest();
+  clearTestState();
+  startBtn.style.display = 'inline-block';
+  startBtn.disabled = false;
+  resetStats();
+  resetTimer();
 });
 
 keyboardMethod.addEventListener('change', () => {
@@ -303,8 +317,6 @@ window.addEventListener('DOMContentLoaded', function() {
     customTextSection.style.display = 'none';
   }
   // Theme and premium already handled below
-  // Start with restored settings
-  startTest();
   // Restore dark mode
   if (localStorage.getItem('darkMode') === 'true') {
     document.body.classList.add('dark');
@@ -313,7 +325,63 @@ window.addEventListener('DOMContentLoaded', function() {
     document.body.classList.remove('dark');
     modeToggle.textContent = '🌙';
   }
+  // Restore test state if running
+  const testState = localStorage.getItem('testState');
+  if (testState === 'running') {
+    restoreTestState();
+  } else {
+    resetStats();
+    startBtn.style.display = 'inline-block';
+    startBtn.disabled = false;
+    resetTimer();
+  }
 });
+
+function saveTestState() {
+  localStorage.setItem('testState', 'running');
+  localStorage.setItem('testStartTime', startTime);
+  localStorage.setItem('testTimeLeft', timeLeft);
+  localStorage.setItem('testCurrentSentence', currentSentence);
+  localStorage.setItem('testTypedInput', typingInput.value);
+  localStorage.setItem('testTotalCorrectChars', totalCorrectChars);
+  localStorage.setItem('testTotalTypedChars', totalTypedChars);
+  localStorage.setItem('testCorrectWords', correctWords);
+  localStorage.setItem('testIncorrectWords', incorrectWords);
+}
+function clearTestState() {
+  localStorage.removeItem('testState');
+  localStorage.removeItem('testStartTime');
+  localStorage.removeItem('testTimeLeft');
+  localStorage.removeItem('testCurrentSentence');
+  localStorage.removeItem('testTypedInput');
+  localStorage.removeItem('testTotalCorrectChars');
+  localStorage.removeItem('testTotalTypedChars');
+  localStorage.removeItem('testCorrectWords');
+  localStorage.removeItem('testIncorrectWords');
+}
+function restoreTestState() {
+  finished = false;
+  currentSentence = localStorage.getItem('testCurrentSentence') || pickSentence();
+  renderSentenceDisplay();
+  updateProgressBar();
+  typingInput.value = localStorage.getItem('testTypedInput') || '';
+  typingInput.disabled = false;
+  typingInput.focus();
+  startTime = parseInt(localStorage.getItem('testStartTime'), 10) || Date.now();
+  totalCorrectChars = parseInt(localStorage.getItem('testTotalCorrectChars'), 10) || 0;
+  totalTypedChars = parseInt(localStorage.getItem('testTotalTypedChars'), 10) || 0;
+  correctWords = parseInt(localStorage.getItem('testCorrectWords'), 10) || 0;
+  incorrectWords = parseInt(localStorage.getItem('testIncorrectWords'), 10) || 0;
+  wpmDisplay.textContent = Math.round(((totalCorrectChars / 5) / (((Date.now() - startTime) / 1000) / 60))) || '0';
+  accuracyDisplay.textContent = totalTypedChars > 0 ? Math.round((totalCorrectChars / totalTypedChars) * 100) : '0';
+  feedback.textContent = '';
+  timeLeft = parseInt(localStorage.getItem('testTimeLeft'), 10) || parseInt(timeSelect.value, 10);
+  timerDisplay.textContent = formatTime(timeLeft);
+  timerDisplay.style.color = defaultTimerColor;
+  startBtn.style.display = 'none';
+  startBtn.disabled = true;
+  startTimer(true); // resume mode
+}
 
 // Dark/Light mode toggle
 modeToggle.addEventListener('click', () => {
