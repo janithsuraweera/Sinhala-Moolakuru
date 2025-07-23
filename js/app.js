@@ -740,4 +740,7 @@ restartBtn.addEventListener('click', () => {
   feedback.textContent = '';
   // Optionally clear test state from localStorage
   clearTestState();
+  document.getElementById('word-count').textContent = '0';
+  wordsSoFar = 0;
+  sentenceDisplay.textContent = 'මෙහි වචන/වක්‍ය පෙන්වයි';
 }); 
