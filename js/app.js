@@ -724,3 +724,20 @@ function renderLeaderboard() {
 
 // Render leaderboard on load
 window.addEventListener('DOMContentLoaded', renderLeaderboard); 
+
+// Restart button logic
+restartBtn.addEventListener('click', () => {
+  // Fully reset to default state
+  testStarted = false;
+  finished = false;
+  typingInput.value = '';
+  typingInput.disabled = false;
+  resetStats();
+  resetTimer();
+  startBtn.style.display = 'inline-block';
+  startBtn.disabled = false;
+  clearInterval(countdown);
+  feedback.textContent = '';
+  // Optionally clear test state from localStorage
+  clearTestState();
+}); 
