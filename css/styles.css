@@ -542,6 +542,9 @@ input[type="text"]:focus, textarea:focus, select:focus {
   width: 100%;
   overflow: hidden;
 }
+
+
+
 #progress-bar {
   background: linear-gradient(90deg, #4f8cff, #38e8ff);
   height: 100%;
@@ -716,11 +719,7 @@ body.dark #leaderboard tr:nth-child(3) td { background: #4ade80; color: #1e293b;
   animation: shake 0.4s;
 }
 
-/* Touch-friendly buttons */
-button, .footer-btn {
-  min-height: 48px;
-  min-width: 100px;
-}
+
 
 /* Subtle background gradient */
 body {
@@ -837,6 +836,15 @@ button:active, .footer-btn:active {
   transform: scale(0.97);
 }
 
+
+
+
+
+
+
+
+
+
 /* Icon buttons */
 #mode-toggle, #help-btn, .close-modal, .close-modal-report, .close-modal-about, .close-modal-help, .close-modal-premium {
   background: none;
@@ -852,6 +860,28 @@ button:active, .footer-btn:active {
   background: #e0e7ef;
   color: #2563eb;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 body.dark #mode-toggle, body.dark #help-btn, body.dark .close-modal, body.dark .close-modal-report, body.dark .close-modal-about, body.dark .close-modal-help, body.dark .close-modal-premium {
   color: #38bdf8;
 }
@@ -859,6 +889,10 @@ body.dark #mode-toggle:hover, body.dark #help-btn:hover, body.dark .close-modal:
   background: #334155;
   color: #facc15;
 }
+
+
+
+
 
 /* Input fields */
 input[type="text"], textarea, select {
