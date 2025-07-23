@@ -51,6 +51,7 @@ const customTextInput = document.getElementById('custom-text-input');
 const wijesekaraSuggestToggle = document.getElementById('wijesekara-suggest-toggle');
 const wijesekaraSuggestTooltip = document.getElementById('wijesekara-suggest-tooltip');
 let wijesekaraSuggestOn = false;
+const countdownSound = document.getElementById('countdown-sound');
 
 // Wijesekara mapping (basic, for demonstration)
 const WIJESEKARA_MAP = {
@@ -234,6 +235,7 @@ function resetTimer() {
   timeLeft = parseInt(timeSelect.value, 10);
   timerDisplay.textContent = formatTime(timeLeft);
   timerDisplay.style.color = defaultTimerColor;
+  if (countdownSound) countdownSound.pause();
 }
 
 function startTimer(resumeMode = false) {
@@ -244,6 +246,10 @@ function startTimer(resumeMode = false) {
     timerDisplay.textContent = formatTime(timeLeft);
     if (timeLeft <= 10) {
       timerDisplay.style.color = '#e11d48';
+      if (countdownSound) {
+        countdownSound.currentTime = 0;
+        countdownSound.play();
+      }
     } else {
       timerDisplay.style.color = defaultTimerColor;
     }
@@ -252,6 +258,7 @@ function startTimer(resumeMode = false) {
       clearInterval(countdown);
       timerDisplay.textContent = '00:00';
       timerDisplay.style.color = defaultTimerColor;
+      if (countdownSound) countdownSound.pause();
       endTest();
     }
   }, 1000);
