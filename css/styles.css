@@ -1342,3 +1342,22 @@ background: none;
     padding: 0.3rem 0.5rem;
   }
 }
+
+#about-btn {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--primary) !important;
+  font-size: inherit !important;
+  padding: 0 !important;
+  margin: 0 0.5rem !important;
+  text-decoration: underline dotted transparent;
+  cursor: pointer;
+  transition: color 0.18s, text-decoration-color 0.18s;
+  display: inline;
+}
+#about-btn:hover, #about-btn:focus {
+  color: var(--secondary) !important;
+  text-decoration-color: var(--secondary);
+  outline: none;
+}
