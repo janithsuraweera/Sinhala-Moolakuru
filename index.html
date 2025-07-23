@@ -65,8 +65,10 @@
           <button id="wijesekara-suggest-toggle" title="Wijesekara Letter Suggestion ON/OFF" style="display: none;">🔔</button>
           <div id="wijesekara-suggest-tooltip" style="display: none;"></div>
         </div>
-        <button id="start-btn" aria-label="Start typing test" style="margin: 1rem auto 0 auto; display: block;">Start</button>
-        <button id="restart-btn" type="button" title="Restart test" style="margin: 1rem auto 0.5rem auto; display: inline-block; font-size: 1.3rem; background: none; border: none; color: var(--primary); cursor: pointer;">🔄</button>
+        <div class="start-reset-row" style="display: flex; gap: 1rem; justify-content: center; align-items: center; margin: 1rem 0;">
+          <button id="start-btn" aria-label="Start typing test">Start</button>
+          <button id="restart-btn" type="button" title="Restart test" style="font-size: 1.3rem; background: none; border: none; color: var(--primary); cursor: pointer;">🔄</button>
+        </div>
         <div class="progress-bar-bg">
           <div id="progress-bar"></div>
         </div>

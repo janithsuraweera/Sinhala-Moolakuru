@@ -1395,3 +1395,40 @@ background: none;
   text-decoration-color: var(--secondary);
   outline: none;
 }
+
+/* --- Start/Reset Button Row --- */
+.start-reset-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+#restart-btn {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  padding: 0.4em 0.7em;
+  border-radius: 8px;
+  transition: background 0.18s, color 0.18s;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#restart-btn:hover, #restart-btn:focus {
+  background: #e0e7ef;
+  color: #2563eb;
+  outline: none;
+}
+@media (max-width: 700px) {
+  .start-reset-row {
+    gap: 0.5rem;
+  }
+  #restart-btn {
+    font-size: 1.1rem;
+    padding: 0.2em 0.4em;
+  }
+}
