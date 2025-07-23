@@ -20,6 +20,9 @@ const DATA = {
 
 let currentSentence = '';
 let startTime = null;
+let timer = null;
+let typedChars = 0;
+let correctChars = 0;
 let finished = false;
 let totalCorrectChars = 0;
 let totalTypedChars = 0;
@@ -32,6 +35,7 @@ const wpmDisplay = document.getElementById('wpm');
 const accuracyDisplay = document.getElementById('accuracy');
 const feedback = document.getElementById('feedback');
 const startBtn = document.getElementById('start-btn');
+const restartBtn = document.getElementById('restart-btn');
 const difficultySelect = document.getElementById('difficulty');
 const modeToggle = document.getElementById('mode-toggle');
 const timerDisplay = document.getElementById('timer-display');
@@ -163,10 +167,6 @@ typingInput.addEventListener('input', (e) => {
   typingInput.setSelectionRange(caret, caret);
   renderSentenceDisplay();
   updateProgressBar();
-  // Update real-time word count
-  const wordCount = typingInput.value.trim().length > 0 ? typingInput.value.trim().split(/\s+/).length : 0;
-  const wordCountDisplay = document.getElementById('word-count');
-  if (wordCountDisplay) wordCountDisplay.textContent = wordCount;
 });
 
 function pickSentence() {
@@ -204,10 +204,8 @@ function resetTimer() {
 function startTimer() {
   resetTimer();
   countdown = setInterval(() => {
-    if (timeLeft > 0) {
-      timeLeft--;
-      timerDisplay.textContent = formatTime(timeLeft);
-    }
+    timeLeft--;
+    timerDisplay.textContent = formatTime(timeLeft);
     if (timeLeft <= 0) {
       clearInterval(countdown);
       timerDisplay.textContent = '00:00';
@@ -235,7 +233,7 @@ function startTest() {
 
 function endTest() {
   finished = true;
-  typingInput.disabled = true; // Always disable input
+  typingInput.disabled = true;
   feedback.textContent = 'Finished!';
   clearInterval(countdown);
   const wpm = parseInt(wpmDisplay.textContent, 10);
@@ -343,11 +341,11 @@ helpBtn.addEventListener('click', () => {
   helpModal.style.display = 'flex';
   mainContent.classList.add('blur-background');
   if (keyboardMethod.value === 'wijesekara') {
-    // phoneticGuide.style.display = 'none'; // This line was removed from the original file
-    // wijesekaraGuide.style.display = 'block'; // This line was removed from the original file
+    phoneticGuide.style.display = 'none';
+    wijesekaraGuide.style.display = 'block';
   } else {
-    // phoneticGuide.style.display = 'block'; // This line was removed from the original file
-    // wijesekaraGuide.style.display = 'none'; // This line was removed from the original file
+    phoneticGuide.style.display = 'block';
+    wijesekaraGuide.style.display = 'none';
   }
 });
 

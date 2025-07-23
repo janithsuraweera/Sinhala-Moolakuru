@@ -32,6 +32,10 @@
         </select>
         <span id="timer-display">01:00</span>
       </div>
+      <div class="stats-card stats" style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.2rem;">
+        <div class="stat-badge">Speed: <span id="wpm">0</span> WPM</div>
+        <div class="stat-badge">Accuracy: <span id="accuracy">0</span>%</div>
+      </div>
       <div class="difficulty-select" style="margin-bottom: 1rem;">
         <label for="difficulty">Select difficulty:</label>
         <select id="difficulty">
@@ -60,11 +64,6 @@
           <div id="wijesekara-suggest-tooltip" style="display: none;"></div>
         </div>
         <button id="start-btn" aria-label="Start typing test" style="margin: 1rem auto 0 auto; display: block;">Start</button>
-        <div class="stats-card stats" style="display: flex; justify-content: center; gap: 1.5rem; margin: 1.2rem 0 0.7rem 0;">
-          <div class="stat-badge">Speed: <span id="wpm">0</span> WPM</div>
-          <div class="stat-badge">Accuracy: <span id="accuracy">0</span>%</div>
-          <div class="stat-badge">Words: <span id="word-count">0</span></div>
-        </div>
         <div class="progress-bar-bg">
           <div id="progress-bar"></div>
         </div>
