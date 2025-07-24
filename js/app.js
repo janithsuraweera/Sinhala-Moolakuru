@@ -28,6 +28,8 @@ let totalCorrectChars = 0;
 let totalTypedChars = 0;
 let correctWords = 0;
 let incorrectWords = 0;
+let testStarted = false;
+let wordsSoFar = 0;
 
 const sentenceDisplay = document.getElementById('sentence-display');
 const typingInput = document.getElementById('typing-input');
@@ -42,12 +44,14 @@ const timerDisplay = document.getElementById('timer-display');
 const timeSelect = document.getElementById('time-select');
 let countdown = null;
 let timeLeft = 60;
+const defaultTimerColor = timerDisplay.style.color || '';
 const keyboardMethod = document.getElementById('keyboard-method');
 const customTextSection = document.querySelector('.custom-text-section');
 const customTextInput = document.getElementById('custom-text-input');
 const wijesekaraSuggestToggle = document.getElementById('wijesekara-suggest-toggle');
 const wijesekaraSuggestTooltip = document.getElementById('wijesekara-suggest-tooltip');
 let wijesekaraSuggestOn = false;
+const countdownSound = document.getElementById('countdown-sound');
 
 // Wijesekara mapping (basic, for demonstration)
 const WIJESEKARA_MAP = {
@@ -122,12 +126,27 @@ function renderSentenceDisplay() {
 
 // --- Replace input with Sinhala in real-time, based on method ---
 typingInput.addEventListener('keydown', (e) => {
+  if (!testStarted && !finished && e.key.length === 1 && typingInput.value.length === 0) {
+    // Auto start on first key if not started
+    startBtn.style.display = 'none';
+    startBtn.disabled = true;
+    startTest();
+    testStarted = true;
+  }
   if (e.key === 'Enter') {
     e.preventDefault();
     if (finished) return;
 
     const val = typingInput.value;
     if (val.length === 0) return;
+
+    // Calculate word count before clearing input
+    let words = 0;
+    if (val.trim().length > 0) {
+      words = val.trim().split(/\s+/).filter(Boolean).length;
+    }
+    wordsSoFar += words;
+    document.getElementById('word-count').textContent = wordsSoFar;
 
     if (val === currentSentence) {
       correctWords++;
@@ -149,10 +168,18 @@ typingInput.addEventListener('keydown', (e) => {
     typingInput.value = '';
     renderSentenceDisplay();
     updateProgressBar();
+    // Do not reset word count here; keep cumulative value
   }
 });
 
 typingInput.addEventListener('input', (e) => {
+  if (!testStarted && !finished && typingInput.value.length > 0) {
+    // Auto start on first input if not started
+    startBtn.style.display = 'none';
+    startBtn.disabled = true;
+    startTest();
+    testStarted = true;
+  }
   if (finished) return;
   const caret = typingInput.selectionStart;
   let sinhala = typingInput.value;
@@ -167,6 +194,12 @@ typingInput.addEventListener('input', (e) => {
   typingInput.setSelectionRange(caret, caret);
   renderSentenceDisplay();
   updateProgressBar();
+  // Real-time cumulative word count
+  let words = 0;
+  if (typingInput.value.trim().length > 0) {
+    words = typingInput.value.trim().split(/\s+/).filter(Boolean).length;
+  }
+  document.getElementById('word-count').textContent = wordsSoFar + words;
 });
 
 function pickSentence() {
@@ -187,6 +220,8 @@ function resetStats() {
   wpmDisplay.textContent = '0';
   accuracyDisplay.textContent = '0';
   feedback.textContent = '';
+  document.getElementById('word-count').textContent = '0';
+  wordsSoFar = 0;
 }
 
 function formatTime(sec) {
@@ -199,16 +234,31 @@ function resetTimer() {
   clearInterval(countdown);
   timeLeft = parseInt(timeSelect.value, 10);
   timerDisplay.textContent = formatTime(timeLeft);
+  timerDisplay.style.color = defaultTimerColor;
+  if (countdownSound) countdownSound.pause();
 }
 
-function startTimer() {
-  resetTimer();
+function startTimer(resumeMode = false) {
+  if (!resumeMode) resetTimer();
+  clearInterval(countdown);
   countdown = setInterval(() => {
     timeLeft--;
     timerDisplay.textContent = formatTime(timeLeft);
+    if (timeLeft <= 10) {
+      timerDisplay.style.color = '#e11d48';
+      if (countdownSound) {
+        countdownSound.currentTime = 0;
+        countdownSound.play();
+      }
+    } else {
+      timerDisplay.style.color = defaultTimerColor;
+    }
+    localStorage.setItem('testTimeLeft', timeLeft);
     if (timeLeft <= 0) {
       clearInterval(countdown);
       timerDisplay.textContent = '00:00';
+      timerDisplay.style.color = defaultTimerColor;
+      if (countdownSound) countdownSound.pause();
       endTest();
     }
   }, 1000);
@@ -216,6 +266,8 @@ function startTimer() {
 
 function startTest() {
   finished = false;
+  testStarted = true;
+  wordsSoFar = 0;
   currentSentence = pickSentence();
   renderSentenceDisplay();
   updateProgressBar();
@@ -228,14 +280,20 @@ function startTest() {
   correctWords = 0;
   incorrectWords = 0;
   resetStats();
+  startBtn.style.display = 'none';
+  startBtn.disabled = true;
+  saveTestState();
   startTimer();
 }
 
 function endTest() {
   finished = true;
+  testStarted = false;
+  wordsSoFar = 0;
   typingInput.disabled = true;
   feedback.textContent = 'Finished!';
   clearInterval(countdown);
+  clearTestState();
   const wpm = parseInt(wpmDisplay.textContent, 10);
   const accuracy = parseInt(accuracyDisplay.textContent, 10);
   if (wpm > 0) {
@@ -256,12 +314,20 @@ difficultySelect.addEventListener('change', () => {
   } else {
     customTextSection.style.display = 'none';
   }
-  startTest();
+  clearTestState();
+  startBtn.style.display = 'inline-block';
+  startBtn.disabled = false;
+  resetStats();
+  resetTimer();
 });
 
 timeSelect.addEventListener('change', () => {
   localStorage.setItem('time', timeSelect.value);
-  startTest();
+  clearTestState();
+  startBtn.style.display = 'inline-block';
+  startBtn.disabled = false;
+  resetStats();
+  resetTimer();
 });
 
 keyboardMethod.addEventListener('change', () => {
@@ -295,8 +361,6 @@ window.addEventListener('DOMContentLoaded', function() {
     customTextSection.style.display = 'none';
   }
   // Theme and premium already handled below
-  // Start with restored settings
-  startTest();
   // Restore dark mode
   if (localStorage.getItem('darkMode') === 'true') {
     document.body.classList.add('dark');
@@ -305,7 +369,64 @@ window.addEventListener('DOMContentLoaded', function() {
     document.body.classList.remove('dark');
     modeToggle.textContent = '🌙';
   }
+  // Restore test state if running
+  const testState = localStorage.getItem('testState');
+  if (testState === 'running') {
+    restoreTestState();
+  } else {
+    resetStats();
+    startBtn.style.display = 'inline-block';
+    startBtn.disabled = false;
+    resetTimer();
+  }
 });
+
+function saveTestState() {
+  localStorage.setItem('testState', 'running');
+  localStorage.setItem('testStartTime', startTime);
+  localStorage.setItem('testTimeLeft', timeLeft);
+  localStorage.setItem('testCurrentSentence', currentSentence);
+  localStorage.setItem('testTypedInput', typingInput.value);
+  localStorage.setItem('testTotalCorrectChars', totalCorrectChars);
+  localStorage.setItem('testTotalTypedChars', totalTypedChars);
+  localStorage.setItem('testCorrectWords', correctWords);
+  localStorage.setItem('testIncorrectWords', incorrectWords);
+}
+function clearTestState() {
+  localStorage.removeItem('testState');
+  localStorage.removeItem('testStartTime');
+  localStorage.removeItem('testTimeLeft');
+  localStorage.removeItem('testCurrentSentence');
+  localStorage.removeItem('testTypedInput');
+  localStorage.removeItem('testTotalCorrectChars');
+  localStorage.removeItem('testTotalTypedChars');
+  localStorage.removeItem('testCorrectWords');
+  localStorage.removeItem('testIncorrectWords');
+}
+function restoreTestState() {
+  finished = false;
+  testStarted = true;
+  currentSentence = localStorage.getItem('testCurrentSentence') || pickSentence();
+  renderSentenceDisplay();
+  updateProgressBar();
+  typingInput.value = localStorage.getItem('testTypedInput') || '';
+  typingInput.disabled = false;
+  typingInput.focus();
+  startTime = parseInt(localStorage.getItem('testStartTime'), 10) || Date.now();
+  totalCorrectChars = parseInt(localStorage.getItem('testTotalCorrectChars'), 10) || 0;
+  totalTypedChars = parseInt(localStorage.getItem('testTotalTypedChars'), 10) || 0;
+  correctWords = parseInt(localStorage.getItem('testCorrectWords'), 10) || 0;
+  incorrectWords = parseInt(localStorage.getItem('testIncorrectWords'), 10) || 0;
+  wpmDisplay.textContent = Math.round(((totalCorrectChars / 5) / (((Date.now() - startTime) / 1000) / 60))) || '0';
+  accuracyDisplay.textContent = totalTypedChars > 0 ? Math.round((totalCorrectChars / totalTypedChars) * 100) : '0';
+  feedback.textContent = '';
+  timeLeft = parseInt(localStorage.getItem('testTimeLeft'), 10) || parseInt(timeSelect.value, 10);
+  timerDisplay.textContent = formatTime(timeLeft);
+  timerDisplay.style.color = defaultTimerColor;
+  startBtn.style.display = 'none';
+  startBtn.disabled = true;
+  startTimer(true); // resume mode
+}
 
 // Dark/Light mode toggle
 modeToggle.addEventListener('click', () => {
@@ -385,20 +506,36 @@ resetTimer();
 function showSessionReport() {
   const wpm = parseInt(wpmDisplay.textContent, 10);
   const accuracy = parseInt(accuracyDisplay.textContent, 10);
-  let level = 'Beginner';
+  const cpm = Math.round((totalCorrectChars / ((Date.now() - startTime) / 1000)) * 60) || 0;
+  // Determine level and illustration
+  let level = 'Turtle';
+  let emoji = '🐢';
+  let heading = "You're a Turtle.";
+  let summary = `Well... You type with the speed of <b>${wpm} WPM</b> (${cpm} CPM). Your accuracy was <b>${accuracy}%</b>. It could be better!`;
   if (wpm >= 40 && accuracy >= 90) {
-    level = 'Advanced';
+    level = 'Cheetah';
+    emoji = '🐆';
+    heading = "You're a Cheetah!";
+    summary = `Amazing! You type with the speed of <b>${wpm} WPM</b> (${cpm} CPM). Your accuracy was <b>${accuracy}%</b>. Lightning fast!`;
   } else if (wpm >= 25 && accuracy >= 80) {
-    level = 'Intermediate';
+    level = 'Lion';
+    emoji = '🦁';
+    heading = "You're a Lion!";
+    summary = `Great! You type with the speed of <b>${wpm} WPM</b> (${cpm} CPM). Your accuracy was <b>${accuracy}%</b>. Keep it up!`;
+  } else if (wpm >= 15 && accuracy >= 60) {
+    level = 'Fox';
+    emoji = '🦊';
+    heading = "You're a Fox!";
+    summary = `Good! You type with the speed of <b>${wpm} WPM</b> (${cpm} CPM). Your accuracy was <b>${accuracy}%</b>. Getting better!`;
   }
-  document.getElementById('report-level').textContent = level;
+  document.getElementById('report-illustration').innerHTML = `<span style="font-size:3.5rem;">${emoji}</span>`;
+  document.getElementById('report-heading').textContent = heading;
+  document.getElementById('report-summary').innerHTML = summary;
   document.getElementById('report-wpm').textContent = wpm;
+  document.getElementById('report-cpm').textContent = cpm;
   document.getElementById('report-accuracy').textContent = accuracy;
-  document.getElementById('report-correct').textContent = correctWords;
-  document.getElementById('report-incorrect').textContent = incorrectWords;
   document.getElementById('session-report-modal').style.display = 'flex';
   mainContent.classList.add('blur-background');
-  // Lock start button
   startBtn.disabled = true;
 }
 
@@ -610,3 +747,71 @@ function renderLeaderboard() {
 
 // Render leaderboard on load
 window.addEventListener('DOMContentLoaded', renderLeaderboard); 
+
+// Restart button logic
+restartBtn.addEventListener('click', () => {
+  // Fully reset to default state
+  testStarted = false;
+  finished = false;
+  typingInput.value = '';
+  typingInput.disabled = false;
+  resetStats();
+  resetTimer();
+  startBtn.style.display = 'inline-block';
+  startBtn.disabled = false;
+  clearInterval(countdown);
+  feedback.textContent = '';
+  // Optionally clear test state from localStorage
+  clearTestState();
+  document.getElementById('word-count').textContent = '0';
+  wordsSoFar = 0;
+  sentenceDisplay.textContent = 'මෙහි වචන/වක්‍ය පෙන්වයි';
+}); 
+
+const resetLeaderboardBtn = document.getElementById('reset-leaderboard-btn');
+const resetModal = document.getElementById('reset-modal');
+const resetPasswordInput = document.getElementById('reset-password-input');
+const resetErrorMsg = document.getElementById('reset-error-msg');
+const resetConfirmBtn = document.getElementById('reset-confirm-btn');
+const resetCancelBtn = document.getElementById('reset-cancel-btn');
+const closeModalReset = document.querySelector('.close-modal-reset');
+
+if (resetLeaderboardBtn) {
+  resetLeaderboardBtn.addEventListener('click', () => {
+    resetModal.style.display = 'flex';
+    resetPasswordInput.value = '';
+    resetErrorMsg.textContent = '';
+    setTimeout(() => { resetPasswordInput.focus(); }, 100);
+  });
+}
+if (resetCancelBtn) {
+  resetCancelBtn.addEventListener('click', () => {
+    resetModal.style.display = 'none';
+    resetErrorMsg.textContent = '';
+    resetPasswordInput.value = '';
+  });
+}
+if (closeModalReset) {
+  closeModalReset.addEventListener('click', () => {
+    resetModal.style.display = 'none';
+    resetErrorMsg.textContent = '';
+    resetPasswordInput.value = '';
+  });
+}
+if (resetConfirmBtn) {
+  resetConfirmBtn.addEventListener('click', () => {
+    const pw = resetPasswordInput.value.trim();
+    if (pw === '1234') {
+      localStorage.removeItem('leaderboard');
+      resetModal.style.display = 'none';
+      resetErrorMsg.textContent = '';
+      resetPasswordInput.value = '';
+      alert('Leaderboard has been reset!');
+      renderLeaderboard();
+    } else {
+      resetErrorMsg.textContent = 'Incorrect password. Please try again.';
+      resetPasswordInput.value = '';
+      resetPasswordInput.focus();
+    }
+  });
+} 

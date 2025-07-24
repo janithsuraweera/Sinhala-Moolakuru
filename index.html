@@ -65,13 +65,17 @@
           <button id="wijesekara-suggest-toggle" title="Wijesekara Letter Suggestion ON/OFF" style="display: none;">🔔</button>
           <div id="wijesekara-suggest-tooltip" style="display: none;"></div>
         </div>
-        <button id="start-btn" aria-label="Start typing test" style="margin: 1rem auto 0 auto; display: block;">Start</button>
+        <div class="start-reset-row" style="display: flex; gap: 1rem; justify-content: center; align-items: center; margin: 1rem 0;">
+          <button id="start-btn" aria-label="Start typing test">Start</button>
+          <button id="restart-btn" type="button" title="Restart test" style="font-size: 1.3rem; background: none; border: none; color: var(--primary); cursor: pointer;">🔄</button>
+        </div>
         <div class="progress-bar-bg">
           <div id="progress-bar"></div>
         </div>
         <div class="stats-card_stats2" >
           <div class="stat-badge">Speed: <span id="wpm">0</span> WPM</div>
           <div class="stat-badge">Accuracy: <span id="accuracy">0</span>%</div>
+          <div class="stat-badge">Words: <span id="word-count">0</span></div>
         </div>
         <div class="feedback" id="feedback"></div>
         <div id="custom-keyboard-section" style="display:none; margin-top:1rem;">
@@ -106,7 +110,21 @@
             <!-- Leaderboard rows will be inserted here -->
           </tbody>
         </table>
+        <button id="reset-leaderboard-btn" class="footer-btn" style="background:#e11d48; color:#fff; margin-top:1rem;">Reset Leaderboard</button>
         <button id="activate-premium-btn" class="premium-link-btn" type="button">🔓 Unlock Premium features</button>
+      </div>
+      <div id="reset-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content card" style="max-width:350px; text-align:center;">
+          <button class="close-modal-reset" style="position:absolute;top:1rem;right:1rem;font-size:1.5rem;background:none;border:none;cursor:pointer;">&times;</button>
+          <h2 style="margin-bottom:0.7rem;">Reset Leaderboard</h2>
+          <div style="margin-bottom:0.7rem;">Are you sure you want to reset the leaderboard? This cannot be undone.</div>
+          <input id="reset-password-input" type="password" placeholder="Enter password" style="width:90%;padding:0.6em;margin-bottom:0.5em;border-radius:7px;border:1.5px solid #e0e7ef;">
+          <div id="reset-error-msg" style="color:#e11d48;min-height:1.2em;margin-bottom:0.5em;"></div>
+          <div style="display:flex;gap:1rem;justify-content:center;">
+            <button id="reset-confirm-btn" class="footer-btn" style="background:#e11d48;color:#fff;">Confirm</button>
+            <button id="reset-cancel-btn" class="footer-btn" style="background:#e0e7ef;color:#222;">Cancel</button>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -163,19 +181,29 @@
 
   <!-- Session Report Modal -->
   <div id="session-report-modal" class="modal-overlay fade-in" style="display: none;">
-    <div class="modal-content card">
+    <div class="modal-content card report-modern">
       <button class="close-modal-report">&times;</button>
-      <h2>Session Report</h2>
-      <div class="report-level">
-        Your Level: <span id="report-level" class="level-badge">⭐ Beginner</span>
+      <div id="report-illustration" style="text-align:center; margin-bottom:1rem;"></div>
+      <h2 id="report-heading" style="text-align:center; margin-bottom:0.5rem;"></h2>
+      <div id="report-summary" style="text-align:center; margin-bottom:1.2rem;"></div>
+      <div class="report-stats-modern" style="display:flex; justify-content:center; gap:1.2rem; margin-bottom:1.2rem;">
+        <div class="report-stat-badge wpm"><span id="report-wpm">0</span> WPM</div>
+        <div class="report-stat-badge cpm"><span id="report-cpm">0</span> CPM</div>
+        <div class="report-stat-badge accuracy"><span id="report-accuracy">0</span> % Accuracy</div>
       </div>
-      <div class="report-stats">
-        <div>WPM: <span id="report-wpm">0</span></div>
-        <div>Accuracy: <span id="report-accuracy">0</span>%</div>
-        <div>Correct Words: <span id="report-correct">0</span></div>
-        <div>Incorrect Words: <span id="report-incorrect">0</span></div>
+      <div class="report-share-row" style="text-align:center; margin-bottom:1.2rem;">
+        <span style="font-size:0.98rem; color:#444;">Share your score</span><br>
+        <a href="" class="report-share-btn fb" title="Share on Facebook">&#xf09a;</a>
+        <a href="#" class="report-share-btn li" title="Share on LinkedIn">&#xf0e1;</a>
+        <a href="#" class="report-share-btn tw" title="Share on Twitter">&#xf099;</a>
       </div>
-      <button id="modal-restart-btn" class="footer-btn" style="margin-top:1rem;" aria-label="Restart typing test">Restart</button>
+      <div style="text-align:center; margin-bottom:1.2rem;">
+        <a href="#leaderboard" class="report-leaderboard-link">View Leaderboard</a>
+      </div>
+      <div class="report-action-row" style="display:flex; justify-content:center; gap:1.2rem;">
+        <button id="modal-restart-btn" class="footer-btn report-btn-try" aria-label="Restart typing test">Try Again</button>
+        <button class="footer-btn report-btn-save">Save</button>
+      </div>
     </div>
   </div>
 
@@ -191,6 +219,7 @@
     </div>
   </div>
 
+  <audio id="countdown-sound" src="sound/cutdown1.mp3" preload="auto"></audio>
   <script src="js/app.js"></script>
 </body>
 </html> 
