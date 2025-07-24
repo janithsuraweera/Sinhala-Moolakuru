@@ -1711,3 +1711,106 @@ background: none;
     width: 100%;
   }
 }
+
+.leaderboard-btn-row {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  margin-top: 0.7rem;
+}
+#reset-leaderboard-btn, #save-leaderboard-btn {
+  padding: 0.38em 0.9em;
+  font-size: 0.91rem;
+  min-width: 90px;
+  min-height: 34px;
+  border-radius: 1.5em;
+}
+@media (max-width: 600px) {
+  #reset-leaderboard-btn, #save-leaderboard-btn {
+    min-width: 70px;
+    width: 100%;
+    font-size: 0.89rem;
+    min-height: 30px;
+    padding: 0.32em 0.5em;
+  }
+}
+
+#reset-leaderboard-btn {
+  background: linear-gradient(90deg, #e11d48 0%, #f43f5e 100%);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.85em 2.2em;
+  font-size: 1.08rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(225,29,72,0.10);
+  transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  outline: none;
+  margin-top: 1rem;
+}
+#reset-leaderboard-btn:hover, #reset-leaderboard-btn:focus {
+  background: linear-gradient(90deg, #be123c 0%, #e11d48 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 20px rgba(225,29,72,0.18);
+}
+#reset-leaderboard-btn:active {
+  transform: scale(0.97);
+}
+#reset-leaderboard-btn .reset-icon {
+  font-size: 1.2em;
+  margin-right: 0.2em;
+  display: inline-block;
+}
+
+#save-leaderboard-btn {
+  background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.85em 2.2em;
+  font-size: 1.08rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.10);
+  transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  outline: none;
+}
+#save-leaderboard-btn:hover, #save-leaderboard-btn:focus {
+  background: linear-gradient(90deg, #1d4ed8 0%, #2563eb 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 20px rgba(37,99,235,0.18);
+}
+#save-leaderboard-btn:active {
+  transform: scale(0.97);
+}
+#save-leaderboard-btn .save-icon {
+  font-size: 1.2em;
+  margin-right: 0.2em;
+  display: inline-block;
+}
+
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+  .leaderboard-card, .leaderboard-card * {
+    visibility: visible !important;
+  }
+  .leaderboard-card {
+    position: absolute !important;
+    left: 0; right: 0; top: 0;
+    margin: 0 auto !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #222 !important;
+    z-index: 9999 !important;
+  }
+}

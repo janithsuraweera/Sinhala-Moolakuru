@@ -821,3 +821,8 @@ if (resetConfirmBtn) {
     }
   });
 } 
+
+const saveLeaderboardBtn = document.getElementById('save-leaderboard-btn');
+saveLeaderboardBtn.addEventListener('click', () => {
+  window.print();
+}); 
