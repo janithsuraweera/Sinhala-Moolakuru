@@ -1,38 +1,78 @@
-# Sinhala Mulakuru - Sinhala Typing Practice App
+# Sinhala Moolakuru
 
-Sinhala Mulakuru is a modern, mobile-friendly web application designed to help you learn and practice Sinhala typing using different keyboard layouts. Whether you are a beginner or want to improve your speed and accuracy, this app provides a fun and effective way to master Sinhala typing.
+**Sinhala Moolakuru** is an open-source project aimed at preserving and organizing fundamental elements (roots) of the Sinhala language. This project serves as a linguistic foundation for educational, research, and technological applications involving Sinhala morphology and natural language processing (NLP).
 
-## Features
-- Practice Sinhala words and sentences (Easy / Medium / Hard / Custom)
-- Typing speed (WPM) and accuracy tracking
-- Mistake highlighting and feedback
-- Multiple keyboard layouts: Phonetic, Wijesekara
-- Custom text practice mode
-- Leaderboard to track your best scores
-- Dark/Light mode
-- Custom themes and keyboard layouts (Premium)
-- Fully responsive, professional UI/UX (works great on mobile and desktop)
+## 🌱 Features
 
-## Getting Started
-1. **Download or clone** this repository.
-2. Open the `index.html` file in your web browser (no installation required).
+- Comprehensive collection of Sinhala root words (මූලකුරු)
+- Categorized by grammatical types (noun roots, verb roots, etc.)
+- Structured data formats for easy integration
+- Unicode Sinhala support
+- Can be used for language learning, linguistic analysis, and AI training
 
-## Folder Structure
-```
-index.html
-css/
-  styles.css
-js/
-  app.js
-assets/
-  (images, icons, logo)
-```
+## 📁 Project Structure
 
-## Contributing
-Contributions are welcome! Feel free to open issues or submit pull requests to improve the app.
+Sinhala-Moolakuru/
+├── data/ # Contains root word datasets
+├── scripts/ # Utility scripts (parsers, analyzers, etc.)
+├── README.md # Project documentation
+└── LICENSE # License details
 
-## License
-MIT
+bash
+Copy
+Edit
 
----
-Developed by [Janith Suraweera](https://github.com/janithsuraweera/) 
+## 📦 Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/janithsuraweera/Sinhala-Moolakuru.git
+cd Sinhala-Moolakuru
+Install any dependencies if applicable (future enhancements).
+
+🚀 Usage
+You can use the datasets and scripts to:
+
+Develop Sinhala NLP models
+
+Integrate Sinhala root word logic in educational software
+
+Analyze morphology of Sinhala words
+
+Extend for verb conjugation and noun inflection studies
+
+📚 Data Format
+The data is stored in structured .json and .csv formats, with fields like:
+
+json
+Copy
+Edit
+{
+  "root": "ගම",
+  "type": "noun",
+  "meaning": "village",
+  "origin": "native"
+}
+🤝 Contributing
+We welcome contributions! Whether it's adding more root words, fixing scripts, or enhancing the dataset format — you're welcome to help.
+
+Fork the repository
+
+Create your feature branch (git checkout -b feature/your-feature)
+
+Commit your changes (git commit -m 'Add some feature')
+
+Push to the branch (git push origin feature/your-feature)
+
+Create a Pull Request
+
+📜 License
+This project is licensed under the MIT License.
+
+🙏 Acknowledgements
+Sinhala linguistic researchers
+
+Unicode Consortium for Sinhala language support
+
+Open-source contributors supporting local language tools
