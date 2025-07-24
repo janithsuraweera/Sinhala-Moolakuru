@@ -1500,3 +1500,80 @@ background: none;
     line-height: 1.6rem;
   }
 }
+
+/* --- Custom Reset Modal --- */
+#reset-modal.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(30,41,59,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  backdrop-filter: blur(2px);
+}
+#reset-modal .modal-content.card {
+  max-width: 350px;
+  width: 96vw;
+  padding: 2rem 1.2rem 1.5rem 1.2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(30,41,59,0.18);
+  background: var(--card-glass, #fff);
+  position: relative;
+  text-align: center;
+  border: 1.5px solid #e0e7ef;
+  animation: modalPop 0.35s cubic-bezier(.4,2,.6,1);
+}
+#reset-modal input[type="password"] {
+  width: 90%;
+  padding: 0.6em;
+  margin-bottom: 0.5em;
+  border-radius: 7px;
+  border: 1.5px solid #e0e7ef;
+  font-size: 1.08rem;
+  background: #f8fafc;
+  color: #222;
+  transition: border 0.2s;
+}
+#reset-modal input[type="password"]:focus {
+  border: 1.5px solid #2563eb;
+  outline: none;
+}
+#reset-error-msg {
+  color: #e11d48;
+  min-height: 1.2em;
+  margin-bottom: 0.5em;
+  font-size: 0.98em;
+}
+#reset-modal .footer-btn {
+  min-width: 90px;
+  font-size: 1.05rem;
+  border-radius: 8px;
+  padding: 0.5em 1.2em;
+  margin: 0;
+}
+#reset-modal .close-modal-reset {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+#reset-modal .close-modal-reset:hover {
+  color: #e11d48;
+}
+@media (max-width: 700px) {
+  #reset-modal .modal-content.card {
+    padding: 1.1rem 0.3rem 1rem 0.3rem;
+    border-radius: 10px;
+  }
+  #reset-modal .footer-btn {
+    font-size: 0.97rem;
+    padding: 0.4em 0.7em;
+    min-width: 60px;
+  }
+}

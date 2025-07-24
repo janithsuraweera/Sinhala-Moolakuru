@@ -769,16 +769,49 @@ restartBtn.addEventListener('click', () => {
 }); 
 
 const resetLeaderboardBtn = document.getElementById('reset-leaderboard-btn');
+const resetModal = document.getElementById('reset-modal');
+const resetPasswordInput = document.getElementById('reset-password-input');
+const resetErrorMsg = document.getElementById('reset-error-msg');
+const resetConfirmBtn = document.getElementById('reset-confirm-btn');
+const resetCancelBtn = document.getElementById('reset-cancel-btn');
+const closeModalReset = document.querySelector('.close-modal-reset');
+
 if (resetLeaderboardBtn) {
   resetLeaderboardBtn.addEventListener('click', () => {
-    if (!confirm('Are you sure you want to reset the leaderboard? This cannot be undone.')) return;
-    const pw = prompt('Enter password to confirm leaderboard reset:');
+    resetModal.style.display = 'flex';
+    resetPasswordInput.value = '';
+    resetErrorMsg.textContent = '';
+    setTimeout(() => { resetPasswordInput.focus(); }, 100);
+  });
+}
+if (resetCancelBtn) {
+  resetCancelBtn.addEventListener('click', () => {
+    resetModal.style.display = 'none';
+    resetErrorMsg.textContent = '';
+    resetPasswordInput.value = '';
+  });
+}
+if (closeModalReset) {
+  closeModalReset.addEventListener('click', () => {
+    resetModal.style.display = 'none';
+    resetErrorMsg.textContent = '';
+    resetPasswordInput.value = '';
+  });
+}
+if (resetConfirmBtn) {
+  resetConfirmBtn.addEventListener('click', () => {
+    const pw = resetPasswordInput.value.trim();
     if (pw === '1234') {
       localStorage.removeItem('leaderboard');
+      resetModal.style.display = 'none';
+      resetErrorMsg.textContent = '';
+      resetPasswordInput.value = '';
       alert('Leaderboard has been reset!');
       renderLeaderboard();
-    } else if (pw !== null) {
-      alert('Incorrect password. Leaderboard was not reset.');
+    } else {
+      resetErrorMsg.textContent = 'Incorrect password. Please try again.';
+      resetPasswordInput.value = '';
+      resetPasswordInput.focus();
     }
   });
 } 
