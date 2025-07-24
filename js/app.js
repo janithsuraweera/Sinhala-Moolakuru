@@ -746,7 +746,7 @@ logoutPremiumBtn.addEventListener('click', () => {
   // localStorage.removeItem('customKeyboardMapping');
   // localStorage.removeItem('customTheme');
   showPremiumFeatures();
-  alert('Premium logged out!');
+  showToast('Premium logged out!');
 });
 
 // --- Leaderboard Persistence ---
