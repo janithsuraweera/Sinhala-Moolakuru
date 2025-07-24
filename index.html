@@ -21,9 +21,19 @@
     </div>
     <button id="mode-toggle" aria-label="Toggle dark mode">🌙</button>
   </header>
-  <div id="ad-container" style="display: flex; flex-direction: column; align-items: center; margin: 1rem 0;">
-    <span style="font-size: 0.95rem; color: #888; margin-bottom: 0.2rem; letter-spacing: 0.04em;">Advertisement</span>
-    <video width="300" height="80" src="./ads/1.mp4" autoplay muted loop playsinline style="border-radius: 8px; box-shadow: 0 2px 8px #0001;"></video>
+  <div id="ad-container" class="ad-blend">
+    <span class="ad-label">Advertisement</span>
+    <div class="ad-video-row">
+      <a href="https://web.facebook.com/SouthCreationsAdvertising" target="_blank" rel="noopener noreferrer">
+      <video class="ad-video" width="90" height="60" src="./ads/1.mp4" autoplay muted loop playsinline></video>
+    </a>
+    <a href="https://web.facebook.com/photo/?fbid=732457939285554&set=a.176519848212702" target="_blank" rel="noopener noreferrer">
+      <img class="ad-video" width="90" height="60" src="https://scontent.fcmb3-2.fna.fbcdn.net/v/t39.30808-6/513493380_732457942618887_6782244650915688458_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGEWx5y5xpzz1SR6DZzUsP88K43Q-2R4oXwrjdD7ZHihed7G5nMVbdxsrvSwBO19WH0uc40O1PO3rng5-9uuKQ0&_nc_ohc=eSLKbEb11rIQ7kNvwG5FUGb&_nc_oc=Adno8t3wT7znqMD-HvmY7_BrHNmhWmK7S3HKPYq_QkYPQs96KrvQushPI_Xtpdm-TLFPkIuKrD5O3ah1yOUDMq2K&_nc_zt=23&_nc_ht=scontent.fcmb3-2.fna&_nc_gid=6lftMTjR-WqC_B4MEh9KuA&oh=00_AfSbyVVXAWRsGrA9SeWtWq0KKljJCIUOM0a6KgwhZAlIYA&oe=6887CE5F" autoplay muted loop playsinline></img>
+    </a>
+      <!-- <video class="ad-video" width="90" height="60" src="./ads/1.mp4" autoplay muted loop playsinline></video>
+      <video class="ad-video" width="90" height="60" src="./ads/1.mp4" autoplay muted loop playsinline></video>
+      <video class="ad-video" width="90" height="60" src="" autoplay muted loop playsinline></video> -->
+    </div>
   </div>
   <main>
     <section class="card main-card">
@@ -157,7 +167,13 @@
       </ul>
       <p>Developed with ❤️ by <a href="https://github.com/janithsuraweera/" target="_blank">Janith Suraweera</a>.</p>
     </div>
+    
   </div>
+  <!-- <div id="ad-container" class="ad-blend">
+    <span class="ad-label">Advertisement</span>
+    <video class="ad-video" width="320" height="90" src="./ads/1.mp4" autoplay muted loop playsinline></video>
+  </div> -->
+  
 
   <div id="help-modal" class="modal-overlay" style="display: none;">
     <div class="modal-content">
