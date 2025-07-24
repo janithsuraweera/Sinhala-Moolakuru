@@ -826,3 +826,47 @@ const saveLeaderboardBtn = document.getElementById('save-leaderboard-btn');
 saveLeaderboardBtn.addEventListener('click', () => {
   window.print();
 }); 
+
+// Leaderboard Modal Popup logic
+const reportLeaderboardLink = document.getElementById('report-leaderboard-link');
+const leaderboardModal = document.getElementById('leaderboard-modal');
+const closeModalLeaderboard = document.querySelector('.close-modal-leaderboard');
+const leaderboardModalTableBody = document.querySelector('#leaderboard-modal-table tbody');
+
+if (reportLeaderboardLink && leaderboardModal) {
+  reportLeaderboardLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Populate leaderboard modal table
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard') || '[]');
+    leaderboardModalTableBody.innerHTML = '';
+    leaderboard.forEach((row, i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${i + 1}</td><td>${row.wpm}</td><td>${row.accuracy}</td><td>${row.date}</td>`;
+      leaderboardModalTableBody.appendChild(tr);
+    });
+    leaderboardModal.style.display = 'flex';
+  });
+}
+if (closeModalLeaderboard && leaderboardModal) {
+  closeModalLeaderboard.addEventListener('click', () => {
+    leaderboardModal.style.display = 'none';
+  });
+}
+window.addEventListener('click', (e) => {
+  if (e.target === leaderboardModal) {
+    leaderboardModal.style.display = 'none';
+  }
+});
+
+// Save Report as PDF logic
+const reportSaveBtn = document.getElementById('report-save-btn');
+if (reportSaveBtn) {
+  reportSaveBtn.addEventListener('click', () => {
+    // Add a print class to body for @media print
+    document.body.classList.add('print-report-modal');
+    window.print();
+    setTimeout(() => {
+      document.body.classList.remove('print-report-modal');
+    }, 500);
+  });
+} 

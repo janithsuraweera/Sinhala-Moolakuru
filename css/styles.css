@@ -1368,7 +1368,7 @@ background: none;
 }
 #report-summary {
   font-size: 1.08rem;
-  color: #444;
+  color: #ffffff;
   margin-bottom: 1.2rem;
 }
 /* --- Colorful Stat Badges for Report Modal --- */
@@ -1382,7 +1382,12 @@ background: none;
 }
 .report-stat-badge.accuracy {
   background: linear-gradient(90deg, #f59e42 0%, #fbbf24 100%);
-  color: #222;
+  text-align: center;
+  font-size: 1.2rem;
+  justify-content: center;
+  color: #db1515;
+  font-weight: 900;
+
 }
 .report-stat-badge {
   border-radius: 16px;
@@ -1587,10 +1592,16 @@ background: none;
     padding: 0.4em 0.7em;
   }
   .report-share-btn {
-    font-size: 1.1rem;
-    width: 1.6rem;
-    height: 1.6rem;
-    line-height: 1.6rem;
+    font-size: 0.97rem;
+    padding: 0.3em 0.7em;
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 1.2em;
+    margin: 0 0.08em;
+  }
+  .report-share-btn svg {
+    width: 1.1em !important;
+    height: 1.1em !important;
   }
 }
 
@@ -1723,12 +1734,20 @@ background: none;
   border-radius: 1.5em;
 }
 @media (max-width: 600px) {
+  .leaderboard-btn-row {
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+    align-items: stretch;
+  }
   #reset-leaderboard-btn, #save-leaderboard-btn {
-    min-width: 70px;
+    min-width: 0;
     width: 100%;
     font-size: 0.89rem;
-    min-height: 30px;
+    min-height: 32px;
     padding: 0.32em 0.5em;
+    margin: 0 auto;
+    border-radius: 1.2em;
   }
 }
 
@@ -1809,6 +1828,28 @@ background: none;
     background: #fff !important;
     color: #222 !important;
     z-index: 9999 !important;
+  }
+}
+
+@media print {
+  body.print-report-modal * {
+    visibility: hidden !important;
+  }
+  body.print-report-modal #session-report-modal,
+  body.print-report-modal #session-report-modal * {
+    visibility: visible !important;
+  }
+  body.print-report-modal #session-report-modal {
+    position: absolute !important;
+    left: 0; right: 0; top: 0;
+    margin: 0 auto !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #222 !important;
+    z-index: 9999 !important;
+    display: block !important;
+    opacity: 1 !important;
   }
 }
 
