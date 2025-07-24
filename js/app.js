@@ -767,3 +767,18 @@ restartBtn.addEventListener('click', () => {
   wordsSoFar = 0;
   sentenceDisplay.textContent = 'මෙහි වචන/වක්‍ය පෙන්වයි';
 }); 
+
+const resetLeaderboardBtn = document.getElementById('reset-leaderboard-btn');
+if (resetLeaderboardBtn) {
+  resetLeaderboardBtn.addEventListener('click', () => {
+    if (!confirm('Are you sure you want to reset the leaderboard? This cannot be undone.')) return;
+    const pw = prompt('Enter password to confirm leaderboard reset:');
+    if (pw === '1234') {
+      localStorage.removeItem('leaderboard');
+      alert('Leaderboard has been reset!');
+      renderLeaderboard();
+    } else if (pw !== null) {
+      alert('Incorrect password. Leaderboard was not reset.');
+    }
+  });
+} 
