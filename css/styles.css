@@ -934,6 +934,11 @@ body.dark input[type="text"]:focus, body.dark textarea:focus, body.dark select:f
 }
 #leaderboard tr:hover {
   background: #f1f5f9;
+  color: #1e293b;
+}
+body.dark #leaderboard tr:hover {
+  background: #334155 !important;
+  color: #f1f5f9 !important;
 }
 #leaderboard tr.user-score {
   background: #dbeafe !important;

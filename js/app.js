@@ -282,6 +282,7 @@ function startTest() {
   resetStats();
   startBtn.style.display = 'none';
   startBtn.disabled = true;
+  timeSelect.disabled = true;
   saveTestState();
   startTimer();
 }
@@ -301,6 +302,7 @@ function endTest() {
     renderLeaderboard();
   }
   showSessionReport();
+  timeSelect.disabled = false;
 }
 
 // Remove all references to restartBtn
@@ -766,6 +768,7 @@ restartBtn.addEventListener('click', () => {
   document.getElementById('word-count').textContent = '0';
   wordsSoFar = 0;
   sentenceDisplay.textContent = 'මෙහි වචන/වක්‍ය පෙන්වයි';
+  timeSelect.disabled = false;
 }); 
 
 const resetLeaderboardBtn = document.getElementById('reset-leaderboard-btn');
