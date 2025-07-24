@@ -11,7 +11,10 @@ Sinhala Mulakuru is a modern, mobile-friendly web application designed to help y
 - Leaderboard to track your best scores
 - Dark/Light mode
 - Custom themes and keyboard layouts (Premium)
+- **Advertisement system:** Video or image ads with clickable links (sidebar, desktop/mobile responsive)
+- **Premium removes all ads**
 - Fully responsive, professional UI/UX (works great on mobile and desktop)
+- Improved help modal with clear Sinhala typing instructions
 
 ## Getting Started
 1. **Download or clone** this repository.
@@ -26,7 +29,25 @@ js/
   app.js
 assets/
   (images, icons, logo)
+ads/
+  (ad video/image files)
 ```
+
+## How to Add or Change Ads
+- Ads are shown in the sidebar as video or image banners.
+- To add or change an ad:
+  1. Place your ad video (e.g. `1.mp4`) or image (e.g. `2.jpg`) in the `ads/` folder.
+  2. In `index.html`, inside the `.ad-video-row` div, add or update the following:
+     ```html
+     <a href="https://your-ad-link.com" target="_blank" rel="noopener noreferrer">
+       <video class="ad-video" width="90" height="60" src="./ads/1.mp4" autoplay muted loop playsinline></video>
+     </a>
+     <a href="https://your-ad-link.com" target="_blank" rel="noopener noreferrer">
+       <img class="ad-video" width="90" height="60" src="./ads/2.jpg" />
+     </a>
+     ```
+  3. Change the `href` to your desired link. You can mix video and image ads.
+- **Premium users will not see ads.**
 
 ## Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests to improve the app.
