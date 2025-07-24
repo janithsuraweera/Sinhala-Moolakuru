@@ -282,6 +282,7 @@ function startTest() {
   resetStats();
   startBtn.style.display = 'none';
   startBtn.disabled = true;
+  timeSelect.disabled = true;
   saveTestState();
   startTimer();
 }
@@ -301,6 +302,7 @@ function endTest() {
     renderLeaderboard();
   }
   showSessionReport();
+  timeSelect.disabled = false;
 }
 
 // Remove all references to restartBtn
@@ -435,6 +437,24 @@ modeToggle.addEventListener('click', () => {
   // Save to localStorage
   localStorage.setItem('darkMode', document.body.classList.contains('dark') ? 'true' : 'false');
 });
+
+const modeToggleMobile = document.getElementById('mode-toggle-mobile');
+if (modeToggleMobile) {
+  modeToggleMobile.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    modeToggleMobile.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    modeToggle.textContent = modeToggleMobile.textContent;
+    localStorage.setItem('darkMode', document.body.classList.contains('dark') ? 'true' : 'false');
+  });
+}
+// Keep both buttons in sync on load
+if (localStorage.getItem('darkMode') === 'true') {
+  if (modeToggleMobile) modeToggleMobile.textContent = '☀️';
+  if (modeToggle) modeToggle.textContent = '☀️';
+} else {
+  if (modeToggleMobile) modeToggleMobile.textContent = '🌙';
+  if (modeToggle) modeToggle.textContent = '🌙';
+}
 
 // Mobile: focus input on sentence click
 sentenceDisplay.addEventListener('click', () => {
@@ -609,7 +629,7 @@ typingInput.addEventListener('keydown', (e) => {
       wijesekaraSuggestTooltip.style.display = 'none';
     }
   }
-}); 
+});
 
 // Premium activation logic
 const activatePremiumBtn = document.getElementById('activate-premium-btn');
@@ -631,22 +651,26 @@ function isPremium() {
 
 function showPremiumFeatures() {
   const adContainer = document.getElementById('ad-container');
+  const premiumBadge = document.querySelector('#activate-premium-btn .premium-badge');
+  const activePremiumBadge = document.getElementById('active-premium-badge');
   if (isPremium()) {
     customKeyboardSection.style.display = 'block';
     customThemeSection.style.display = 'block';
     activatePremiumBtn.style.display = 'none';
     logoutPremiumBtn.style.display = 'inline-block';
-    // Show premium badge
     document.getElementById('premium-badge').style.display = 'inline-block';
     if (adContainer) adContainer.style.display = 'none';
+    if (premiumBadge) premiumBadge.style.display = 'none';
+    if (activePremiumBadge) activePremiumBadge.style.display = 'block';
   } else {
     customKeyboardSection.style.display = 'none';
     customThemeSection.style.display = 'none';
     activatePremiumBtn.style.display = 'inline-block';
     logoutPremiumBtn.style.display = 'none';
-    // Hide premium badge
     document.getElementById('premium-badge').style.display = 'none';
     if (adContainer) adContainer.style.display = 'flex';
+    if (premiumBadge) premiumBadge.style.display = 'inline-flex';
+    if (activePremiumBadge) activePremiumBadge.style.display = 'none';
   }
 }
 
@@ -718,7 +742,7 @@ if (isPremium()) {
 if (isPremium()) {
   const mappingStr = localStorage.getItem('customKeyboardMapping') || '';
   customKeyboardMapping.value = mappingStr;
-} 
+}
 
 logoutPremiumBtn.addEventListener('click', () => {
   localStorage.removeItem('premium');
@@ -726,8 +750,8 @@ logoutPremiumBtn.addEventListener('click', () => {
   // localStorage.removeItem('customKeyboardMapping');
   // localStorage.removeItem('customTheme');
   showPremiumFeatures();
-  alert('Premium logged out!');
-}); 
+  showToast('Premium logged out!');
+});
 
 // --- Leaderboard Persistence ---
 function saveToLeaderboard(wpm, accuracy) {
@@ -749,7 +773,7 @@ function renderLeaderboard() {
 }
 
 // Render leaderboard on load
-window.addEventListener('DOMContentLoaded', renderLeaderboard); 
+window.addEventListener('DOMContentLoaded', renderLeaderboard);
 
 // Restart button logic
 restartBtn.addEventListener('click', () => {
@@ -769,7 +793,8 @@ restartBtn.addEventListener('click', () => {
   document.getElementById('word-count').textContent = '0';
   wordsSoFar = 0;
   sentenceDisplay.textContent = 'මෙහි වචන/වක්‍ය පෙන්වයි';
-}); 
+  timeSelect.disabled = false;
+});
 
 const resetLeaderboardBtn = document.getElementById('reset-leaderboard-btn');
 const resetModal = document.getElementById('reset-modal');
@@ -804,12 +829,12 @@ if (closeModalReset) {
 if (resetConfirmBtn) {
   resetConfirmBtn.addEventListener('click', () => {
     const pw = resetPasswordInput.value.trim();
-    if (pw === '1234') {
+    if (pw === '123456') {
       localStorage.removeItem('leaderboard');
       resetModal.style.display = 'none';
       resetErrorMsg.textContent = '';
       resetPasswordInput.value = '';
-      alert('Leaderboard has been reset!');
+      showToast('Leaderboard has been reset!');
       renderLeaderboard();
     } else {
       resetErrorMsg.textContent = 'Incorrect password. Please try again.';
@@ -817,4 +842,65 @@ if (resetConfirmBtn) {
       resetPasswordInput.focus();
     }
   });
+}
+
+const saveLeaderboardBtn = document.getElementById('save-leaderboard-btn');
+saveLeaderboardBtn.addEventListener('click', () => {
+  window.print();
+});
+
+// Leaderboard Modal Popup logic
+const reportLeaderboardLink = document.getElementById('report-leaderboard-link');
+const leaderboardModal = document.getElementById('leaderboard-modal');
+const closeModalLeaderboard = document.querySelector('.close-modal-leaderboard');
+const leaderboardModalTableBody = document.querySelector('#leaderboard-modal-table tbody');
+
+if (reportLeaderboardLink && leaderboardModal) {
+  reportLeaderboardLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Populate leaderboard modal table
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard') || '[]');
+    leaderboardModalTableBody.innerHTML = '';
+    leaderboard.forEach((row, i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${i + 1}</td><td>${row.wpm}</td><td>${row.accuracy}</td><td>${row.date}</td>`;
+      leaderboardModalTableBody.appendChild(tr);
+    });
+    leaderboardModal.style.display = 'flex';
+  });
+}
+if (closeModalLeaderboard && leaderboardModal) {
+  closeModalLeaderboard.addEventListener('click', () => {
+    leaderboardModal.style.display = 'none';
+  });
+}
+window.addEventListener('click', (e) => {
+  if (e.target === leaderboardModal) {
+    leaderboardModal.style.display = 'none';
+  }
+});
+
+// Save Report as PDF logic
+const reportSaveBtn = document.getElementById('report-save-btn');
+if (reportSaveBtn) {
+  reportSaveBtn.addEventListener('click', () => {
+    // Add a print class to body for @media print
+    document.body.classList.add('print-report-modal');
+    window.print();
+    setTimeout(() => {
+      document.body.classList.remove('print-report-modal');
+    }, 500);
+  });
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.style.display = 'block';
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => { toast.style.display = 'none'; }, 350);
+  }, 2200);
 } 

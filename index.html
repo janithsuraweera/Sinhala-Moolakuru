@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="stylesheet" href="css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- <header> -->
@@ -21,6 +22,9 @@
     </div>
     <button id="mode-toggle" aria-label="Toggle dark mode">🌙</button>
   </header>
+  <div class="mode-toggle-mobile">
+    <button id="mode-toggle-mobile" aria-label="Toggle dark mode">🌙</button>
+  </div>
   <div id="ad-container" class="ad-blend">
     <span class="ad-label">Advertisement</span>
     <div class="ad-video-row">
@@ -128,14 +132,27 @@
             <!-- Leaderboard rows will be inserted here -->
           </tbody>
         </table>
-        <button id="reset-leaderboard-btn" class="footer-btn" style="background:#e11d48; color:#fff; margin-top:1rem;">Reset Leaderboard</button>
-        <button id="activate-premium-btn" class="premium-link-btn" type="button">🔓 Unlock Premium features</button>
+        <div class="leaderboard-btn-row">
+          <button id="reset-leaderboard-btn" class="footer-btn">
+            <span class="reset-icon">🗑️</span>
+            Reset Leaderboard
+          </button>
+          <button id="save-leaderboard-btn" class="footer-btn">
+            <span class="save-icon">📄</span>
+            Save as PDF
+          </button>
+        </div>
+        <button id="activate-premium-btn" class="premium-link-btn premium-pill-btn" type="button">
+
+          Unlock Premium features
+          <span class="premium-badge"><span class="crown">👑</span>Premium</span>
+        </button>
       </div>
       <div id="reset-modal" class="modal-overlay" style="display:none;">
         <div class="modal-content card" style="max-width:350px; text-align:center;">
           <button class="close-modal-reset" style="position:absolute;top:1rem;right:1rem;font-size:1.5rem;background:none;border:none;cursor:pointer;">&times;</button>
           <h2 style="margin-bottom:0.7rem;">Reset Leaderboard</h2>
-          <div style="margin-bottom:0.7rem;">Are you sure you want to reset the leaderboard? This cannot be undone.</div>
+          <div style="margin-bottom:0.7rem; color:#222;">Are you sure you want to reset the leaderboard? This cannot be undone.</div>
           <input id="reset-password-input" type="password" placeholder="Enter password" style="width:90%;padding:0.6em;margin-bottom:0.5em;border-radius:7px;border:1.5px solid #e0e7ef;">
           <div id="reset-error-msg" style="color:#e11d48;min-height:1.2em;margin-bottom:0.5em;"></div>
           <div style="display:flex;gap:1rem;justify-content:center;">
@@ -169,6 +186,7 @@
     </div>
     
   </div>
+  
   <!-- <div id="ad-container" class="ad-blend">
     <span class="ad-label">Advertisement</span>
     <video class="ad-video" width="320" height="90" src="./ads/1.mp4" autoplay muted loop playsinline></video>
@@ -213,21 +231,51 @@
       <div class="report-stats-modern" style="display:flex; justify-content:center; gap:1.2rem; margin-bottom:1.2rem;">
         <div class="report-stat-badge wpm"><span id="report-wpm">0</span> WPM</div>
         <div class="report-stat-badge cpm"><span id="report-cpm">0</span> CPM</div>
-        <div class="report-stat-badge accuracy"><span id="report-accuracy">0</span> % Accuracy</div>
+        <div class="report-stat-badge accuracy"><span id="report-accuracy"></span>% Accuracy</div>
       </div>
       <div class="report-share-row" style="text-align:center; margin-bottom:1.2rem;">
-        <span style="font-size:0.98rem; color:#444;">Share your score</span><br>
-        <a href="" class="report-share-btn fb" title="Share on Facebook">&#xf09a;</a>
-        <a href="#" class="report-share-btn li" title="Share on LinkedIn">&#xf0e1;</a>
-        <a href="#" class="report-share-btn tw" title="Share on Twitter">&#xf099;</a>
+        <span style="font-size:0.98rem; color:#000000;">Share your score</span><br>
+        <a href="https://www.facebook.com" class="report-share-btn fb" title="Share on Facebook" target="_blank" rel="noopener noreferrer">
+          <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="#1877f3" style="vertical-align:middle;"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"/></svg>
+          
+        </a>
+        <a href="https://www.linkedin.com" class="report-share-btn li" title="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+          <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="#0a66c2" style="vertical-align:middle;"><path d="M20.447 20.452h-3.554v-5.569c0-1.327-.027-3.037-1.849-3.037-1.851 0-2.132 1.445-2.132 2.939v5.667H9.358V9h3.414v1.561h.049c.476-.899 1.637-1.849 3.37-1.849 3.602 0 4.267 2.368 4.267 5.455v6.285zM5.337 7.433c-1.144 0-2.069-.926-2.069-2.068 0-1.143.925-2.069 2.069-2.069 1.143 0 2.068.926 2.068 2.069 0 1.142-.925 2.068-2.068 2.068zm1.777 13.019H3.56V9h3.554v11.452zM22.225 0H1.771C.792 0 0 .771 0 1.723v20.549C0 23.229.792 24 1.771 24h20.451C23.2 24 24 23.229 24 22.271V1.723C24 .771 23.2 0 22.225 0z"/></svg>
+         
+        </a>
+        <a href="https://www.twitter.com" class="report-share-btn tw" title="Share on Twitter" target="_blank" rel="noopener noreferrer">
+          <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="#1da1f2" style="vertical-align:middle;"><path d="M24 4.557a9.83 9.83 0 0 1-2.828.775 4.932 4.932 0 0 0 2.165-2.724c-.951.564-2.005.974-3.127 1.195a4.916 4.916 0 0 0-8.38 4.482C7.691 8.095 4.066 6.13 1.64 3.161c-.542.929-.856 2.01-.857 3.17 0 2.188 1.115 4.117 2.823 5.254a4.904 4.904 0 0 1-2.229-.616c-.054 2.281 1.581 4.415 3.949 4.89a4.936 4.936 0 0 1-2.224.084c.627 1.956 2.444 3.377 4.6 3.417A9.867 9.867 0 0 1 0 21.543a13.94 13.94 0 0 0 7.548 2.209c9.057 0 14.009-7.496 14.009-13.986 0-.21-.005-.423-.015-.633A9.936 9.936 0 0 0 24 4.557z"/></svg>
+         
+        </a>
       </div>
       <div style="text-align:center; margin-bottom:1.2rem;">
-        <a href="#leaderboard" class="report-leaderboard-link">View Leaderboard</a>
+        <a href="#" id="report-leaderboard-link" class="report-leaderboard-link">View Leaderboard</a>
       </div>
       <div class="report-action-row" style="display:flex; justify-content:center; gap:1.2rem;">
         <button id="modal-restart-btn" class="footer-btn report-btn-try" aria-label="Restart typing test">Try Again</button>
-        <button class="footer-btn report-btn-save">Save</button>
+        <button id="report-save-btn" class="footer-btn report-btn-save">Save</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Leaderboard Modal Popup -->
+  <div id="leaderboard-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content card leaderboard-card" style="max-width: 500px;">
+      <button class="close-modal-leaderboard" style="position:absolute;top:1rem;right:1rem;font-size:1.5rem;background:none;border:none;cursor:pointer;">&times;</button>
+      <h2>Leaderboard</h2>
+      <table id="leaderboard-modal-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>WPM</th>
+            <th>Accuracy</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Leaderboard rows will be inserted here by JS -->
+        </tbody>
+      </table>
     </div>
   </div>
 
@@ -235,9 +283,12 @@
   <div id="premium-modal" class="modal-overlay" style="display: none;">
     <div class="modal-content">
       <button class="close-modal-premium">&times;</button>
+      <div class="premium-modal-badge">
+        <span class="premium-crown">👑</span>
+      </div>
       <h2>Activate Premium</h2>
       <p>Enter your premium code to unlock custom keyboard layouts and themes.</p>
-      <input type="text" id="premium-code-input" placeholder="Enter code here..." style="width: 100%; padding: 0.5rem; margin-bottom: 1rem;" />
+      <input type="text" id="premium-code-input" placeholder="Enter code here..." />
       <button id="submit-premium-code" class="footer-btn">Activate</button>
       <div id="premium-feedback" style="color: #e11d48; margin-top: 0.5rem;"></div>
     </div>
@@ -245,5 +296,6 @@
 
   <audio id="countdown-sound" src="sound/cutdown1.mp3" preload="auto"></audio>
   <script src="js/app.js"></script>
+  <div id="toast" class="toast" style="display:none;"></div>
 </body>
 </html> 
