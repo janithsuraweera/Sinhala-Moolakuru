@@ -651,22 +651,26 @@ function isPremium() {
 
 function showPremiumFeatures() {
   const adContainer = document.getElementById('ad-container');
+  const premiumBadge = document.querySelector('#activate-premium-btn .premium-badge');
+  const activePremiumBadge = document.getElementById('active-premium-badge');
   if (isPremium()) {
     customKeyboardSection.style.display = 'block';
     customThemeSection.style.display = 'block';
     activatePremiumBtn.style.display = 'none';
     logoutPremiumBtn.style.display = 'inline-block';
-    // Show premium badge
     document.getElementById('premium-badge').style.display = 'inline-block';
     if (adContainer) adContainer.style.display = 'none';
+    if (premiumBadge) premiumBadge.style.display = 'none';
+    if (activePremiumBadge) activePremiumBadge.style.display = 'block';
   } else {
     customKeyboardSection.style.display = 'none';
     customThemeSection.style.display = 'none';
     activatePremiumBtn.style.display = 'inline-block';
     logoutPremiumBtn.style.display = 'none';
-    // Hide premium badge
     document.getElementById('premium-badge').style.display = 'none';
     if (adContainer) adContainer.style.display = 'flex';
+    if (premiumBadge) premiumBadge.style.display = 'inline-flex';
+    if (activePremiumBadge) activePremiumBadge.style.display = 'none';
   }
 }
 
