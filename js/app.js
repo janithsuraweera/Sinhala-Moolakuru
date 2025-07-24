@@ -630,6 +630,7 @@ function isPremium() {
 }
 
 function showPremiumFeatures() {
+  const adContainer = document.getElementById('ad-container');
   if (isPremium()) {
     customKeyboardSection.style.display = 'block';
     customThemeSection.style.display = 'block';
@@ -637,6 +638,7 @@ function showPremiumFeatures() {
     logoutPremiumBtn.style.display = 'inline-block';
     // Show premium badge
     document.getElementById('premium-badge').style.display = 'inline-block';
+    if (adContainer) adContainer.style.display = 'none';
   } else {
     customKeyboardSection.style.display = 'none';
     customThemeSection.style.display = 'none';
@@ -644,6 +646,7 @@ function showPremiumFeatures() {
     logoutPremiumBtn.style.display = 'none';
     // Hide premium badge
     document.getElementById('premium-badge').style.display = 'none';
+    if (adContainer) adContainer.style.display = 'flex';
   }
 }
 
