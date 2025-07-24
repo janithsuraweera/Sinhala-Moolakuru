@@ -825,7 +825,7 @@ if (closeModalReset) {
 if (resetConfirmBtn) {
   resetConfirmBtn.addEventListener('click', () => {
     const pw = resetPasswordInput.value.trim();
-    if (pw === '1234') {
+    if (pw === '123456') {
       localStorage.removeItem('leaderboard');
       resetModal.style.display = 'none';
       resetErrorMsg.textContent = '';
