@@ -438,6 +438,24 @@ modeToggle.addEventListener('click', () => {
   localStorage.setItem('darkMode', document.body.classList.contains('dark') ? 'true' : 'false');
 });
 
+const modeToggleMobile = document.getElementById('mode-toggle-mobile');
+if (modeToggleMobile) {
+  modeToggleMobile.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    modeToggleMobile.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    modeToggle.textContent = modeToggleMobile.textContent;
+    localStorage.setItem('darkMode', document.body.classList.contains('dark') ? 'true' : 'false');
+  });
+}
+// Keep both buttons in sync on load
+if (localStorage.getItem('darkMode') === 'true') {
+  if (modeToggleMobile) modeToggleMobile.textContent = '☀️';
+  if (modeToggle) modeToggle.textContent = '☀️';
+} else {
+  if (modeToggleMobile) modeToggleMobile.textContent = '🌙';
+  if (modeToggle) modeToggle.textContent = '🌙';
+}
+
 // Mobile: focus input on sentence click
 sentenceDisplay.addEventListener('click', () => {
   typingInput.focus();
