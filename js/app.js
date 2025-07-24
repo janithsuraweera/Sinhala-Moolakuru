@@ -629,7 +629,7 @@ typingInput.addEventListener('keydown', (e) => {
       wijesekaraSuggestTooltip.style.display = 'none';
     }
   }
-}); 
+});
 
 // Premium activation logic
 const activatePremiumBtn = document.getElementById('activate-premium-btn');
@@ -738,7 +738,7 @@ if (isPremium()) {
 if (isPremium()) {
   const mappingStr = localStorage.getItem('customKeyboardMapping') || '';
   customKeyboardMapping.value = mappingStr;
-} 
+}
 
 logoutPremiumBtn.addEventListener('click', () => {
   localStorage.removeItem('premium');
@@ -747,7 +747,7 @@ logoutPremiumBtn.addEventListener('click', () => {
   // localStorage.removeItem('customTheme');
   showPremiumFeatures();
   alert('Premium logged out!');
-}); 
+});
 
 // --- Leaderboard Persistence ---
 function saveToLeaderboard(wpm, accuracy) {
@@ -769,7 +769,7 @@ function renderLeaderboard() {
 }
 
 // Render leaderboard on load
-window.addEventListener('DOMContentLoaded', renderLeaderboard); 
+window.addEventListener('DOMContentLoaded', renderLeaderboard);
 
 // Restart button logic
 restartBtn.addEventListener('click', () => {
@@ -790,7 +790,7 @@ restartBtn.addEventListener('click', () => {
   wordsSoFar = 0;
   sentenceDisplay.textContent = 'මෙහි වචන/වක්‍ය පෙන්වයි';
   timeSelect.disabled = false;
-}); 
+});
 
 const resetLeaderboardBtn = document.getElementById('reset-leaderboard-btn');
 const resetModal = document.getElementById('reset-modal');
@@ -830,7 +830,7 @@ if (resetConfirmBtn) {
       resetModal.style.display = 'none';
       resetErrorMsg.textContent = '';
       resetPasswordInput.value = '';
-      alert('Leaderboard has been reset!');
+      showToast('Leaderboard has been reset!');
       renderLeaderboard();
     } else {
       resetErrorMsg.textContent = 'Incorrect password. Please try again.';
@@ -838,12 +838,12 @@ if (resetConfirmBtn) {
       resetPasswordInput.focus();
     }
   });
-} 
+}
 
 const saveLeaderboardBtn = document.getElementById('save-leaderboard-btn');
 saveLeaderboardBtn.addEventListener('click', () => {
   window.print();
-}); 
+});
 
 // Leaderboard Modal Popup logic
 const reportLeaderboardLink = document.getElementById('report-leaderboard-link');
@@ -887,4 +887,16 @@ if (reportSaveBtn) {
       document.body.classList.remove('print-report-modal');
     }, 500);
   });
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.style.display = 'block';
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => { toast.style.display = 'none'; }, 350);
+  }, 2200);
 } 

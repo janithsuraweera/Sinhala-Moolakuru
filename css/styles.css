@@ -1922,3 +1922,38 @@ background: none;
     display: none !important;
   }
 }
+
+.toast {
+  position: fixed;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+  color: #fff;
+  padding: 1em 2.2em;
+  border-radius: 2em;
+  font-size: 1.08rem;
+  font-weight: 600;
+  box-shadow: 0 4px 24px rgba(34,197,94,0.13);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, bottom 0.3s;
+  display: none;
+}
+.toast.show {
+  display: block;
+  opacity: 1;
+  bottom: 3.5rem;
+  pointer-events: auto;
+}
+@media (max-width: 600px) {
+  .toast {
+    font-size: 0.97rem;
+    padding: 0.7em 1.2em;
+    bottom: 1.2rem;
+  }
+  .toast.show {
+    bottom: 2.2rem;
+  }
+}
