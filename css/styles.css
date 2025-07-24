@@ -1545,26 +1545,30 @@ background: none;
 
 /* --- Mobile Stats Cards Optimization --- */
 @media (max-width: 600px) {
-  .stats-card_stats2 {
+  .stats-cards, .stats-card_stats2 {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.2rem;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    padding-left: 0.1rem;
-    padding-right: 0.1rem;
     justify-content: center;
-    overflow-x: visible;
-  }
-  .stats-card_stats2 {
-    flex: 1 1 0;
-    min-width: 0;
-    max-width: 100%;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 100vw;
     box-sizing: border-box;
+    padding: 0.2rem;
+    margin-bottom: 1.2rem;
+  }
+  .stat-card, .stats-card_stats2 > div {
+    background: #23232b;
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(30,41,59,0.10);
+    padding: 0.7em 0.7em;
+    font-size: 1.1rem;
+    font-weight: 700;
     text-align: center;
-    font-size: 0.97rem;
-    padding: 0.4em 0.2em;
+    flex: 1 1 110px;
+    min-width: 90px;
+    max-width: 160px;
+    margin: 0 auto;
   }
 }
 
