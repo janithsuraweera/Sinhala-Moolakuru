@@ -1390,17 +1390,20 @@ background: none;
 
 }
 .report-stat-badge {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border-radius: 16px;
   font-size: 1.25rem;
   font-weight: 700;
   padding: 1em 1.5em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: 0 2px 12px rgba(30,41,59,0.10);
   margin-bottom: 0.5rem;
   min-width: 110px;
   transition: background 0.2s, color 0.2s;
+
+
 }
 .report-stat-badge span {
   font-size: 1.3em;
@@ -2107,4 +2110,68 @@ background: none;
     justify-content: center;
     white-space: nowrap;
   }
+}
+
+/* --- Leaderboard mobile horizontal scroll --- */
+@media (max-width: 700px) {
+  #leaderboard {
+    overflow-x: auto !important;
+    display: block !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    box-shadow: 0 2px 8px rgba(79,140,255,0.07);
+    border-radius: 10px;
+  }
+  #leaderboard th, #leaderboard td {
+    min-width: 80px !important;
+    font-size: 0.95rem !important;
+    padding: 0.3rem 0.2rem !important;
+  }
+}
+
+/* --- Animated gradient buttons --- */
+button, .footer-btn {
+  background: linear-gradient(270deg, #4f8cff, #38e8ff, #fbbf24, #4f8cff);
+  background-size: 600% 600%;
+  animation: gradientMove 4s ease infinite;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(79,140,255,0.08);
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* --- Animated stripes for progress bar --- */
+#progress-bar {
+  background: repeating-linear-gradient(
+    135deg,
+    #4f8cff 0px,
+    #38e8ff 20px,
+    #fbbf24 40px,
+    #4f8cff 60px
+  );
+  background-size: 80px 80px;
+  animation: stripesMove 1.2s linear infinite;
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.4s cubic-bezier(.4,2,.6,1), background 0.3s;
+  box-shadow: 0 1px 6px rgba(56,232,255,0.13);
+}
+@keyframes stripesMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 80px 0; }
 }
