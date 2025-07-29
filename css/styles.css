@@ -453,25 +453,7 @@ footer a {
   font-weight: bold;
   color: var(--primary);
 }
-@media (max-width: 600px) {
-  main {
-    padding: 1rem;
-    margin: 1rem;
-  }
-  header {
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem;
-  }
 
-  .leaderboard-section h2 {
-    font-size: 1rem;
-  }
-  #leaderboard th, #leaderboard td {
-    padding: 0.3rem 0.3rem;
-    font-size: 0.9rem;
-  }
-} 
 
 .controls-card {
   display: flex;
@@ -2231,4 +2213,581 @@ button:disabled {
 @keyframes stripesMove {
   0% { background-position: 0 0; }
   100% { background-position: 80px 0; }
+}
+
+/* --- EXTRA SMALL MOBILE OPTIMIZATION: width < 500px --- */
+@media (max-width: 500px) {
+  main {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  .main-card {
+    padding: 1rem 0.5rem !important;
+    border-radius: 8px !important;
+    margin: 1rem auto !important;
+  }
+  .main-heading, h1 {
+    font-size: 1.2rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .stats-card.stats {
+    gap: 0.5rem !important;
+    flex-wrap: wrap !important;
+  }
+  .stat-badge {
+    font-size: 0.9rem !important;
+    padding: 0.5rem 0.8rem !important;
+    margin: 0.2rem !important;
+  }
+  .sinhala-badge, .level-badge {
+    font-size: 0.9rem !important;
+    padding: 0.15rem 0.6rem !important;
+  }
+  .typing-area-card {
+    padding: 0.8rem 0.5rem !important;
+  }
+  #sentence-display {
+    font-size: 1rem !important;
+    min-height: 2rem !important;
+    padding: 0.3rem 0 !important;
+  }
+  #typing-input {
+    font-size: 1rem !important;
+    padding: 0.6rem 0.8rem !important;
+  }
+  .timer-section {
+    gap: 0.8rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  #timer-display {
+    font-size: 1.2rem !important;
+    padding: 0.15em 1em !important;
+    min-width: 150px !important;
+  }
+  .difficulty-select, .keyboard-section, .custom-text-section {
+    gap: 0.5rem !important;
+    flex-wrap: wrap !important;
+  }
+  input[type="text"], textarea, select {
+    font-size: 1rem !important;
+    padding: 0.6rem 0.8rem !important;
+  }
+  button {
+    font-size: 1rem !important;
+    padding: 0.6rem 1.5rem !important;
+  }
+  .leaderboard-card.leaderboard-section {
+    padding: 0.8rem 0.5rem !important;
+  }
+  #leaderboard th, #leaderboard td {
+    font-size: 0.8rem !important;
+    padding: 0.25rem 0.15rem !important;
+    min-width: 50px !important;
+  }
+  .modal-content.card, .modal-content {
+    padding: 1.5rem 1rem !important;
+    border-radius: 12px !important;
+  }
+  .report-modern {
+    padding: 1rem 0.5rem !important;
+  }
+  .report-stat-badge {
+    font-size: 0.9rem !important;
+    padding: 0.4em 0.6em !important;
+    min-width: 90px !important;
+  }
+  .premium-pill-btn {
+    font-size: 0.95rem !important;
+    padding: 0.6em 1em !important;
+    margin-left: 10% !important;
+  }
+  #help-btn {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.5rem !important;
+    right: 15px !important;
+    bottom: 8px !important;
+  }
+  .toast {
+    font-size: 0.9rem !important;
+    padding: 0.6em 1em !important;
+    bottom: 1rem !important;
+  }
+  .toast.show {
+    bottom: 1.8rem !important;
+  }
+}
+
+/* --- ULTRA SMALL MOBILE OPTIMIZATION: width < 400px --- */
+@media (max-width: 400px) {
+  main {
+    padding-left: 0.3rem !important;
+    padding-right: 0.3rem !important;
+  }
+  .main-card {
+    padding: 0.8rem 0.3rem !important;
+    border-radius: 6px !important;
+    margin: 0.5rem auto !important;
+  }
+  .main-heading, h1 {
+    font-size: 1.1rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+  .stats-card.stats {
+    gap: 0.3rem !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .stat-badge {
+    font-size: 0.85rem !important;
+    padding: 0.4rem 0.6rem !important;
+    margin: 0.1rem !important;
+    min-width: 80px !important;
+  }
+  .sinhala-badge, .level-badge {
+    font-size: 0.85rem !important;
+    padding: 0.12rem 0.5rem !important;
+  }
+  .typing-area-card {
+    padding: 0.6rem 0.3rem !important;
+  }
+  #sentence-display {
+    font-size: 0.95rem !important;
+    min-height: 1.8rem !important;
+    padding: 0.2rem 0 !important;
+  }
+  #typing-input {
+    font-size: 0.95rem !important;
+    padding: 0.5rem 0.6rem !important;
+  }
+  .timer-section {
+    gap: 0.6rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+  #timer-display {
+    font-size: 1.1rem !important;
+    padding: 0.12em 0.8em !important;
+    min-width: 120px !important;
+  }
+  .difficulty-select, .keyboard-section, .custom-text-section {
+    gap: 0.4rem !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  input[type="text"], textarea, select {
+    font-size: 0.95rem !important;
+    padding: 0.5rem 0.6rem !important;
+  }
+  button {
+    font-size: 0.95rem !important;
+    padding: 0.5rem 1.2rem !important;
+  }
+  .leaderboard-card.leaderboard-section {
+    padding: 0.6rem 0.3rem !important;
+  }
+  #leaderboard {
+    font-size: 0.75rem !important;
+  }
+  #leaderboard th, #leaderboard td {
+    font-size: 0.75rem !important;
+    padding: 0.2rem 0.1rem !important;
+    min-width: 45px !important;
+  }
+  .modal-content.card, .modal-content {
+    padding: 1.2rem 0.8rem !important;
+    border-radius: 8px !important;
+  }
+  .report-modern {
+    padding: 0.8rem 0.4rem !important;
+  }
+  .report-modern h2#report-heading {
+    font-size: 1.1rem !important;
+  }
+  .report-stat-badge {
+    font-size: 0.85rem !important;
+    padding: 0.3em 0.5em !important;
+    min-width: 80px !important;
+  }
+  .premium-pill-btn {
+    font-size: 0.9rem !important;
+    padding: 0.5em 0.8em !important;
+    margin-left: 5% !important;
+  }
+  #help-btn {
+    width: 45px !important;
+    height: 45px !important;
+    font-size: 1.3rem !important;
+    right: 12px !important;
+    bottom: 6px !important;
+  }
+  .toast {
+    font-size: 0.85rem !important;
+    padding: 0.5em 0.8em !important;
+    bottom: 0.8rem !important;
+  }
+  .toast.show {
+    bottom: 1.5rem !important;
+  }
+  .start-reset-row {
+    gap: 0.4rem !important;
+  }
+  #restart-btn {
+    font-size: 1rem !important;
+    padding: 0.15em 0.3em !important;
+  }
+  .leaderboard-btn-row {
+    gap: 0.4rem !important;
+    flex-direction: column !important;
+  }
+  #reset-leaderboard-btn, #save-leaderboard-btn {
+    font-size: 0.85rem !important;
+    padding: 0.4em 0.8em !important;
+    min-width: 80px !important;
+  }
+  .select {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  .ad-blend {
+    padding: 0.5rem 0.3rem !important;
+    margin: 0.8rem auto !important;
+  }
+  .ad-video {
+    width: 50px !important;
+    height: 35px !important;
+  }
+}
+
+/* --- EXTREME SMALL MOBILE OPTIMIZATION: width < 350px --- */
+@media (max-width: 350px) {
+  main {
+    padding-left: 0.2rem !important;
+    padding-right: 0.2rem !important;
+  }
+  .main-card {
+    padding: 0.6rem 0.2rem !important;
+    border-radius: 4px !important;
+    margin: 0.3rem auto !important;
+  }
+  .main-heading, h1 {
+    font-size: 1rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+  .stats-card.stats {
+    gap: 0.2rem !important;
+  }
+  .stat-badge {
+    font-size: 0.8rem !important;
+    padding: 0.3rem 0.5rem !important;
+    margin: 0.05rem !important;
+    min-width: 70px !important;
+  }
+  .sinhala-badge, .level-badge {
+    font-size: 0.8rem !important;
+    padding: 0.1rem 0.4rem !important;
+  }
+  .typing-area-card {
+    padding: 0.5rem 0.2rem !important;
+  }
+  #sentence-display {
+    font-size: 0.9rem !important;
+    min-height: 1.6rem !important;
+    padding: 0.15rem 0 !important;
+  }
+  #typing-input {
+    font-size: 0.9rem !important;
+    padding: 0.4rem 0.5rem !important;
+  }
+  .timer-section {
+    gap: 0.5rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+  #timer-display {
+    font-size: 1rem !important;
+    padding: 0.1em 0.6em !important;
+    min-width: 100px !important;
+  }
+  input[type="text"], textarea, select {
+    font-size: 0.9rem !important;
+    padding: 0.4rem 0.5rem !important;
+  }
+  button {
+    font-size: 0.9rem !important;
+    padding: 0.4rem 1rem !important;
+  }
+  #leaderboard th, #leaderboard td {
+    font-size: 0.7rem !important;
+    padding: 0.15rem 0.08rem !important;
+    min-width: 40px !important;
+  }
+  .modal-content.card, .modal-content {
+    padding: 1rem 0.6rem !important;
+    border-radius: 6px !important;
+  }
+  .report-modern {
+    padding: 0.6rem 0.3rem !important;
+  }
+  .report-modern h2#report-heading {
+    font-size: 1rem !important;
+  }
+  .report-stat-badge {
+    font-size: 0.8rem !important;
+    padding: 0.25em 0.4em !important;
+    min-width: 70px !important;
+  }
+  .premium-pill-btn {
+    font-size: 0.85rem !important;
+    padding: 0.4em 0.7em !important;
+    margin-left: 2% !important;
+  }
+  #help-btn {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1.2rem !important;
+    right: 10px !important;
+    bottom: 5px !important;
+  }
+  .toast {
+    font-size: 0.8rem !important;
+    padding: 0.4em 0.7em !important;
+    bottom: 0.6rem !important;
+  }
+  .toast.show {
+    bottom: 1.2rem !important;
+  }
+  #reset-leaderboard-btn, #save-leaderboard-btn {
+    font-size: 0.8rem !important;
+    padding: 0.3em 0.6em !important;
+    min-width: 70px !important;
+  }
+  .ad-video {
+    width: 45px !important;
+    height: 30px !important;
+  }
+}
+@media (max-width: 600px) {
+  main {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  header {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .leaderboard-section h2 {
+    font-size: 1rem;
+  }
+  #leaderboard th, #leaderboard td {
+    padding: 0.3rem 0.3rem;
+    font-size: 0.9rem;
+  }
+} 
+/* --- HORIZONTAL SCROLL FIX FOR SMALL SCREENS --- */
+@media (max-width: 500px) {
+  body {
+    overflow-x: hidden !important;
+  }
+  html {
+    overflow-x: hidden !important;
+  }
+  .main-card, .card, .typing-area-card, .leaderboard-card, .footer-card, .header-card {
+    overflow-x: hidden !important;
+  }
+  #leaderboard {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+  }
+  #leaderboard::-webkit-scrollbar {
+    height: 4px !important;
+  }
+  #leaderboard::-webkit-scrollbar-thumb {
+    background: #cbd5e1 !important;
+    border-radius: 2px !important;
+  }
+}
+
+/* --- TOUCH FRIENDLY BUTTONS FOR MOBILE --- */
+@media (max-width: 500px) {
+  button, #help-btn, .close-modal, .close-modal-report, .close-modal-about, .close-modal-help, .close-modal-premium {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  input[type="text"], textarea, select {
+    min-height: 44px !important;
+  }
+}
+
+/* --- IMPROVED MODAL FOR SMALL SCREENS --- */
+@media (max-width: 400px) {
+  .modal-overlay {
+    padding: 0.5rem !important;
+  }
+  .modal-content.card, .modal-content {
+    max-width: 95vw !important;
+    width: 95vw !important;
+  }
+}
+
+/* --- BETTER FONT RENDERING FOR SMALL SCREENS --- */
+@media (max-width: 500px) {
+  body {
+    -webkit-text-size-adjust: 100% !important;
+    -ms-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+  }
+}
+
+/* --- FIXED POSITION ELEMENTS FOR SMALL SCREENS --- */
+@media (max-width: 400px) {
+  #help-btn {
+    position: fixed !important;
+    z-index: 1000 !important;
+  }
+  .toast {
+    position: fixed !important;
+    z-index: 9999 !important;
+  }
+}
+
+/* --- IMPROVED CARD SPACING FOR SMALL SCREENS --- */
+@media (max-width: 500px) {
+  .main-card {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  .typing-area-card {
+    margin-bottom: 0.8rem !important;
+  }
+  .leaderboard-card.leaderboard-section {
+    margin-top: 0.8rem !important;
+  }
+}
+
+/* --- BETTER INPUT FOCUS FOR MOBILE --- */
+@media (max-width: 500px) {
+  input[type="text"]:focus, textarea:focus, select:focus {
+    outline: 2px solid #4f8cff !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* --- IMPROVED BUTTON TOUCH TARGETS --- */
+@media (max-width: 500px) {
+  .start-reset-row button {
+    padding: 0.8rem 1.5rem !important;
+    margin: 0.2rem !important;
+  }
+  .leaderboard-btn-row button {
+    padding: 0.7rem 1.2rem !important;
+    margin: 0.1rem !important;
+  }
+}
+
+/* --- BETTER PROGRESS BAR FOR SMALL SCREENS --- */
+@media (max-width: 400px) {
+  .progress-bar-bg {
+    height: 12px !important;
+    margin: 0.5rem 0 !important;
+  }
+  #progress-bar {
+    border-radius: 6px !important;
+  }
+}
+
+/* --- IMPROVED STATS LAYOUT FOR SMALL SCREENS --- */
+@media (max-width: 400px) {
+  .stats-card.stats {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.3rem !important;
+  }
+  .stat-badge {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* --- BETTER MODAL CLOSE BUTTONS --- */
+@media (max-width: 400px) {
+  .close-modal, .close-modal-report, .close-modal-about, .close-modal-help, .close-modal-premium {
+    position: absolute !important;
+    top: 0.5rem !important;
+    right: 0.5rem !important;
+    font-size: 1.5rem !important;
+    padding: 0.5rem !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+}
+
+/* --- IMPROVED FORM ELEMENTS FOR MOBILE --- */
+@media (max-width: 400px) {
+  .difficulty-select select, .keyboard-section select, .timer-section select {
+    font-size: 0.9rem !important;
+    padding: 0.4rem 0.6rem !important;
+    min-height: 44px !important;
+  }
+  .custom-text-section textarea {
+    font-size: 0.9rem !important;
+    padding: 0.4rem 0.6rem !important;
+    min-height: 60px !important;
+  }
+}
+
+/* --- BETTER ADAPTIVE LAYOUT FOR EXTREME SMALL SCREENS --- */
+@media (max-width: 350px) {
+  .main-card {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  .stats-card.stats {
+    grid-template-columns: 1fr !important;
+    gap: 0.2rem !important;
+  }
+  .difficulty-select, .keyboard-section, .custom-text-section {
+    width: 100% !important;
+  }
+  .timer-section {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* --- IMPROVED ACCESSIBILITY FOR MOBILE --- */
+@media (max-width: 500px) {
+  button:focus, input:focus, select:focus, textarea:focus {
+    outline: 2px solid #4f8cff !important;
+    outline-offset: 2px !important;
+  }
+  .modal-overlay:focus {
+    outline: none !important;
+  }
+}
+
+/* --- BETTER SCROLLING EXPERIENCE --- */
+@media (max-width: 500px) {
+  html {
+    scroll-behavior: smooth !important;
+  }
+  .main-card {
+    scroll-margin-top: 1rem !important;
+  }
+}
+
+/* --- IMPROVED PERFORMANCE FOR SMALL SCREENS --- */
+@media (max-width: 500px) {
+  * {
+    -webkit-transform: translateZ(0) !important;
+    transform: translateZ(0) !important;
+  }
+  .card, .modal-content {
+    will-change: auto !important;
+  }
 }
