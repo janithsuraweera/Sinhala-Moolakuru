@@ -347,8 +347,8 @@ footer a {
 }
 #help-btn {
   position:fixed;
-  bottom:45px;
-  right:15px;
+  bottom:10px;
+  right:20px;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -1775,15 +1775,17 @@ background: none;
   display: flex;
   gap: 0.7rem;
   align-items: center;
-  margin-top: 0.7rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.75rem;
+  justify-content: center;
 }
-#reset-leaderboard-btn, #save-leaderboard-btn {
+/* #reset-leaderboard-btn, #save-leaderboard-btn {
   padding: 0.38em 0.9em;
   font-size: 0.91rem;
   min-width: 90px;
   min-height: 34px;
   border-radius: 1.5em;
-}
+} */
 @media (max-width: 600px) {
   .leaderboard-btn-row {
     flex-direction: column;
@@ -1838,7 +1840,7 @@ background: none;
   color: #fff;
   border: none;
   border-radius: 999px;
-  padding: 0.85em 2.2em;
+  padding: 0.85em 4em;
   font-size: 1.08rem;
   font-weight: 700;
   cursor: pointer;
@@ -1848,6 +1850,7 @@ background: none;
   align-items: center;
   gap: 0.7em;
   outline: none;
+  margin-top: 1rem;
 }
 #save-leaderboard-btn:hover, #save-leaderboard-btn:focus {
   background: linear-gradient(90deg, #1d4ed8 0%, #2563eb 100%);
