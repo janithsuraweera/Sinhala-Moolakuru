@@ -230,34 +230,50 @@ function formatTime(sec) {
   return `${m}:${s}`;
 }
 
+// Fix timer initialization and start button functionality
 function resetTimer() {
   clearInterval(countdown);
   timeLeft = parseInt(timeSelect.value, 10);
   timerDisplay.textContent = formatTime(timeLeft);
   timerDisplay.style.color = defaultTimerColor;
   if (countdownSound) countdownSound.pause();
+  // Ensure timer display is visible and properly formatted
+  timerDisplay.style.display = 'inline-block';
 }
 
 function startTimer(resumeMode = false) {
-  if (!resumeMode) resetTimer();
+  if (!resumeMode) {
+    resetTimer();
+  }
   clearInterval(countdown);
+  
+  // Ensure timer starts immediately
+  timerDisplay.textContent = formatTime(timeLeft);
+  
   countdown = setInterval(() => {
     timeLeft--;
     timerDisplay.textContent = formatTime(timeLeft);
+    
+    // Add visual feedback for timer
     if (timeLeft <= 10) {
       timerDisplay.style.color = '#e11d48';
+      timerDisplay.classList.add('pulse');
       if (countdownSound) {
         countdownSound.currentTime = 0;
-        countdownSound.play();
+        countdownSound.play().catch(e => console.log('Audio play failed:', e));
       }
     } else {
       timerDisplay.style.color = defaultTimerColor;
+      timerDisplay.classList.remove('pulse');
     }
+    
     localStorage.setItem('testTimeLeft', timeLeft);
+    
     if (timeLeft <= 0) {
       clearInterval(countdown);
       timerDisplay.textContent = '00:00';
       timerDisplay.style.color = defaultTimerColor;
+      timerDisplay.classList.remove('pulse');
       if (countdownSound) countdownSound.pause();
       endTest();
     }
@@ -265,27 +281,88 @@ function startTimer(resumeMode = false) {
 }
 
 function startTest() {
+  console.log('Start test called'); // Debug log
+  
+  // Reset all states
   finished = false;
   testStarted = true;
   wordsSoFar = 0;
+  
+  // Pick new sentence
   currentSentence = pickSentence();
   renderSentenceDisplay();
   updateProgressBar();
+  
+  // Reset input
   typingInput.value = '';
   typingInput.disabled = false;
   typingInput.focus();
+  
+  // Reset timing and stats
   startTime = Date.now();
   totalCorrectChars = 0;
   totalTypedChars = 0;
   correctWords = 0;
   incorrectWords = 0;
   resetStats();
+  
+  // Update UI
   startBtn.style.display = 'none';
   startBtn.disabled = true;
   timeSelect.disabled = true;
+  
+  // Save state and start timer
   saveTestState();
+  
+  // Ensure timer starts properly
+  console.log('Starting timer with timeLeft:', timeLeft); // Debug log
   startTimer();
+  
+  // Show feedback
+  feedback.textContent = 'Test started! Start typing...';
 }
+
+// Enhanced start button event listener
+startBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  console.log('Start button clicked'); // Debug log
+  
+  // Ensure button is properly disabled
+  startBtn.disabled = true;
+  startBtn.style.display = 'none';
+  
+  // Start the test
+  startTest();
+});
+
+// Fix restart button functionality
+restartBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  console.log('Restart button clicked'); // Debug log
+  
+  // Reset everything
+  clearInterval(countdown);
+  resetTimer();
+  resetStats();
+  
+  // Reset UI
+  startBtn.style.display = 'inline-block';
+  startBtn.disabled = false;
+  timeSelect.disabled = false;
+  typingInput.disabled = true;
+  typingInput.value = '';
+  
+  // Clear feedback
+  feedback.textContent = '';
+  
+  // Clear test state
+  clearTestState();
+  
+  // Reset sentence display
+  currentSentence = '';
+  renderSentenceDisplay();
+  updateProgressBar();
+});
 
 function endTest() {
   finished = true;
@@ -568,12 +645,6 @@ modalRestartBtn.addEventListener('click', () => {
   startTest();
 });
 
-// Start button logic
-startBtn.addEventListener('click', () => {
-  startBtn.disabled = true;
-  startTest();
-});
-
 // Close Session Report Modal
 const closeModalReport = document.querySelector('.close-modal-report');
 closeModalReport.addEventListener('click', () => {
@@ -775,26 +846,26 @@ function renderLeaderboard() {
 // Render leaderboard on load
 window.addEventListener('DOMContentLoaded', renderLeaderboard);
 
-// Restart button logic
-restartBtn.addEventListener('click', () => {
-  // Fully reset to default state
-  testStarted = false;
-  finished = false;
-  typingInput.value = '';
-  typingInput.disabled = false;
-  resetStats();
-  resetTimer();
-  startBtn.style.display = 'inline-block';
-  startBtn.disabled = false;
-  clearInterval(countdown);
-  feedback.textContent = '';
-  // Optionally clear test state from localStorage
-  clearTestState();
-  document.getElementById('word-count').textContent = '0';
-  wordsSoFar = 0;
-  sentenceDisplay.textContent = 'මෙහි වචන/වක්‍ය පෙන්වයි';
-  timeSelect.disabled = false;
-});
+// Restart button logic - Enhanced version already exists above
+// restartBtn.addEventListener('click', () => {
+//   // Fully reset to default state
+//   testStarted = false;
+//   finished = false;
+//   typingInput.value = '';
+//   typingInput.disabled = false;
+//   resetStats();
+//   resetTimer();
+//   startBtn.style.display = 'inline-block';
+//   startBtn.disabled = false;
+//   clearInterval(countdown);
+//   feedback.textContent = '';
+//   // Optionally clear test state from localStorage
+//   clearTestState();
+//   document.getElementById('word-count').textContent = '0';
+//   wordsSoFar = 0;
+//   sentenceDisplay.textContent = 'මෙහි වචන/වක්‍ය පෙන්වයි';
+//   timeSelect.disabled = false;
+// });
 
 const resetLeaderboardBtn = document.getElementById('reset-leaderboard-btn');
 const resetModal = document.getElementById('reset-modal');

@@ -92,7 +92,7 @@ header {
   position: sticky;
   top: 0;
 margin-bottom: -25px;
-  /* z-index: 100%; */
+  z-index: 100%;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
