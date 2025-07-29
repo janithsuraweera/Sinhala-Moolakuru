@@ -188,12 +188,12 @@ main.blur-background {
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
 }
-.controls {
+/* .controls {
   display: flex;
   gap: 1rem;
   justify-content: center;
-}
-.controls button {
+} */
+/* .controls button {
   padding: 0.7rem 1.5rem;
   border-radius: 0.5rem;
   border: none;
@@ -202,10 +202,10 @@ main.blur-background {
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.2s;
-}
-.controls button:hover {
+} */
+/* .controls button:hover {
   background: var(--secondary);
-}
+} */
 footer {
   text-align: center;
   margin: 0;
@@ -213,9 +213,9 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+ 
   background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-  padding: var(--space-xl);
+  padding: var(--space-sm);
   border-top: 1px solid var(--border);
   margin-top: auto;
 
@@ -223,15 +223,9 @@ footer {
 footer a {
   color: var(--primary);
   text-decoration: none;
+
 }
-.footer-btn {
-  background: var(--input-bg);
-  color: var(--primary);
-  padding: 0.3rem 0.8rem;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
+
 .about-page {
   display: flex;
   justify-content: center;
@@ -244,6 +238,7 @@ footer a {
   border-radius: 1rem;
   box-shadow: 0 4px 24px rgba(0,0,0,0.07);
   max-width: 500px;
+
 }
 .about-card a {
   color: var(--primary);
@@ -478,19 +473,6 @@ footer a {
   }
 } 
 
-/* 
-.header-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #f5f7fa;
-  box-shadow: none;
-  padding: auto;
-  margin-bottom: 0;
-  max-width: 100%;
-  width: 100%;
-
-} */
 .controls-card {
   display: flex;
   align-items: center;
@@ -517,14 +499,6 @@ footer a {
   background: #f5f7fa;
   box-shadow: none;
   padding: 1.5rem 2rem;
-}
-.footer-card {
-  background: #f5f7fa;
-  box-shadow: none;
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 
@@ -553,7 +527,7 @@ footer a {
 }
 
 /* Buttons */
-button, .footer-btn {
+button {
   background: linear-gradient(90deg, #4f8cff, #38e8ff);
   color: #fff;
   border: none;
@@ -575,7 +549,7 @@ button:disabled {
   cursor: not-allowed;
 }
 /* Button active state */
-button:active, .footer-btn:active {
+button:active {
   transform: scale(0.97);
 }
 
@@ -792,7 +766,7 @@ body.dark {
 }
 
 /* Accessibility focus ring */
-button:focus, .footer-btn:focus {
+button:focus {
   outline: 3px solid #38bdf8;
   outline-offset: 2px;
 }
@@ -1690,7 +1664,7 @@ background: none;
   .main-heading, h1, h2, h3 {
     font-size: 0.85rem;
   }
-  button, .footer-btn {
+  button{
     font-size: 0.8rem;
     padding: 0.3rem 0.5rem;
   }
@@ -2036,26 +2010,28 @@ background: none;
 }
 
 .premium-pill-btn {
-  background: linear-gradient(90deg, #fbbf24 0%, #ffd700 100%);
-  color: #fff !important;
-  border: 2.5px solid #ffd700;
+  background: linear-gradient(90deg, #ffd700 0%, #fbbf24 100%);
+  color: #ffffff;
+  border: 2px solid #ffd700;
   border-radius: 999px;
-  padding: 0.4em 1.5em;
-  font-size: 1.1rem;
-  font-weight: 900;
+  padding: 0.4em 1em;
+  font-size: 1rem;
+  font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 4px 32px #ffd70044, 0 0 24px #fbbf2444, 0 0 0 0 #ffd700;
+  box-shadow: 0 2px 20px #ffd70044, 0 0 24px #fbbf2444, 0 0 0 0 #ffd700;
   transition: background 0.18s, transform 0.13s, box-shadow 0.18s, border 0.18s;
-  display: flex;
-  align-items: center;
-  gap: 0.3em;
-  outline: none;
-  margin: 1.4rem auto 0rem auto;
+  display: block;
+  /* margin: 1.4rem auto 0rem auto; */
   width: fit-content;
+  text-align: center;
+  gap: 0.2em;
+  outline: none;
   letter-spacing: 0.01;
-  position: relative;
   overflow: hidden;
   animation: premiumGlow 2.3s infinite alternate;
+  margin-left: 20%;
+
+
 }
 @keyframes premiumGlow {
   0% { box-shadow: 0 4px 32px #ffd70044, 0 0 24px #fbbf2444, 0 0 0 0 #ffd700; }
@@ -2086,6 +2062,9 @@ background: none;
   display: flex;
   align-items: center;
   gap: 0.3em;
+
+
+
 }
 .premium-badge .crown {
   font-size: 1.2em;
@@ -2205,15 +2184,15 @@ background: none;
 }
 
 /* --- Animated gradient buttons --- */
-button, .footer-btn {
+button {
   background: linear-gradient(270deg, #4f8cff, #38e8ff, #fbbf24, #4f8cff);
   background-size: 600% 600%;
-  animation: gradientMove 4s ease infinite;
+  animation: gradientMove 6s ease infinite;
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 0.75rem 2rem;
-  font-size: 1.1rem;
+  padding: 0.75rem 4rem;
+  font-size: 1.3rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
