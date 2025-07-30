@@ -600,10 +600,10 @@ startBtn.disabled = false;
 resetTimer();
 
 // Session Report Modal
-function showSessionReport() {
-  const wpm = parseInt(wpmDisplay.textContent, 10);
-  const accuracy = parseInt(accuracyDisplay.textContent, 10);
-  const cpm = Math.round((totalCorrectChars / ((Date.now() - startTime) / 1000)) * 60) || 0;
+function showSessionReport(reportData = {}) {
+  const wpm = reportData.wpm || parseInt(wpmDisplay.textContent, 10);
+  const accuracy = reportData.accuracy || parseInt(accuracyDisplay.textContent, 10);
+  const cpm = reportData.cpm || Math.round((totalCorrectChars / ((Date.now() - startTime) / 1000)) * 60) || 0;
   // Determine level and illustration
   let level = 'Turtle';
   let emoji = '🐢';
@@ -838,9 +838,44 @@ function renderLeaderboard() {
   tbody.innerHTML = '';
   leaderboard.forEach((row, i) => {
     const tr = document.createElement('tr');
+    tr.className = 'leaderboard-row';
+    tr.style.cursor = 'pointer';
     tr.innerHTML = `<td>${i + 1}</td><td>${row.wpm}</td><td>${row.accuracy}</td><td>${row.date}</td>`;
+    
+    // Add click event to show report
+    tr.addEventListener('click', () => {
+      showLeaderboardReport(row, i + 1);
+    });
+    
+    // Add hover effect
+    tr.addEventListener('mouseenter', () => {
+      tr.style.backgroundColor = '#f0f8ff';
+      tr.style.transform = 'scale(1.02)';
+      tr.style.transition = 'all 0.2s ease';
+    });
+    
+    tr.addEventListener('mouseleave', () => {
+      tr.style.backgroundColor = '';
+      tr.style.transform = '';
+    });
+    
     tbody.appendChild(tr);
   });
+}
+
+// Function to show report for clicked leaderboard entry
+function showLeaderboardReport(entry, rank) {
+  // Create a mock report based on the leaderboard entry
+  const reportData = {
+    wpm: entry.wpm,
+    cpm: Math.round(entry.wpm * 5), // Approximate CPM
+    accuracy: entry.accuracy,
+    date: entry.date,
+    rank: rank
+  };
+  
+  // Show the report modal with the data
+  showSessionReport(reportData);
 }
 
 // Render leaderboard on load
