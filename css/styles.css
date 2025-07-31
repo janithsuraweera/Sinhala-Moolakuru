@@ -91,17 +91,20 @@ header {
   box-shadow: var(--shadow-lg);
   position: sticky;
   top: 0;
-margin-bottom: -25px;
+  margin-bottom: -25px;
   z-index: 100%;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 .logo-title {
   display: flex;
   align-items: center;
   gap: var(--space-md);
   flex-wrap: wrap;
- 
+  flex: 1;
+  min-width: 0;
 }
 .logo {
   width: 48px;
@@ -2856,4 +2859,99 @@ body.dark .report-share-btn.li {
 
 body.dark .report-share-btn.tw { 
   color: #22d3ee; 
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+}
+
+.nav:hover, .nav:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 700px) {
+  nav {
+    gap: 0.5rem;
+  }
+  
+  .nav {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    min-width: 60px;
+  }
+}
+
+.header-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+#mode-toggle {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+@media (max-width: 700px) {
+  header {
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+  }
+  
+  .logo-title {
+    flex: none;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  nav {
+    flex: none;
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .nav {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    min-width: 60px;
+  }
+  
+  #mode-toggle {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  
+  .header-title-row {
+    justify-content: center;
+  }
 }
