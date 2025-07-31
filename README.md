@@ -1,78 +1,145 @@
-# Sinhala Moolakuru
+# Sinhala Moolakuru - Sinhala Typing Tutor
 
-**Sinhala Moolakuru** is an open-source project aimed at preserving and organizing fundamental elements (roots) of the Sinhala language. This project serves as a linguistic foundation for educational, research, and technological applications involving Sinhala morphology and natural language processing (NLP).
+**Sinhala Moolakuru** is an interactive web-based Sinhala typing tutor designed to help users learn and practice typing in Sinhala script. This project provides comprehensive typing lessons, exercises, and real-time feedback to improve Sinhala typing skills.
 
 ## 🌱 Features
 
-- Comprehensive collection of Sinhala root words (මූලකුරු)
-- Categorized by grammatical types (noun roots, verb roots, etc.)
-- Structured data formats for easy integration
-- Unicode Sinhala support
-- Can be used for language learning, linguistic analysis, and AI training
+- **Interactive Typing Lessons**: Step-by-step lessons covering Sinhala alphabet, character combinations, and word formation
+- **Multiple Keyboard Methods**: Support for both Phonetic and Wijesekara keyboard layouts
+- **Customizable Difficulty**: Easy, Medium, Hard, and Custom difficulty levels
+- **Timer-based Practice**: Configurable time limits (1, 2, 3 minutes) for focused practice sessions
+- **Real-time Feedback**: Instant feedback on typing accuracy and speed
+- **Dark/Light Mode**: Toggle between dark and light themes for comfortable learning
+- **Mobile Responsive**: Works seamlessly on desktop and mobile devices
+- **Audio Feedback**: Sound effects for correct and incorrect typing
+- **Progress Tracking**: Monitor your typing speed and accuracy improvements
 
 ## 📁 Project Structure
 
+```
 Sinhala-Moolakuru/
-├── data/ # Contains root word datasets
-├── scripts/ # Utility scripts (parsers, analyzers, etc.)
-├── README.md # Project documentation
-└── LICENSE # License details
+├── index.html          # Main application interface
+├── lessons.html        # Lessons page
+├── assets/             # Images and audio files
+│   ├── logo.png        # Application logo
+│   ├── success.mp3     # Success sound effect
+│   └── error.mp3       # Error sound effect
+├── css/                # Stylesheets
+│   └── styles.css      # Main application styles
+├── js/                 # JavaScript files
+│   └── app.js          # Main application logic
+├── lessons/            # Lesson-related files
+│   ├── lessons.css     # Lesson-specific styles
+│   ├── lessons.js      # Lesson functionality
+│   └── lessons-data.js # Lesson content and data
+├── sound/              # Additional audio files
+├── ads/                # Advertisement assets
+└── README.md           # Project documentation
+```
 
-bash
-Copy
-Edit
+## 🚀 Getting Started
 
-## 📦 Installation
+### Prerequisites
+- A modern web browser (Chrome, Firefox, Safari, Edge)
+- No additional software installation required
 
-Clone the repository:
-
+### Installation
+1. Clone the repository:
 ```bash
 git clone https://github.com/janithsuraweera/Sinhala-Moolakuru.git
 cd Sinhala-Moolakuru
-Install any dependencies if applicable (future enhancements).
+```
 
-🚀 Usage
-You can use the datasets and scripts to:
+2. Open `index.html` in your web browser to start using the application.
 
-Develop Sinhala NLP models
+## 📚 How to Use
 
-Integrate Sinhala root word logic in educational software
+### Basic Typing Practice
+1. Select your preferred difficulty level (Easy, Medium, Hard, or Custom)
+2. Choose your keyboard method (Phonetic or Wijesekara)
+3. Set your practice time (1, 2, or 3 minutes)
+4. Click "Start" to begin your typing session
+5. Type the displayed Sinhala text in the input field
+6. Monitor your progress with the timer and accuracy metrics
 
-Analyze morphology of Sinhala words
+### Interactive Lessons
+1. Navigate to the Lessons section
+2. Choose from various lesson categories:
+   - **Basic Alphabet**: Learn individual Sinhala characters
+   - **Character Combinations**: Practice consonant-vowel combinations
+   - **Word Formation**: Build vocabulary through typing exercises
+3. Follow the guided lessons with step-by-step instructions
+4. Practice with provided examples and exercises
 
-Extend for verb conjugation and noun inflection studies
+### Custom Text Practice
+1. Select "Custom" difficulty level
+2. Paste your own Sinhala text in the custom text area
+3. Practice typing with your chosen content
 
-📚 Data Format
-The data is stored in structured .json and .csv formats, with fields like:
+## ⌨️ Keyboard Methods
 
-json
-Copy
-Edit
-{
-  "root": "ගම",
-  "type": "noun",
-  "meaning": "village",
-  "origin": "native"
-}
-🤝 Contributing
-We welcome contributions! Whether it's adding more root words, fixing scripts, or enhancing the dataset format — you're welcome to help.
+### Phonetic Method
+- Type Sinhala using English phonetic equivalents
+- Example: `ka` = ක, `kA` = කා, `ki` = කි
 
-Fork the repository
+### Wijesekara Method
+- Use the traditional Wijesekara keyboard layout
+- Example: `k` = ක, `kA` = කා, `ki` = කි
 
-Create your feature branch (git checkout -b feature/your-feature)
+## 🎯 Learning Path
 
-Commit your changes (git commit -m 'Add some feature')
+1. **Beginner**: Start with basic alphabet lessons
+2. **Intermediate**: Practice character combinations and simple words
+3. **Advanced**: Work on complex words and sentences
+4. **Expert**: Use custom text for specialized practice
 
-Push to the branch (git push origin feature/your-feature)
+## 🛠️ Technical Features
 
-Create a Pull Request
+- **Responsive Design**: Works on all device sizes
+- **Progressive Web App**: Can be installed on mobile devices
+- **Local Storage**: Saves your preferences and progress
+- **Unicode Support**: Full Sinhala Unicode character support
+- **Accessibility**: Keyboard navigation and screen reader support
 
-📜 License
-This project is licensed under the MIT License.
+## 🤝 Contributing
 
-🙏 Acknowledgements
-Sinhala linguistic researchers
+We welcome contributions to improve the Sinhala typing tutor! Here's how you can help:
 
-Unicode Consortium for Sinhala language support
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/your-feature`)
+3. **Add** new lessons or improve existing ones
+4. **Enhance** the user interface or add new features
+5. **Test** your changes thoroughly
+6. **Commit** your changes (`git commit -m 'Add some feature'`)
+7. **Push** to the branch (`git push origin feature/your-feature`)
+8. **Create** a Pull Request
 
-Open-source contributors supporting local language tools
+### Areas for Contribution
+- Add new typing lessons and exercises
+- Improve the user interface design
+- Add more keyboard layout support
+- Create additional practice materials
+- Enhance accessibility features
+- Add multiplayer or competitive features
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgements
+
+- **Sinhala Language Community**: For preserving and promoting Sinhala script
+- **Unicode Consortium**: For comprehensive Sinhala Unicode support
+- **Open Source Contributors**: For supporting local language tools and education
+- **Educational Institutions**: For promoting Sinhala language learning
+
+## 📞 Support
+
+If you have questions, suggestions, or encounter issues:
+- Open an issue on GitHub
+- Contact the maintainers
+- Join the community discussions
+
+---
+
+**Happy Typing! සුභ ටයිපිං! 🇱🇰**
