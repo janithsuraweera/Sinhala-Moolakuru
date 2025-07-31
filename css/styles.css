@@ -3274,3 +3274,273 @@ body:not(.dark) .report-leaderboard-link {
 body:not(.dark) .report-leaderboard-link:hover {
   color: #dc2626;
 }
+
+/* Mobile Touch-Friendly Button Styles */
+@media (max-width: 700px) {
+  /* Touch targets - minimum 44px for accessibility */
+  button, .nav, select, input[type="text"], textarea, .footer-btn, .premium-pill-btn {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Better touch feedback */
+  button:active, .nav:active, .footer-btn:active, .premium-pill-btn:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+  
+  /* Improved button padding for mobile */
+  button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Touch area expansion */
+  button::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    z-index: -1;
+  }
+  
+  /* Better focus management */
+  button:focus, .nav:focus, .footer-btn:focus, .premium-pill-btn:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+  
+  /* Improved navigation buttons */
+  .nav {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    min-width: 60px;
+    text-align: center;
+    position: relative;
+  }
+  
+  /* Footer buttons */
+  .footer-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    min-height: 44px;
+  }
+  
+  /* Premium pill button */
+  .premium-pill-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    min-height: 44px;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Help button improvements */
+  #help-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    bottom: 1rem;
+    right: 1rem;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: fixed;
+    z-index: 1000;
+  }
+  
+  /* Mode toggle button */
+  #mode-toggle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+  
+  /* Close modal buttons */
+  .close-modal, .close-modal-report, .close-modal-about, .close-modal-help, .close-modal-premium {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+  
+  /* Start/Reset buttons */
+  .start-reset-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  
+  .start-reset-row button {
+    width: 100%;
+    max-width: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  /* Leaderboard buttons */
+  .leaderboard-btn-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  
+  .leaderboard-btn-row button {
+    width: 100%;
+    max-width: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  /* Form elements */
+  select, input[type="text"], textarea {
+    min-height: 44px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border-width: 2px;
+  }
+  
+  /* Better touch area for small buttons */
+  #restart-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+  }
+  
+  /* Improved button groups */
+  .difficulty-select, .keyboard-section, .timer-section {
+    margin-bottom: 1rem;
+  }
+  
+  /* Better spacing for touch */
+  .typing-area-card > * {
+    margin-bottom: 0.75rem;
+  }
+  
+  .typing-area-card > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  button, .nav, .footer-btn, .premium-pill-btn {
+    min-height: 48px;
+    font-size: 0.9rem;
+  }
+  
+  .nav {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+    min-width: 50px;
+  }
+  
+  .footer-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .premium-pill-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  #help-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
+  
+  #mode-toggle {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+  
+  .close-modal, .close-modal-report, .close-modal-about, .close-modal-help, .close-modal-premium {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+  
+  #restart-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 350px) {
+  button, .nav, .footer-btn, .premium-pill-btn {
+    min-height: 44px;
+    font-size: 0.85rem;
+  }
+  
+  .nav {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.75rem;
+    min-width: 45px;
+  }
+  
+  .footer-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .premium-pill-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  #help-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  #mode-toggle {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+  
+  .close-modal, .close-modal-report, .close-modal-about, .close-modal-help, .close-modal-premium {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+  
+  #restart-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+}
