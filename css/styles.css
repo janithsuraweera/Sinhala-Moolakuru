@@ -2197,6 +2197,22 @@ background: none;
   }
 }
 
+@media (max-width: 480px) {
+  .premium-pill-btn {
+    font-size: 0.85rem;
+    gap: 0.1rem;
+    max-width: 59vw;
+    margin: auto;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0rem;
+    margin-left: 2.5rem;
+  }
+}
+
 /* --- Leaderboard mobile horizontal scroll --- */
 @media (max-width: 700px) {
   #leaderboard {
