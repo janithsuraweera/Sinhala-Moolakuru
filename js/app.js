@@ -881,6 +881,64 @@ function showLeaderboardReport(entry, rank) {
 // Render leaderboard on load
 window.addEventListener('DOMContentLoaded', renderLeaderboard);
 
+// Lessons button functionality
+const lessonsBtn = document.getElementById('lessons-btn');
+if (lessonsBtn) {
+  lessonsBtn.addEventListener('click', () => {
+    showLessonsInterface();
+  });
+}
+
+function showLessonsInterface() {
+  // Hide main interface
+  document.querySelector('main').style.display = 'none';
+  
+  // Create lessons interface
+  const lessonsContainer = document.createElement('div');
+  lessonsContainer.className = 'lessons-container';
+  lessonsContainer.innerHTML = `
+    <div class="lessons-header">
+      <h1>📚 Sinhala Typing Lessons</h1>
+      <p>Learn Sinhala typing step by step with structured lessons and exercises</p>
+    </div>
+    
+    <div class="lessons-categories">
+      <!-- Categories will be populated by JavaScript -->
+    </div>
+    
+    <div class="lessons-list">
+      <!-- Lessons will be populated by JavaScript -->
+    </div>
+    
+    <div class="lesson-practice">
+      <!-- Practice interface will be populated by JavaScript -->
+    </div>
+    
+    <button class="footer-btn" id="back-to-main" style="margin-top: 2rem;">
+      ← Back to Main Interface
+    </button>
+  `;
+  
+  document.body.appendChild(lessonsContainer);
+  
+  // Load lessons CSS
+  const lessonsCSS = document.createElement('link');
+  lessonsCSS.rel = 'stylesheet';
+  lessonsCSS.href = 'lessons/lessons.css';
+  document.head.appendChild(lessonsCSS);
+  
+  // Back to main button
+  document.getElementById('back-to-main').addEventListener('click', () => {
+    document.querySelector('main').style.display = 'block';
+    lessonsContainer.remove();
+  });
+  
+  // Initialize lessons manager
+  setTimeout(() => {
+    new LessonsManager();
+  }, 100);
+}
+
 // Restart button logic - Enhanced version already exists above
 // restartBtn.addEventListener('click', () => {
 //   // Fully reset to default state
