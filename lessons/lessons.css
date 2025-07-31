@@ -524,3 +524,9 @@ body.dark .lesson-practice-input {
   font-size: 0.9rem;
   color: var(--text-secondary);
 } 
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

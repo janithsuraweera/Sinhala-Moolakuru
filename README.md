@@ -13,6 +13,9 @@
 - **Mobile Responsive**: Works seamlessly on desktop and mobile devices
 - **Audio Feedback**: Sound effects for correct and incorrect typing
 - **Progress Tracking**: Monitor your typing speed and accuracy improvements
+- **Progressive Web App (PWA)**: Install as a native app on your device
+- **Offline Support**: Works without internet connection after initial load
+- **Install Prompt**: Easy installation from browser with install button
 
 ## 📁 Project Structure
 
@@ -20,6 +23,8 @@
 Sinhala-Moolakuru/
 ├── index.html          # Main application interface
 ├── lessons.html        # Lessons page
+├── manifest.json       # PWA manifest configuration
+├── sw.js              # Service worker for offline functionality
 ├── assets/             # Images and audio files
 │   ├── logo.png        # Application logo
 │   ├── success.mp3     # Success sound effect
@@ -51,6 +56,12 @@ cd Sinhala-Moolakuru
 ```
 
 2. Open `index.html` in your web browser to start using the application.
+
+### Installing as PWA
+1. Open the application in a modern browser (Chrome, Edge, Firefox)
+2. Look for the "Install" button in the browser address bar or the floating "📱 Install App" button
+3. Click "Install" to add the app to your device
+4. The app will now work offline and appear like a native application
 
 ## 📚 How to Use
 
@@ -96,10 +107,12 @@ cd Sinhala-Moolakuru
 ## 🛠️ Technical Features
 
 - **Responsive Design**: Works on all device sizes
-- **Progressive Web App**: Can be installed on mobile devices
+- **Progressive Web App (PWA)**: Can be installed on mobile devices
+- **Offline Functionality**: Works without internet connection
+- **Service Worker**: Caches resources for offline access
+- **Install Prompt**: Automatic installation suggestion
 - **Local Storage**: Saves your preferences and progress
-- **Unicode Support**: Full Sinhala Unicode character support
-- **Accessibility**: Keyboard navigation and screen reader support
+- **Modern Web Standards**: Uses latest web technologies
 
 ## 🤝 Contributing
 
