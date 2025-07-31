@@ -3,8 +3,11 @@ const urlsToCache = [
   '/',
   '/index.html',
   '/lessons.html',
+  '/layout.html',
   '/css/styles.css',
+  '/css/layout.css',
   '/js/script.js',
+  '/js/layout.js',
   '/assets/logo.png',
   'https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap',
   'https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap'

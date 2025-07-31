@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sinhala Moolakuru - Keyboard Layout</title>
+  
+  <!-- PWA Meta Tags -->
+  <meta name="description" content="Learn Sinhala typing with interactive lessons and practice">
+  <meta name="theme-color" content="#4a90e2">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Sinhala Moolakuru">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Icons -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="card header-card">
+    <div class="logo-title">
+      <img src="assets/logo.png" alt="Logo" class="logo" />
+      <span class="sinhala-badge">සිංහල 🇱🇰</span>
+      <div class="header-title-row" style="display: flex; align-items: center; gap: 0.7rem;">
+        <h1>Sinhala Moolakuru - Layout</h1>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html" class="nav">Home</a>
+      <a href="lessons.html" class="nav">Lessons</a>
+      <a href="layout.html" class="nav" style="background: var(--primary); color: white;">Layout</a>
+    </nav>
+    <button id="mode-toggle" aria-label="Toggle dark mode">🌙</button>
+  </header>
+
+  <main>
+    <section class="card main-card">
+      <h2>⌨️ Interactive Sinhala Keyboard Layout</h2>
+      
+      
+      <!-- Typing Area -->
+      <div class="typing-demo-area">
+        <div class="demo-text-display" id="demo-text-display">
+          Click on keyboard keys to see Sinhala characters appear here...
+        </div>
+        <div class="demo-input-area">
+          <input type="text" id="demo-input" placeholder="Type here or click keyboard keys..." readonly />
+          <button id="clear-demo" class="demo-btn">Clear</button>
+        </div>
+      </div>
+
+      <!-- Interactive Keyboard -->
+      <div class="keyboard-container">
+        <div class="keyboard">
+          <!-- Row 1: Numbers and Symbols -->
+          <div class="keyboard-row">
+            <div class="key" data-english="`" data-sinhala="~" data-shifted="~" data-altgr="">`<br><span class="sinhala-char">~</span></div>
+            <div class="key" data-english="1" data-sinhala="!" data-shifted="!" data-altgr="">1<br><span class="sinhala-char">!</span></div>
+            <div class="key" data-english="2" data-sinhala="@" data-shifted="@" data-altgr="">2<br><span class="sinhala-char">@</span></div>
+            <div class="key" data-english="3" data-sinhala="#" data-shifted="#" data-altgr="">3<br><span class="sinhala-char">#</span></div>
+            <div class="key" data-english="4" data-sinhala="$" data-shifted="$" data-altgr="">4<br><span class="sinhala-char">$</span></div>
+            <div class="key" data-english="5" data-sinhala="%" data-shifted="%" data-altgr="">5<br><span class="sinhala-char">%</span></div>
+            <div class="key" data-english="6" data-sinhala="^" data-shifted="^" data-altgr="">6<br><span class="sinhala-char">^</span></div>
+            <div class="key" data-english="7" data-sinhala="&" data-shifted="&" data-altgr="">7<br><span class="sinhala-char">&</span></div>
+            <div class="key" data-english="8" data-sinhala="*" data-shifted="*" data-altgr="">8<br><span class="sinhala-char">*</span></div>
+            <div class="key" data-english="9" data-sinhala="(" data-shifted="(" data-altgr="">9<br><span class="sinhala-char">(</span></div>
+            <div class="key" data-english="0" data-sinhala=")" data-shifted=")" data-altgr="">0<br><span class="sinhala-char">)</span></div>
+            <div class="key" data-english="-" data-sinhala="_" data-shifted="_" data-altgr="">-<br><span class="sinhala-char">_</span></div>
+            <div class="key" data-english="=" data-sinhala="+" data-shifted="+" data-altgr="">=<br><span class="sinhala-char">+</span></div>
+            <div class="key backspace-key" data-english="Backspace" data-sinhala="⌫">Backspace</div>
+          </div>
+
+          <!-- Row 2: QWERTY -->
+          <div class="keyboard-row">
+            <div class="key tab-key" data-english="Tab" data-sinhala="Tab">Tab</div>
+            <div class="key" data-english="Q" data-sinhala="ල" data-shifted="ල" data-altgr="ෟ">Q<br><span class="sinhala-char">ල</span><br><span class="altgr-char">ෟ</span></div>
+            <div class="key" data-english="W" data-sinhala="ළ" data-shifted="ළ" data-altgr="ඣ">W<br><span class="sinhala-char">ළ</span><br><span class="altgr-char">ඣ</span></div>
+            <div class="key" data-english="E" data-sinhala="ඇ" data-shifted="ඇ" data-altgr="ඈ">E<br><span class="sinhala-char">ඇ</span><br><span class="altgr-char">ඈ</span></div>
+            <div class="key" data-english="R" data-sinhala="ර" data-shifted="ර" data-altgr="ඍ">R<br><span class="sinhala-char">ර</span><br><span class="altgr-char">ඍ</span></div>
+            <div class="key" data-english="T" data-sinhala="ට" data-shifted="ට" data-altgr="ඨ">T<br><span class="sinhala-char">ට</span><br><span class="altgr-char">ඨ</span></div>
+            <div class="key" data-english="Y" data-sinhala="ය" data-shifted="ය" data-altgr="ඤ">Y<br><span class="sinhala-char">ය</span><br><span class="altgr-char">ඤ</span></div>
+            <div class="key" data-english="U" data-sinhala="උ" data-shifted="උ" data-altgr="ඌ">U<br><span class="sinhala-char">උ</span><br><span class="altgr-char">ඌ</span></div>
+            <div class="key" data-english="I" data-sinhala="ඉ" data-shifted="ඉ" data-altgr="ඊ">I<br><span class="sinhala-char">ඉ</span><br><span class="altgr-char">ඊ</span></div>
+            <div class="key" data-english="O" data-sinhala="ඔ" data-shifted="ඔ" data-altgr="ඕ">O<br><span class="sinhala-char">ඔ</span><br><span class="altgr-char">ඕ</span></div>
+            <div class="key" data-english="P" data-sinhala="ප" data-shifted="ප" data-altgr="ඵ">P<br><span class="sinhala-char">ප</span><br><span class="altgr-char">ඵ</span></div>
+            <div class="key" data-english="[" data-sinhala="{" data-shifted="{" data-altgr="ඥ">[<br><span class="sinhala-char">{</span><br><span class="altgr-char">ඥ</span></div>
+            <div class="key" data-english="]" data-sinhala="}" data-shifted="}" data-altgr="ඤ">]<br><span class="sinhala-char">}</span><br><span class="altgr-char">ඤ</span></div>
+            <div class="key" data-english="\\" data-sinhala="|" data-shifted="|" data-altgr="ඣ">\<br><span class="sinhala-char">|</span><br><span class="altgr-char">ඣ</span></div>
+          </div>
+
+          <!-- Row 3: ASDF -->
+          <div class="keyboard-row">
+            <div class="key caps-key" data-english="Caps" data-sinhala="Caps">Caps</div>
+            <div class="key" data-english="A" data-sinhala="අ" data-shifted="අ" data-altgr="ආ">A<br><span class="sinhala-char">අ</span><br><span class="altgr-char">ආ</span></div>
+            <div class="key" data-english="S" data-sinhala="ස" data-shifted="ස" data-altgr="ශ">S<br><span class="sinhala-char">ස</span><br><span class="altgr-char">ශ</span></div>
+            <div class="key" data-english="D" data-sinhala="ද" data-shifted="ද" data-altgr="ධ">D<br><span class="sinhala-char">ද</span><br><span class="altgr-char">ධ</span></div>
+            <div class="key" data-english="F" data-sinhala="ෆ" data-shifted="ෆ" data-altgr="භ">F<br><span class="sinhala-char">ෆ</span><br><span class="altgr-char">භ</span></div>
+            <div class="key" data-english="G" data-sinhala="ග" data-shifted="ග" data-altgr="ඝ">G<br><span class="sinhala-char">ග</span><br><span class="altgr-char">ඝ</span></div>
+            <div class="key" data-english="H" data-sinhala="හ" data-shifted="හ" data-altgr="ඦ">H<br><span class="sinhala-char">හ</span><br><span class="altgr-char">ඦ</span></div>
+            <div class="key" data-english="J" data-sinhala="ජ" data-shifted="ජ" data-altgr="ඣ">J<br><span class="sinhala-char">ජ</span><br><span class="altgr-char">ඣ</span></div>
+            <div class="key" data-english="K" data-sinhala="ක" data-shifted="ක" data-altgr="ඛ">K<br><span class="sinhala-char">ක</span><br><span class="altgr-char">ඛ</span></div>
+            <div class="key" data-english="L" data-sinhala="ල" data-shifted="ල" data-altgr="ළ">L<br><span class="sinhala-char">ල</span><br><span class="altgr-char">ළ</span></div>
+            <div class="key" data-english=";" data-sinhala=":" data-shifted=":" data-altgr="ං">;<br><span class="sinhala-char">:</span><br><span class="altgr-char">ං</span></div>
+            <div class="key" data-english="'" data-sinhala="\"" data-shifted="\"" data-altgr="ඳ">'<br><span class="sinhala-char">"</span><br><span class="altgr-char">ඳ</span></div>
+            <div class="key enter-key" data-english="Enter" data-sinhala="Enter">Enter</div>
+          </div>
+
+          <!-- Row 4: ZXCV -->
+          <div class="keyboard-row">
+            <div class="key shift-key" data-english="Shift" data-sinhala="Shift">Shift</div>
+            <div class="key" data-english="Z" data-sinhala="ස" data-shifted="ස" data-altgr="ශ">Z<br><span class="sinhala-char">ස</span><br><span class="altgr-char">ශ</span></div>
+            <div class="key" data-english="X" data-sinhala="x" data-shifted="x" data-altgr="ඞ">X<br><span class="sinhala-char">x</span><br><span class="altgr-char">ඞ</span></div>
+            <div class="key" data-english="C" data-sinhala="ච" data-shifted="ච" data-altgr="ඡ">C<br><span class="sinhala-char">ච</span><br><span class="altgr-char">ඡ</span></div>
+            <div class="key" data-english="V" data-sinhala="ව" data-shifted="ව" data-altgr="භ">V<br><span class="sinhala-char">ව</span><br><span class="altgr-char">භ</span></div>
+            <div class="key" data-english="B" data-sinhala="බ" data-shifted="බ" data-altgr="ඹ">B<br><span class="sinhala-char">බ</span><br><span class="altgr-char">ඹ</span></div>
+            <div class="key" data-english="N" data-sinhala="න" data-shifted="න" data-altgr="ණ">N<br><span class="sinhala-char">න</span><br><span class="altgr-char">ණ</span></div>
+            <div class="key" data-english="M" data-sinhala="ම" data-shifted="ම" data-altgr="ඟ">M<br><span class="sinhala-char">ම</span><br><span class="altgr-char">ඟ</span></div>
+            <div class="key" data-english="," data-sinhala="<" data-shifted="<" data-altgr="ඏ">,<br><span class="sinhala-char"><</span><br><span class="altgr-char">ඏ</span></div>
+            <div class="key" data-english="." data-sinhala=">" data-shifted=">" data-altgr="ඐ">.<br><span class="sinhala-char">></span><br><span class="altgr-char">ඐ</span></div>
+            <div class="key" data-english="/" data-sinhala="?" data-shifted="?" data-altgr="ඏ">/<br><span class="sinhala-char">?</span><br><span class="altgr-char">ඏ</span></div>
+            <div class="key shift-key" data-english="Shift" data-sinhala="Shift">Shift</div>
+          </div>
+
+          <!-- Row 5: Spacebar -->
+          <div class="keyboard-row">
+            <div class="key space-key" data-english="Space" data-sinhala=" ">Space</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keyboard State Controls -->
+      <div class="keyboard-controls">
+        <div class="control-group">
+          <label>Keyboard State:</label>
+          <div class="state-buttons">
+            <button class="state-btn active" data-state="normal">Normal</button>
+            <button class="state-btn" data-state="shift">Shift</button>
+            <button class="state-btn" data-state="altgr">AltGr</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instructions -->
+      <div class="instructions">
+        <h3>How to Use:</h3>
+        <ul>
+          <li>Click on any key to see the Sinhala character it produces</li>
+          <li>Type directly in the input box to see real-time conversion</li>
+          <li>Use the Clear button to reset the typing area</li>
+          <li>Switch between Normal, Shift, and AltGr states using the buttons above</li>
+          <li>This layout follows the Standard Sinhala Computer Keyboard Layout (Sri Lanka Standard 1134 Revision 2: 2004)</li>
+          <li>Red characters (AltGr) show special Sinhala symbols and modifiers</li>
+          <li>Use keyboard shortcuts: Ctrl/Cmd + K to focus input, Ctrl/Cmd + L to clear</li>
+        </ul>
+        
+        <h4>Keyboard States:</h4>
+        <ul>
+          <li><strong>Normal:</strong> Standard Sinhala character mapping</li>
+          <li><strong>Shift:</strong> Shifted characters and symbols</li>
+          <li><strong>AltGr:</strong> Special Sinhala symbols and modifiers (shown in red)</li>
+        </ul>
+        
+        <h4>Special Symbols:</h4>
+        <ul>
+          <li><strong>ෟ</strong> (rakaaraansaya) - AltGr + Q</li>
+          <li><strong>ඣ</strong> (yansaya) - AltGr + W</li>
+          <li><strong>ඞ</strong> (repaya) - AltGr + X</li>
+          <li><strong>ඦ</strong> (join adjacent letters) - AltGr + H</li>
+          <li><strong>ං</strong> (anusvara) - AltGr + ;</li>
+          <li><strong>ඳ</strong> (niggahita) - AltGr + '</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="card footer-card">
+    <small>© 2025 Sinhala Mulakuru | Developed by <a href="https://github.com/janithsuraweera/" target="_blank">Janith Suraweera</a></small>
+    <button id="about-btn" class="footer-btn" aria-label="About Sinhala Moolakuru">About</button>
+  </footer>
+
+  <!-- About Modal -->
+  <div id="about-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <button class="close-modal-about">&times;</button>
+      <h2>About Sinhala Moolakuru</h2>
+      <p>This application is designed to help you learn and practice Sinhala typing with different keyboard layouts.</p>
+      <p><strong>Version:</strong> 1.0.0</p>
+      <p><strong>Features:</strong></p>
+      <ul>
+        <li>Interactive keyboard layout demonstration</li>
+        <li>Real-time Sinhala character conversion</li>
+        <li>Standard Sinhala Keyboard Layout support</li>
+        <li>Educational typing practice</li>
+      </ul>
+      <p>Developed with ❤️ by <a href="https://github.com/janithsuraweera/" target="_blank">Janith Suraweera</a>.</p>
+    </div>
+  </div>
+
+  <!-- PWA Service Worker Registration -->
+  <script>
+    // Register service worker for PWA functionality
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('SW registered: ', registration);
+          })
+          .catch((registrationError) => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+
+    // PWA Install Prompt
+    let deferredPrompt;
+    const installButton = document.createElement('button');
+    installButton.textContent = '📱 Install App';
+    installButton.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 1000;
+      display: none;
+    `;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installButton.style.display = 'block';
+      document.body.appendChild(installButton);
+    });
+
+    installButton.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User response to the install prompt: ${outcome}`);
+        deferredPrompt = null;
+        installButton.style.display = 'none';
+      }
+    });
+
+    window.addEventListener('appinstalled', () => {
+      console.log('PWA was installed');
+      installButton.style.display = 'none';
+    });
+  </script>
+
+  <script src="js/layout.js"></script>
+</body>
+</html> 
