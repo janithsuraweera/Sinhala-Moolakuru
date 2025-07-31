@@ -8,7 +8,7 @@ html, body {
 }
 body {
   font-family: 'Noto Sans Sinhala', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  background: linear-gradient(135deg, #f7f7fa 0%, #e0e7ef 100%);
   color: var(--text-primary);
   line-height: 1.6;
   margin: 0;
@@ -81,6 +81,10 @@ body.dark {
   --border: #334155;
   --border-dark: #475569;
 }
+body.dark {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  color: var(--text-primary);
+}
 header {
   display: flex;
   justify-content: space-between;
@@ -97,6 +101,13 @@ header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+/* Light mode specific header style */
+body:not(.dark) header {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  color: #1e293b;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .logo-title {
   display: flex;
@@ -120,14 +131,30 @@ h1 {
   font-size: var(--font-size-3xl);
   font-weight: 700;
   margin: 0;
-  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
   letter-spacing: -0.025em;
-
 }
 
+header h1 {
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Light mode specific header h1 style */
+body:not(.dark) header h1 {
+  color: #1e293b;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  font-weight: 800;
+}
+
+body.dark h1 {
+  color: var(--text-primary);
+}
+
+body.dark header h1 {
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
 
 main {
   max-width: 1200px;
@@ -692,38 +719,38 @@ body.dark {
   color: #f1f5f9;
 }
 body.dark .card, body.dark .modal-content.card {
-  background: #273449;
-  color: #f1f5f9;
+  background: var(--card);
+  color: var(--text-primary);
   box-shadow: 0 4px 24px rgba(0,0,0,0.18);
 }
 body.dark .header-card, body.dark .footer-card, body.dark .leaderboard-card, body.dark .controls-card, body.dark .stats-card {
-  background: #222b3a;
+  background: var(--bg-tertiary);
 }
 body.dark .stat-badge {
   background: #334155;
   color: #f1f5f9;
 }
 body.dark .level-badge {
-  background: #0ea5e9;
-  color: #fff;
+  background: var(--primary);
+  color: white;
 }
 body.dark input[type="text"], body.dark textarea, body.dark select {
-  background: #222b3a;
-  color: #f1f5f9;
-  border: 2px solid #334155;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border: 2px solid var(--border);
 }
 body.dark input[type="text"]:focus, body.dark textarea:focus, body.dark select:focus {
-  border: 2px solid #38bdf8;
+  border: 2px solid var(--primary);
 }
 body.dark .progress-bar-bg {
-  background: #334155;
+  background: var(--border);
 }
 body.dark #progress-bar {
-  background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
 }
 body.dark #leaderboard th {
-  background: #334155;
-  color: #f1f5f9;
+  background: var(--border);
+  color: var(--text-primary);
 }
 body.dark #leaderboard tr:nth-child(1) td { background: #facc15; color: #1e293b; }
 body.dark #leaderboard tr:nth-child(2) td { background: #38bdf8; color: #1e293b; }
@@ -783,6 +810,15 @@ button:focus {
   border: none;
   outline: none;
 }
+
+/* Light mode specific premium badge style */
+body:not(.dark) .premium-badge {
+  background: #1e293b;
+  color: #facc15;
+  box-shadow: 0 1px 4px rgba(30, 41, 59, 0.2);
+  border: 1px solid #334155;
+}
+
 .header-title-row {
   display: flex;
   align-items: center;
@@ -856,12 +892,12 @@ input[type="text"]:focus, textarea:focus, select:focus {
   box-shadow: 0 2px 8px rgba(79,140,255,0.10);
 }
 body.dark input[type="text"], body.dark textarea, body.dark select {
-  background: #222b3a;
-  color: #f1f5f9;
-  border: 2px solid #334155;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border: 2px solid var(--border);
 }
 body.dark input[type="text"]:focus, body.dark textarea:focus, body.dark select:focus {
-  border: 2px solid #38bdf8;
+  border: 2px solid var(--primary);
 }
 
 /* Custom badges */
@@ -969,8 +1005,8 @@ body.dark #leaderboard tr:hover {
   font-weight: 700;
 }
 body.dark #leaderboard th {
-  background: #334155;
-  color: #f1f5f9;
+  background: var(--border);
+  color: var(--text-primary);
 }
 body.dark #leaderboard tr:nth-child(1) td { background: #facc15; color: #1e293b; }
 body.dark #leaderboard tr:nth-child(2) td { background: #38bdf8; color: #1e293b; }
@@ -1026,8 +1062,8 @@ body.dark .modal-content.card, body.dark .modal-content {
 
 
 body.dark .stat-badge {
-  background: #334155;
-  color: #f1f5f9;
+  background: var(--border);
+  color: var(--text-primary);
 }
 
 /* Feedback */
@@ -1393,6 +1429,14 @@ background: none;
   animation: modalPop 0.35s cubic-bezier(.4,2,.6,1);
   text-align: center;
 }
+
+/* Light mode specific report modern style */
+body:not(.dark) .report-modern {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 8px 32px rgba(30,41,59,0.12);
+}
+
 .report-modern h2#report-heading {
   font-size: 2rem;
   font-weight: 800;
@@ -1400,11 +1444,24 @@ background: none;
   color: #2563eb;
   letter-spacing: 0.01em;
 }
+
+/* Light mode specific report heading style */
+body:not(.dark) .report-modern h2#report-heading {
+  color: #1e40af;
+}
+
 #report-summary {
   font-size: 1.08rem;
   color: #ffffff;
   margin-bottom: 1.2rem;
 }
+
+/* Light mode specific report summary style */
+body:not(.dark) #report-summary {
+  color: #1e293b;
+  font-weight: 500;
+}
+
 /* --- Colorful Stat Badges for Report Modal --- */
 .report-stat-badge.wpm {
   background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
@@ -1421,8 +1478,17 @@ background: none;
   justify-content: center;
   color: #db1515;
   font-weight: 900;
-
 }
+
+/* Light mode specific report stat badge styles */
+body:not(.dark) .report-stat-badge.accuracy {
+  color: #dc2626;
+}
+
+body:not(.dark) .report-stat-badge {
+  box-shadow: 0 2px 12px rgba(30,41,59,0.08);
+}
+
 .report-stat-badge {
   display:flex;
   flex-direction: column;
@@ -2061,9 +2127,23 @@ background: none;
   overflow: hidden;
   animation: premiumGlow 2.3s infinite alternate;
   margin-left: 20%;
-
-
 }
+
+/* Light mode specific premium pill button style */
+body:not(.dark) .premium-pill-btn {
+  background: linear-gradient(90deg, #1e293b 0%, #334155 100%);
+  color: #facc15;
+  border: 2px solid #334155;
+  box-shadow: 0 2px 20px rgba(30, 41, 59, 0.3), 0 0 24px rgba(51, 65, 85, 0.2);
+}
+
+body:not(.dark) .premium-pill-btn:hover, body:not(.dark) .premium-pill-btn:focus {
+  background: linear-gradient(90deg, #334155 0%, #475569 100%);
+  color: #fbbf24;
+  border-color: #475569;
+  box-shadow: 0 12px 48px rgba(30, 41, 59, 0.4), 0 0 32px rgba(51, 65, 85, 0.3);
+}
+
 @keyframes premiumGlow {
   0% { box-shadow: 0 4px 32px #ffd70044, 0 0 24px #fbbf2444, 0 0 0 0 #ffd700; }
   100% { box-shadow: 0 8px 48px #ffd70077, 0 0 32px #fbbf2477, 0 0 16px 8px #ffd700; }
@@ -2900,6 +2980,20 @@ nav {
   min-width: 80px;
 }
 
+/* Light mode specific nav styles */
+body:not(.dark) .nav {
+  background: rgba(30, 41, 59, 0.1);
+  color: #1e293b;
+  border: 1px solid rgba(30, 41, 59, 0.2);
+}
+
+body:not(.dark) .nav:hover, body:not(.dark) .nav:focus {
+  background: rgba(30, 41, 59, 0.2);
+  border-color: rgba(30, 41, 59, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 .nav:hover, .nav:focus {
   background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.4);
@@ -3137,4 +3231,46 @@ body.dark .lesson-card p {
     padding: 0.5rem 1rem;
     font-size: var(--font-size-xs);
   }
+}
+
+/* Light mode specific report button styles */
+body:not(.dark) .report-btn-try {
+  background: #ffffff;
+  color: #1e40af;
+  border: 2px solid #1e40af;
+}
+
+body:not(.dark) .report-btn-try:hover, body:not(.dark) .report-btn-try:focus {
+  background: #1e40af;
+  color: #ffffff;
+}
+
+body:not(.dark) .report-btn-save {
+  background: #1e40af;
+  color: #ffffff;
+}
+
+body:not(.dark) .report-btn-save:hover, body:not(.dark) .report-btn-save:focus {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* Light mode specific report share button styles */
+body:not(.dark) .report-share-btn {
+  background: #f1f5f9;
+  color: #1e40af;
+}
+
+body:not(.dark) .report-share-btn:hover, body:not(.dark) .report-share-btn:focus {
+  background: #1e40af;
+  color: #ffffff;
+}
+
+/* Light mode specific report leaderboard link style */
+body:not(.dark) .report-leaderboard-link {
+  color: #1e40af;
+}
+
+body:not(.dark) .report-leaderboard-link:hover {
+  color: #dc2626;
 }
